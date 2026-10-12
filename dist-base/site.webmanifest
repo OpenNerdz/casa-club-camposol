@@ -1,8 +1,0 @@
-{
-  "name": "Casa Club Camposol",
-  "short_name": "Casa Club",
-  "icons": [{ "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }],
-  "theme_color": "#123a2a",
-  "background_color": "#fbf8f2",
-  "display": "browser"
-}

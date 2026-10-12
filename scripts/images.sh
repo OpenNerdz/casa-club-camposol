@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerates the web-sized images in public/images from the originals in public/images/raw.
+# Regenerates the web-sized images in public/images from the originals in source/photos.
 # Requires ffmpeg with libwebp. Usage: bash scripts/images.sh
 set -euo pipefail
 RAW=source/photos
@@ -37,5 +37,10 @@ for f in terrace-tables-colonnade-01 terrace-arcade-tables-01 terrace-guests-col
          golf-entrance-sign-course-01 golf-green-flag-mountains-01 golf-green-palms-mountains-01 golf-course-golfers-buggy-01 golf-buggies-bags-01 \
          golf-club-closeup-01 driving-range-bays-01 clubhouse-exterior-buggies-01 golf-course-buggy-camposol-view-01; do
   enc "$f.jpg" "gallery/$f.webp" "scale='min(1400,iw)':-2"
+done
+# Gallery grid thumbnails (600px wide); the lightbox opens the full-size file
+mkdir -p "$OUT/gallery/thumb"
+for f in "$OUT"/gallery/*.webp; do
+  ffmpeg -v error -y -i "$f" -vf "scale='min(600,iw)':-2" -c:v libwebp -quality 78 "$OUT/gallery/thumb/$(basename "$f")"
 done
 echo "done"; du -sh "$OUT" "$OUT/gallery"

@@ -8,22 +8,22 @@ export const site = {
   legalName: 'Casa Club Camposol Golf S.L.',
   cif: 'B19345867', // CONFIRM
   registry: 'Registro Mercantil de Murcia, Hoja MU-114423', // CONFIRM
-  tagline: {
-    en: 'The clubhouse at the heart of Camposol',
-    es: 'La casa club en el corazón de Camposol',
-  },
 
   // Casa Club (restaurant, bar, events) — bookings & WhatsApp
   phoneDisplay: '+34 602 42 01 67',
   phoneHref: 'tel:+34602420167',
   whatsappHref: 'https://wa.me/34602420167',
+  /** Pre-filled WhatsApp booking message, so guests only fill in the blanks. */
+  whatsappBooking: {
+    en: "Hello Casa Club! I'd like to book a table.\nName:\nDate:\nTime:\nNumber of people:",
+    es: '¡Hola Casa Club! Quería reservar una mesa.\nNombre:\nFecha:\nHora:\nNúmero de personas:',
+  },
   // Golf office / tee times
   golfPhoneDisplay: '+34 968 978 886', // CONFIRM
   golfPhoneHref: 'tel:+34968978886',
   email: 'eventos@casaclubcamposolgolf.com',
-  golfEmail: 'info@camposolclubdegolf.com', // CONFIRM (old domain)
+  golfEmail: 'info@camposolclubdegolf.com', // CONFIRM (old domain), not shown on the site yet
   teeTimeUrl: 'https://eu.golfmanager.com/camposol',
-  golfSiteUrl: 'https://camposolgolf.com', // parent golf club website
 
   /** Optional form service endpoint (e.g. https://api.web3forms.com/submit or a Formspree URL).
    *  Leave empty to fall back to the visitor's email app. */
@@ -38,11 +38,14 @@ export const site = {
     country: 'ES',
   },
   geo: { lat: 37.670098, lng: -1.354977 },
-  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Camposol%20Golf%20Club%20Mazarr%C3%B3n&query_place_id=',
+  // Opens the Google listing; directionsUrl starts turn-by-turn navigation to the pin.
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Casa%20Club%20Camposol%2C%20Calle%20Aljibe%2C%20Mazarr%C3%B3n',
+  directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=37.670098%2C-1.354977',
   social: {
     facebook: 'https://www.facebook.com/theclubhouse.camposol/',
     facebookGolf: 'https://www.facebook.com/CamposolClubDeGolf/',
     instagram: 'https://www.instagram.com/casaclubcamposol/',
+    // CONFIRM, not shown on the site yet
     tiktok: 'https://www.tiktok.com/@casa.club.camposo',
     instagramAcademy: 'https://www.instagram.com/camposolgolfacademy/',
   },
@@ -83,9 +86,11 @@ export const site = {
       { key: '9', eur: 25 },
       { key: 'buggy', eur: 20 },
     ],
-    maxHandicap: 54,
-    associationUrl: 'https://murciatoday.com/camposol-golf-association-_1868-std.html',
   },
 } as const;
 
 export type Site = typeof site;
+
+/** WhatsApp link with the booking template pre-filled in the visitor's language. */
+export const whatsappBookingHref = (lang: 'en' | 'es') =>
+  `${site.whatsappHref}?text=${encodeURIComponent(site.whatsappBooking[lang])}`;

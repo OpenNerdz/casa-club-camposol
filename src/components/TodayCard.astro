@@ -1,0 +1,30 @@
+---
+// "Today at Casa Club": today's line-up, chosen in the browser in Spanish time.
+// Without JS (or before it runs) the generic fallback line shows instead.
+import Icon from './Icon.astro';
+import { programme, dayNames } from '../data/programme';
+import { useTranslations, type Lang } from '../i18n/utils';
+interface Props { lang: Lang; class?: string }
+const { lang, class: cls = '' } = Astro.props;
+const t = useTranslations(lang);
+---
+<div class:list={['panel flex gap-4 p-5 sm:p-6', cls]}>
+  <span class="relative mt-1 grid h-3 w-3 shrink-0 place-items-center">
+    <span class="absolute h-3 w-3 animate-ping rounded-full bg-pine-600/40 motion-reduce:animate-none"></span>
+    <span class="h-2 w-2 rounded-full bg-pine-600"></span>
+  </span>
+  <div class="min-w-0 flex-1">
+    <p class="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ink-600">{t('today.label')}</p>
+    <p data-today-for="0" class="mt-1.5 font-semibold text-pine-950">{t('today.fallback')}</p>
+    {programme.map((d) => (
+      <div data-today-for={d.day} hidden>
+        <p class="mt-1.5 display text-2xl leading-tight text-pine-950">{dayNames[lang].long[d.day - 1]}</p>
+        <ul class="mt-1 text-[0.9375rem] text-ink-800">
+          {d.items.filter((it) => !it.minor).map((it) => <li>{it.title[lang]}{(it.time || it.note) && <span class="text-clay-700"> · {it.time ?? it.note?.[lang]}</span>}</li>)}
+          {d.items.every((it) => it.minor) && d.items.map((it) => <li>{it.title[lang]}{it.note && <span class="text-clay-700"> · {it.note[lang]}</span>}</li>)}
+        </ul>
+      </div>
+    ))}
+    <p class="mt-3 flex items-center gap-2 border-t border-ink-950/10 pt-3 text-sm text-ink-600"><Icon name="clock" size={15} /> {t('today.hours')}</p>
+  </div>
+</div>

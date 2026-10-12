@@ -1,0 +1,55 @@
+---
+// One booking sheet for the whole site. Any <a data-book> opens it; without JS the link
+// still goes to the enquiry form on the contact page.
+import Icon from './Icon.astro';
+import { site, whatsappBookingHref } from '../data/site';
+import { useTranslations, localePath, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const options = [
+  { href: whatsappBookingHref(lang), icon: 'whatsapp', title: t('book.whatsapp'), sub: t('book.whatsappSub'), external: true, accent: true },
+  { href: site.phoneHref, icon: 'phone', title: t('book.call'), sub: site.phoneDisplay },
+  { href: `${localePath(lang, '/contact/')}#enquiry`, icon: 'mail', title: t('book.form'), sub: t('book.formSub') },
+];
+---
+<dialog id="book-dialog" aria-labelledby="book-title"
+  class="m-auto mb-0 w-full max-w-none rounded-t-[1.75rem] bg-cream-50 p-0 text-ink-950 shadow-2xl sm:mb-auto sm:max-w-lg sm:rounded-[1.75rem]">
+  <div class="relative p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] sm:p-9">
+    <button type="button" data-close class="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full text-ink-600 hover:bg-ink-950/5" aria-label={t('book.close')}><Icon name="close" size={22} /></button>
+    <p class="eyebrow">{site.name}</p>
+    <h2 id="book-title" class="mt-4 text-[2.6rem] leading-none text-pine-950">{t('book.title')}</h2>
+    <p class="mt-3 text-ink-600">{t('book.text')}</p>
+    <ul class="mt-6 grid gap-2.5">
+      {options.map((o) => (
+        <li>
+          <a href={o.href} target={o.external ? '_blank' : undefined} rel={o.external ? 'noopener' : undefined}
+             class:list={['group flex items-center gap-4 rounded-2xl border p-4 transition-colors',
+               o.accent ? 'border-transparent bg-pine-900 text-cream-50 hover:bg-pine-800' : 'border-ink-950/12 bg-cream-50 hover:border-ink-950/30 hover:bg-cream-100']}>
+            <span class:list={['grid h-11 w-11 shrink-0 place-items-center rounded-full', o.accent ? 'bg-cream-50/10 text-ochre-300' : 'bg-cream-200 text-pine-800']}><Icon name={o.icon} size={20} /></span>
+            <span class="min-w-0 flex-1">
+              <span class="block font-semibold">{o.title}</span>
+              <span class:list={['block text-sm', o.accent ? 'text-cream-50/70' : 'text-ink-600']}>{o.sub}</span>
+            </span>
+            <Icon name="arrow" size={18} class="shrink-0 opacity-60 transition-transform group-hover:translate-x-0.5" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('book-dialog') as HTMLDialogElement;
+  document.addEventListener('click', (e) => {
+    const trigger = (e.target as Element).closest('a[data-book]');
+    if (!trigger || typeof dialog.showModal !== 'function') return;
+    e.preventDefault();
+    dialog.showModal();
+  });
+  dialog.querySelector('[data-close]')!.addEventListener('click', () => dialog.close());
+  // Click on the backdrop closes it
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+  // Opening the enquiry link from the contact page itself just needs the sheet out of the way
+  dialog.querySelectorAll('a[href*="#enquiry"]').forEach((a) => a.addEventListener('click', () => dialog.close()));
+</script>

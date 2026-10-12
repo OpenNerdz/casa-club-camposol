@@ -1,0 +1,28 @@
+---
+// Opening of every inner page: headline on the left, an arched photo on the right.
+import Icon from './Icon.astro';
+import { em } from '../i18n/utils';
+interface Cta { href: string; label: string; icon?: string; book?: boolean; external?: boolean }
+interface Props { eyebrow: string; title: string; sub?: string; image: string; alt?: string; position?: string; cta1?: Cta; cta2?: Cta }
+const { eyebrow, title, sub, image, alt = '', position = 'center', cta1, cta2 } = Astro.props;
+const linkAttrs = (c: Cta) => ({ href: c.href, 'data-book': c.book ? '' : undefined, target: c.external ? '_blank' : undefined, rel: c.external ? 'noopener' : undefined });
+---
+<section class="container-x grid gap-10 pb-12 pt-28 sm:pt-36 lg:grid-cols-12 lg:items-end lg:gap-16 lg:pb-20 lg:pt-40">
+  <div class="lg:col-span-7 lg:pb-8">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 class="h-display mt-6" set:html={em(title)} />
+    {sub && <p class="lede mt-7 max-w-xl">{sub}</p>}
+    {(cta1 || cta2) && (
+      <div class="mt-9 flex flex-wrap gap-3">
+        {cta1 && <a {...linkAttrs(cta1)} class="btn-primary">{cta1.icon && <Icon name={cta1.icon} size={17} />}{cta1.label}</a>}
+        {cta2 && <a {...linkAttrs(cta2)} class="btn-line">{cta2.icon && <Icon name={cta2.icon} size={17} />}{cta2.label}</a>}
+      </div>
+    )}
+    <slot />
+  </div>
+  <div class="lg:col-span-5">
+    <div class="arch relative mx-auto aspect-[4/5] max-h-[34rem] w-full max-w-md bg-cream-200 lg:max-w-none">
+      <img src={image} alt={alt} class="img-cover" style={`object-position:${position}`} fetchpriority="high" decoding="async" />
+    </div>
+  </div>
+</section>

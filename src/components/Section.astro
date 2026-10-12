@@ -1,14 +1,11 @@
 ---
-interface Props { eyebrow?: string; title: string; intro?: string; align?: 'left' | 'center'; class?: string; id?: string; dark?: boolean }
-const { eyebrow, title, intro, align = 'left', class: cls = '', id, dark = false } = Astro.props;
+import SectionHeading from './SectionHeading.astro';
+interface Props { eyebrow?: string; title: string; intro?: string; align?: 'left' | 'center'; class?: string; id?: string }
+const { eyebrow, title, intro, align = 'left', class: cls = '', id } = Astro.props;
 ---
-<section id={id} class:list={['py-16 sm:py-24', cls]}>
+<section id={id} class:list={['py-20 sm:py-28', cls]}>
   <div class="container-x">
-    <div class:list={['reveal max-w-2xl', align === 'center' && 'mx-auto text-center']}>
-      {eyebrow && <p class:list={['eyebrow', dark && 'text-sol-300']}>{eyebrow}</p>}
-      <h2 class:list={['mt-3 text-3xl font-medium leading-[1.1] sm:text-4xl lg:text-5xl', dark ? 'text-white' : 'text-green-950']}>{title}</h2>
-      {intro && <p class:list={['mt-5 text-lg leading-relaxed', dark ? 'text-sand-200/85' : 'text-ink-500']}>{intro}</p>}
-    </div>
+    <SectionHeading eyebrow={eyebrow} title={title} intro={intro} align={align} />
     <slot />
   </div>
 </section>

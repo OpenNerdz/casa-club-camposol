@@ -1,38 +1,52 @@
 ---
+// Interactive map, loaded only when it scrolls near the viewport so Leaflet (~45 kB) and the
+// satellite tiles never slow the first paint. `isolate` keeps Leaflet's z-indexes under the header.
+import Icon from './Icon.astro';
 import { site } from '../data/site';
-interface Props { class?: string; zoom?: number; height?: string }
-const { class: cls = '', zoom = 16, height = '420px' } = Astro.props;
-const { lat, lng } = site.geo;
+import { useTranslations, type Lang } from '../i18n/utils';
+interface Props { lang: Lang; class?: string; zoom?: number }
+const { lang, class: cls = '', zoom = 16 } = Astro.props;
+const t = useTranslations(lang);
 ---
-<div class:list={['relative overflow-hidden rounded-xl2 ring-1 ring-ink-900/10 shadow-card', cls]} style={`height:${height}`}>
-  <div id="map" class="h-full w-full bg-sand-200" data-lat={lat} data-lng={lng} data-zoom={zoom} data-name={site.name} data-maps={site.mapsUrl} role="region" aria-label="Map"></div>
-  <noscript><a href={site.mapsUrl} class="absolute inset-0 flex items-center justify-center bg-sand-100 font-semibold">Open in Google Maps</a></noscript>
+<div class:list={['relative isolate overflow-hidden rounded-[1.5rem] bg-cream-200', cls]}>
+  <div data-map class="absolute inset-0" role="region" aria-label={t('map.label')}
+    data-lat={site.geo.lat} data-lng={site.geo.lng} data-zoom={zoom} data-name={site.name}
+    data-satellite={t('map.satellite')} data-streets={t('map.streets')}>
+    <div class="grid h-full place-items-center text-pine-800/40"><Icon name="pin" size={40} /></div>
+  </div>
+  <a href={site.mapsUrl} target="_blank" rel="noopener" class="btn-light absolute bottom-4 left-4 z-[500] h-10 px-4 text-sm shadow-lg shadow-pine-950/20">
+    <Icon name="external" size={15} /> {t('map.open')}
+  </a>
 </div>
+
 <script>
-  import L from 'leaflet';
-  import 'leaflet/dist/leaflet.css';
-  const el = document.getElementById('map') as HTMLElement | null;
-  if (el) {
-    const lat = +el.dataset.lat!, lng = +el.dataset.lng!, zoom = +el.dataset.zoom!;
-    const map = L.map(el, { scrollWheelZoom: false, attributionControl: true }).setView([lat, lng], zoom);
-    // Key-free tile sources: satellite imagery shows the course layout; a street map is offered as an alternative.
+  async function init(el: HTMLElement) {
+    const [{ default: L }] = await Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]);
+    el.replaceChildren();
+    const { lat, lng, zoom, name, satellite: satLabel, streets: streetLabel } = el.dataset;
+    const map = L.map(el, { scrollWheelZoom: false }).setView([+lat!, +lng!], +zoom!);
+    // Key-free tiles: satellite shows the course layout; the street map is one tap away.
     const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      maxZoom: 18,
-      attribution: 'Imagery &copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics',
+      maxZoom: 18, attribution: 'Imagery &copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics',
     });
     const streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     });
     satellite.addTo(map);
-    const isEs = document.documentElement.lang.startsWith('es');
-    L.control.layers({ [isEs ? 'Satélite' : 'Satellite']: satellite, [isEs ? 'Mapa' : 'Map']: streets }, {}, { position: 'topright' }).addTo(map);
+    L.control.layers({ [satLabel!]: satellite, [streetLabel!]: streets }, {}, { position: 'topright' }).addTo(map);
     const icon = L.divIcon({
       className: '',
-      html: `<div style="width:44px;height:44px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#123a2a;border:3px solid #fff;box-shadow:0 8px 20px -6px rgba(0,0,0,.5);display:grid;place-items:center"><div style="width:14px;height:14px;border-radius:50%;background:#e8923a"></div></div>`,
+      html: '<div style="width:44px;height:44px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#123326;border:3px solid #fbf8f1;box-shadow:0 8px 20px -6px rgba(0,0,0,.5);display:grid;place-items:center"><div style="width:14px;height:14px;border-radius:50%;background:#d9a23a"></div></div>',
       iconSize: [44, 44], iconAnchor: [22, 44], popupAnchor: [0, -44],
     });
-    L.marker([lat, lng], { icon }).addTo(map)
-      .bindPopup(`<strong style="font-size:15px">${el.dataset.name}</strong><br><a href="${el.dataset.maps}" target="_blank" rel="noopener">Google Maps →</a>`);
+    L.marker([+lat!, +lng!], { icon, title: name }).addTo(map);
   }
+
+  const maps = document.querySelectorAll<HTMLElement>('[data-map]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { io.unobserve(e.target); init(e.target as HTMLElement); }
+    }, { rootMargin: '400px 0px' });
+    maps.forEach((m) => io.observe(m));
+  } else maps.forEach(init);
 </script>

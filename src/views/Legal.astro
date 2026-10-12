@@ -7,22 +7,22 @@ interface Props { lang: Lang; kind: 'legal' | 'privacy' }
 const { lang, kind } = Astro.props;
 const c = (kind === 'legal' ? legal : privacy)[lang];
 const fill = (s: string) => s
-  .replace('{legalName}', site.legalName).replace('{cif}', site.cif).replace('{address}', site.address.lines.slice(0, 3).join(', '))
-  .replace('{registry}', site.registry).replace('{email}', site.email).replace('{phone}', site.phoneDisplay);
+  .replaceAll('{legalName}', site.legalName).replaceAll('{cif}', site.cif).replaceAll('{address}', site.address.lines.slice(0, 3).join(', '))
+  .replaceAll('{registry}', site.registry).replaceAll('{email}', site.email).replaceAll('{phone}', site.phoneDisplay);
 ---
 <Base title={c.meta.title} description={c.meta.description} noindex>
-  <section class="container-x max-w-3xl pb-8 pt-32 sm:pt-40">
+  <article class="container-x max-w-3xl pb-8 pt-28 sm:pt-36 lg:pt-40">
     <p class="eyebrow">{site.name}</p>
-    <h1 class="mt-3 text-4xl font-medium text-green-950 sm:text-5xl">{c.title}</h1>
-    <div class="prose-custom mt-10 space-y-10">
+    <h1 class="h-section mt-5 text-pine-950">{c.title}</h1>
+    <div class="prose-legal mt-4">
       {c.sections.map((s) => (
         <section>
-          <h2 class="text-2xl text-green-950">{s.h}</h2>
-          {s.p.map((p) => <p class="mt-3 leading-relaxed text-ink-700">{fill(p)}</p>)}
-          {'list' in s && <ul class="mt-3 list-disc space-y-1 pl-6 text-ink-700">{s.list!.map((l) => <li>{fill(l)}</li>)}</ul>}
+          <h2>{s.h}</h2>
+          {s.p.map((p) => <p>{fill(p)}</p>)}
+          {'list' in s && <ul>{s.list!.map((l) => <li>{fill(l)}</li>)}</ul>}
         </section>
       ))}
     </div>
-    <p class="mt-12 text-sm text-ink-500">{lang === 'en' ? 'Last updated: October 2026.' : 'Última actualización: octubre de 2026.'}</p>
-  </section>
+    <p class="mt-14 border-t border-ink-950/12 pt-6 text-sm text-ink-600">{c.updated}</p>
+  </article>
 </Base>

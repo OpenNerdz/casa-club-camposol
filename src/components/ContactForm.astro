@@ -1,80 +1,80 @@
 ---
+// Enquiry form. Posts JSON to site.formEndpoint, or opens the visitor's email app when no
+// endpoint is configured. ?type=event|golf|table|other preselects the enquiry type.
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 import { useTranslations, type Lang } from '../i18n/utils';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const types = ['table', 'event', 'golf', 'other'] as const;
+const label = 'block text-sm font-semibold text-ink-800';
+const optional = `<span class="font-normal text-ink-400">(${t('form.optional')})</span>`;
+const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form.okMail'), err: t('form.err'), invalid: t('form.invalid') };
 ---
-<form id="contact-form" class="card p-6 sm:p-8" method="post" action={site.formEndpoint || '#'} data-endpoint={site.formEndpoint} data-mailto={site.email} novalidate>
+<form id="contact-form" class="rounded-[1.75rem] bg-cream-50 p-6 shadow-[0_30px_60px_-30px_rgb(23_32_27/.35)] ring-1 ring-ink-950/8 sm:p-9"
+  method="post" action={site.formEndpoint || `mailto:${site.email}`} data-endpoint={site.formEndpoint} data-mailto={site.email}
+  data-messages={JSON.stringify(messages)} novalidate>
   <input type="hidden" name="subject" value={`Web enquiry · ${site.name}`} />
-  <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+  <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
   <div class="grid gap-5 sm:grid-cols-2">
-    <label class="block text-sm font-semibold">
-      {t('form.name')}
-      <input name="name" required autocomplete="name" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20" />
+    <label class={label}>{t('form.name')}<input name="name" required autocomplete="name" class="field" /></label>
+    <label class={label}>{t('form.email')}<input name="email" type="email" required autocomplete="email" class="field" /></label>
+    <label class={label}><Fragment set:html={`${t('form.phone')} ${optional}`} /><input name="phone" type="tel" autocomplete="tel" class="field" /></label>
+    <label class={label}>{t('form.type')}
+      <span class="relative mt-2 block">
+        <select name="enquiry" class="field !mt-0 appearance-none pr-12">
+          {types.map((k) => <option value={k}>{t(`form.type.${k}`)}</option>)}
+        </select>
+        <Icon name="chevron" size={18} class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink-600" />
+      </span>
     </label>
-    <label class="block text-sm font-semibold">
-      {t('form.phone')}
-      <input name="phone" type="tel" autocomplete="tel" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20" />
-    </label>
-    <label class="block text-sm font-semibold sm:col-span-2">
-      {t('form.email')}
-      <input name="email" type="email" required autocomplete="email" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20" />
-    </label>
-    <label class="block text-sm font-semibold">
-      {t('form.type')}
-      <select name="enquiry" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20">
-        <option>{t('form.type.table')}</option>
-        <option>{t('form.type.event')}</option>
-        <option>{t('form.type.golf')}</option>
-        <option>{t('form.type.other')}</option>
-      </select>
-    </label>
-    <label class="block text-sm font-semibold">
-      {t('form.date')}
-      <input name="date" type="date" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20" />
-    </label>
-    <label class="block text-sm font-semibold sm:col-span-2">
-      {t('form.message')}
-      <textarea name="message" rows="4" required class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20"></textarea>
-    </label>
+    <label class={label}><Fragment set:html={`${t('form.date')} ${optional}`} /><input name="date" type="date" class="field" /></label>
+    <label class={label}><Fragment set:html={`${t('form.guests')} ${optional}`} /><input name="guests" type="number" min="1" max="300" inputmode="numeric" class="field" /></label>
+    <label class:list={[label, 'sm:col-span-2']}>{t('form.message')}<textarea name="message" rows="4" required class="field resize-y"></textarea></label>
   </div>
-  <label class="mt-5 flex items-start gap-3 text-sm text-ink-500">
-    <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 rounded border-ink-900/30 accent-green-700" />
+  <label class="mt-6 flex items-start gap-3 text-sm text-ink-600">
+    <input type="checkbox" name="consent" required class="mt-0.5 h-5 w-5 shrink-0 rounded accent-pine-700" />
     <span>{t('form.consent')}</span>
   </label>
-  <div class="mt-6 flex flex-wrap items-center gap-4">
-    <button type="submit" class="btn-primary"><Icon name="mail" size={16} /> {t('form.send')}</button>
-    <p id="form-status" class="text-sm text-ink-500" aria-live="polite"></p>
+  <div class="mt-7 flex flex-wrap items-center gap-4">
+    <button type="submit" class="btn-dark">{t('form.send')} <Icon name="arrow" size={16} /></button>
+    <p id="form-status" class="text-sm font-medium text-ink-600" role="status" aria-live="polite"></p>
   </div>
 </form>
+
 <script>
+  import { madridDate } from '../scripts/madrid';
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const status = document.getElementById('form-status')!;
-  const msgs = {
-    sending: form.closest('html')!.lang.startsWith('es') ? 'Enviando…' : 'Sending…',
-    ok: form.closest('html')!.lang.startsWith('es') ? '¡Gracias! Te responderemos muy pronto.' : 'Thank you! We will get back to you shortly.',
-    err: form.closest('html')!.lang.startsWith('es') ? 'No se pudo enviar. Llámanos o escríbenos por WhatsApp.' : 'Could not send. Please call or WhatsApp us instead.',
-    invalid: form.closest('html')!.lang.startsWith('es') ? 'Revisa los campos marcados.' : 'Please check the highlighted fields.',
-  };
+  const msg = JSON.parse(form.dataset.messages!) as Record<'sending' | 'ok' | 'okMail' | 'err' | 'invalid', string>;
+
+  // No booking dates in the past; preselect the enquiry type from ?type=
+  (form.elements.namedItem('date') as HTMLInputElement).min = madridDate();
+  const type = new URLSearchParams(location.search).get('type');
+  const select = form.elements.namedItem('enquiry') as HTMLSelectElement;
+  if (type && [...select.options].some((o) => o.value === type)) select.value = type;
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!form.checkValidity()) { form.reportValidity(); status.textContent = msgs.invalid; return; }
+    if (!form.checkValidity()) { form.reportValidity(); status.textContent = msg.invalid; return; }
     const data = Object.fromEntries(new FormData(form).entries());
     if (data.botcheck) return;
+    data.enquiry = select.selectedOptions[0].text;
     const endpoint = form.dataset.endpoint;
     if (!endpoint) {
-      // No form service configured yet: fall back to the visitor's email client.
-      const body = Object.entries(data).filter(([k]) => !['botcheck', 'subject', 'consent'].includes(k)).map(([k, v]) => `${k}: ${v}`).join('\n');
+      // No form service configured yet: hand over to the visitor's email app.
+      const body = Object.entries(data).filter(([k, v]) => v && !['botcheck', 'subject', 'consent'].includes(k)).map(([k, v]) => `${k}: ${v}`).join('\n');
       location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(String(data.subject))}&body=${encodeURIComponent(body)}`;
-      status.textContent = msgs.ok; return;
+      status.textContent = msg.okMail;
+      return;
     }
-    status.textContent = msgs.sending;
+    status.textContent = msg.sending;
     try {
       const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
       if (!r.ok) throw new Error(String(r.status));
-      form.reset(); status.textContent = msgs.ok;
-    } catch { status.textContent = msgs.err; }
+      form.reset();
+      status.textContent = msg.ok;
+    } catch { status.textContent = msg.err; }
   });
 </script>

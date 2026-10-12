@@ -1,37 +1,59 @@
 ---
-// Attach to any <a data-lightbox href="full.jpg"> elements on the page.
+// Photo viewer for <a data-lightbox href="full.webp" data-caption="…"> links on the page.
+// A native <dialog> gives focus trapping and Esc for free; arrows and swipes move between photos.
+import Icon from './Icon.astro';
+import { useTranslations, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const t = useTranslations(Astro.props.lang);
+const btn = 'grid h-12 w-12 place-items-center rounded-full bg-cream-50/10 text-cream-50 transition-colors hover:bg-cream-50/20';
 ---
-<div id="lightbox" class="fixed inset-0 z-[90] hidden items-center justify-center bg-ink-900/95 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button id="lb-close" class="absolute right-4 top-4 rounded-full bg-white/10 p-3 text-white hover:bg-white/20" aria-label="Close">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-  </button>
-  <button id="lb-prev" class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white hover:bg-white/20" aria-label="Previous"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
-  <button id="lb-next" class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white hover:bg-white/20" aria-label="Next"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
-  <figure class="max-h-full max-w-6xl">
-    <img id="lb-img" src="" alt="" class="max-h-[82vh] w-auto max-w-full rounded-xl object-contain shadow-2xl" />
-    <figcaption id="lb-cap" class="mt-3 text-center text-sm text-sand-200/80"></figcaption>
+<dialog id="lightbox" aria-label={t('lb.label')} class="m-0 h-dvh max-h-none w-screen max-w-none bg-pine-950/97 p-0 text-cream-50 backdrop:bg-transparent">
+  <figure class="flex h-full flex-col items-center justify-center gap-4 px-4 pb-24 pt-16 sm:px-20 sm:pb-16">
+    <img id="lb-img" alt="" class="min-h-0 max-w-full flex-1 rounded-xl object-contain" />
+    <figcaption id="lb-cap" class="max-w-xl text-center text-sm text-cream-50/80"></figcaption>
   </figure>
-</div>
+  <p id="lb-count" class="absolute left-5 top-5 text-sm tabular-nums text-cream-50/60"></p>
+  <button type="button" data-close class:list={[btn, 'absolute right-4 top-3']} aria-label={t('lb.close')}><Icon name="close" size={22} /></button>
+  <button type="button" data-step="-1" class:list={[btn, 'absolute bottom-6 left-1/2 -translate-x-[calc(100%+0.5rem)] sm:bottom-auto sm:left-5 sm:top-1/2 sm:-translate-x-0 sm:-translate-y-1/2']} aria-label={t('lb.prev')}><Icon name="left" size={24} /></button>
+  <button type="button" data-step="1" class:list={[btn, 'absolute bottom-6 left-1/2 translate-x-2 sm:bottom-auto sm:left-auto sm:right-5 sm:top-1/2 sm:translate-x-0 sm:-translate-y-1/2']} aria-label={t('lb.next')}><Icon name="right" size={24} /></button>
+</dialog>
+
 <script>
-  const box = document.getElementById('lightbox')!;
+  const box = document.getElementById('lightbox') as HTMLDialogElement;
   const img = document.getElementById('lb-img') as HTMLImageElement;
   const cap = document.getElementById('lb-cap')!;
-  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]'));
+  const count = document.getElementById('lb-count')!;
   let i = 0;
-  const show = (n: number) => {
-    i = (n + links.length) % links.length;
-    const a = links[i];
+  // Only the photos currently shown (the gallery filter hides some)
+  const links = () => [...document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]')].filter((a) => a.offsetParent !== null);
+
+  function show(n: number) {
+    const list = links();
+    i = (n + list.length) % list.length;
+    const a = list[i];
     img.src = a.href; img.alt = a.dataset.caption ?? ''; cap.textContent = a.dataset.caption ?? '';
-    box.classList.remove('hidden'); box.classList.add('flex'); document.body.style.overflow = 'hidden';
-  };
-  const hide = () => { box.classList.add('hidden'); box.classList.remove('flex'); document.body.style.overflow = ''; };
-  links.forEach((a, n) => a.addEventListener('click', (e) => { e.preventDefault(); show(n); }));
-  document.getElementById('lb-close')!.addEventListener('click', hide);
-  document.getElementById('lb-prev')!.addEventListener('click', () => show(i - 1));
-  document.getElementById('lb-next')!.addEventListener('click', () => show(i + 1));
-  box.addEventListener('click', (e) => { if (e.target === box) hide(); });
-  document.addEventListener('keydown', (e) => {
-    if (box.classList.contains('hidden')) return;
-    if (e.key === 'Escape') hide(); if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1);
+    count.textContent = `${i + 1} / ${list.length}`;
+    if (!box.open) box.showModal();
+  }
+
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest<HTMLAnchorElement>('a[data-lightbox]');
+    if (!a || typeof box.showModal !== 'function') return;
+    e.preventDefault();
+    show(links().indexOf(a));
+  });
+  box.querySelector('[data-close]')!.addEventListener('click', () => box.close());
+  box.querySelectorAll<HTMLElement>('[data-step]').forEach((b) => b.addEventListener('click', () => show(i + Number(b.dataset.step))));
+  box.addEventListener('click', (e) => { if (e.target === box || (e.target as Element).tagName === 'FIGURE') box.close(); });
+  box.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1); });
+  box.addEventListener('close', () => img.removeAttribute('src'));
+
+  // Swipe on touch screens
+  let x0: number | null = null;
+  box.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1));
   });
 </script>

@@ -42,7 +42,7 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
       08:00–16:00. Google/Tripadvisor list 08:00–16:00 only; evening events run to 21:00+, so please give the
       real bar and kitchen hours (summer/winter if they differ).
 
-### Weekly programme (home + events pages)
+### Weekly programme (home + events pages, `src/data/programme.ts`)
 - [ ] Quiz nights Monday and Thursday 19:30.
 - [ ] Funky Orange daytime disco every other Tuesday.
 - [ ] Menú del día on weekdays (price seen: €10 in a March 2026 review — not shown on the site).

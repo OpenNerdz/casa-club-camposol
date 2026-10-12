@@ -1,0 +1,16 @@
+---
+// Opening hours from site.ts, used by the footer, restaurant and contact pages.
+import { site } from '../data/site';
+import type { Lang } from '../i18n/utils';
+interface Props { lang: Lang; tone?: 'dark' | 'light'; class?: string }
+const { lang, tone = 'dark', class: cls = '' } = Astro.props;
+const dark = tone === 'dark';
+---
+<dl class:list={['divide-y text-[0.9375rem]', dark ? 'divide-ink-950/10' : 'divide-cream-50/10', cls]}>
+  {site.hours[lang].map((h) => (
+    <div class="flex items-baseline justify-between gap-4 py-2.5">
+      <dt class={dark ? 'text-ink-600' : 'text-cream-50/70'}>{h.label}</dt>
+      <dd class:list={['text-right font-semibold', dark ? 'text-pine-950' : 'text-cream-50']}>{h.value}</dd>
+    </div>
+  ))}
+</dl>

@@ -19,10 +19,16 @@ export const img = {
   buggies: `${b}/images/buggies.webp`,
   events: `${b}/images/events.webp`,
   exterior: `${b}/images/exterior.webp`,
+  golfPortrait: `${b}/images/gallery/golf-green-flag-mountains-01.webp`,
+  functionRoom: `${b}/images/gallery/event-dance-floor-indoor-01.webp`,
   og: `${b}/images/og-default.jpg`,
 } as const;
 
-export const gallery: { src: string; w: number; h: number; alt: { en: string; es: string } }[] = [
+export type GalleryCategory = 'club' | 'events' | 'golf';
+export interface GalleryImage { src: string; thumb: string; w: number; h: number; cat: GalleryCategory; alt: { en: string; es: string } }
+
+// Grid thumbnails (600 px wide) live in gallery/thumb/; the lightbox opens the full-size file.
+const raw: Omit<GalleryImage, 'thumb' | 'cat'>[] = [
   { src: `${b}/images/gallery/terrace-tables-colonnade-01.webp`, w: 720, h: 1280, alt: { en: "Diners on the terrace colonnade with the golf course beyond", es: "Comensales en la terraza porticada con el campo de golf al fondo" } },
   { src: `${b}/images/gallery/terrace-arcade-tables-01.webp`, w: 720, h: 1280, alt: { en: "Tables under the white pergola on the terrace", es: "Mesas bajo la pérgola blanca de la terraza" } },
   { src: `${b}/images/gallery/terrace-guests-colonnade-01.webp`, w: 720, h: 1280, alt: { en: "Guests enjoying drinks in the sun on the terrace", es: "Clientes tomando algo al sol en la terraza" } },
@@ -48,3 +54,12 @@ export const gallery: { src: string; w: number; h: number; alt: { en: string; es
   { src: `${b}/images/gallery/clubhouse-exterior-buggies-01.webp`, w: 1400, h: 646, alt: { en: "Buggies lined up outside the clubhouse", es: "Buggies alineados frente a la casa club" } },
   { src: `${b}/images/gallery/golf-course-buggy-camposol-view-01.webp`, w: 720, h: 1280, alt: { en: "A buggy on the course with Camposol in the distance", es: "Un buggy en el campo con Camposol al fondo" } },
 ];
+
+const category = (src: string): GalleryCategory =>
+  /live-music|event-/.test(src) ? 'events' : /golf-|driving-range/.test(src) ? 'golf' : 'club';
+
+export const gallery: GalleryImage[] = raw.map((g) => ({
+  ...g,
+  thumb: g.src.replace('/gallery/', '/gallery/thumb/'),
+  cat: category(g.src),
+}));

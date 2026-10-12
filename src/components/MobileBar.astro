@@ -1,0 +1,26 @@
+---
+// Thumb-reach actions on phones: most visitors want to call, message or find the place.
+import Icon from './Icon.astro';
+import { site, whatsappBookingHref } from '../data/site';
+import { useTranslations, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const actions = [
+  { href: site.phoneHref, icon: 'phone', label: t('bar.call') },
+  { href: whatsappBookingHref(lang), icon: 'whatsapp', label: t('bar.whatsapp'), external: true },
+  { href: site.directionsUrl, icon: 'navigation', label: t('bar.directions'), external: true },
+];
+---
+<nav class="fixed inset-x-0 bottom-0 z-40 border-t border-cream-50/10 bg-pine-950/95 pb-[env(safe-area-inset-bottom)] text-cream-50 backdrop-blur-md lg:hidden" aria-label={site.name}>
+  <ul class="grid grid-cols-3">
+    {actions.map((a) => (
+      <li>
+        <a href={a.href} target={a.external ? '_blank' : undefined} rel={a.external ? 'noopener' : undefined}
+           class="flex h-[4.25rem] flex-col items-center justify-center gap-1 text-[0.8125rem] font-semibold active:bg-cream-50/10">
+          <Icon name={a.icon} size={20} class="text-ochre-300" />{a.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

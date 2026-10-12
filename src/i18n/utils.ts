@@ -34,3 +34,9 @@ export function switchLang(url: URL, to: Lang): string {
   if (from !== defaultLang) p = p.replace(new RegExp(`^/${from}`), '') || '/';
   return localePath(to, p);
 }
+
+const escapeHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+/** Headline markup: *word* becomes <em>word</em> (set in the italic accent). Use with set:html. */
+export const em = (s: string) => escapeHtml(s).replace(/\*(.+?)\*/g, '<em>$1</em>');
+/** The same text with the emphasis markers removed, for meta tags and alt text. */
+export const plain = (s: string) => s.replace(/\*(.+?)\*/g, '$1');

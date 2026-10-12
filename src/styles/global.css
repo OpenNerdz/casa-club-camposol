@@ -1,103 +1,149 @@
 @import "tailwindcss";
 
 /* ---------- Design tokens ----------
-   Edit these to re-brand the whole site. */
+   The palette is taken from the clubhouse itself: pine-green fairways, the terracotta
+   terrace tiles, the ochre roof trim and lime-washed walls. Edit here to re-brand. */
 @theme {
-  --font-display: "Fraunces", "Georgia", serif;
-  --font-sans: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Instrument Sans Variable", "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Fairway greens */
-  --color-green-950: #0d2b1f;
-  --color-green-900: #123a2a;
-  --color-green-800: #1a4d38;
-  --color-green-700: #236347;
-  --color-green-600: #2f7a58;
-  --color-green-500: #3f9a70;
-  --color-green-100: #dcefe4;
-  --color-green-50: #eef7f2;
+  --color-pine-950: #0c241b;
+  --color-pine-900: #123326;
+  --color-pine-800: #1a4534;
+  --color-pine-700: #245a44;
+  --color-pine-600: #2f7056;
+  --color-pine-200: #c9dccf;
+  --color-pine-100: #e3ede5;
 
-  /* Sun / terracotta accents */
-  --color-sol-600: #b85c1e;
-  --color-sol-500: #d4731f;
-  --color-sol-400: #e8923a;
-  --color-sol-300: #f2b66e;
-  --color-sol-100: #fbe9d4;
+  --color-clay-700: #8f3b1f;
+  --color-clay-600: #a94a28; /* buttons: 5.7:1 against white */
+  --color-clay-500: #c65d36;
+  --color-clay-200: #f0c9b4;
+  --color-clay-100: #f8e4d8;
 
-  /* Sand neutrals */
-  --color-sand-50: #fbf8f2;
-  --color-sand-100: #f5efe3;
-  --color-sand-200: #ebe1cd;
-  --color-sand-300: #d9cbb0;
-  --color-sand-400: #b8a583;
+  --color-ochre-500: #d9a23a;
+  --color-ochre-300: #ecc878;
+  --color-ochre-100: #f7ebcc;
 
-  /* Ink */
-  --color-ink-900: #16211c;
-  --color-ink-700: #2b3a33;
-  --color-ink-500: #55655d;
-  --color-ink-300: #93a099;
+  --color-cream-50: #fbf8f1;
+  --color-cream-100: #f4ede0;
+  --color-cream-200: #e9dfca;
+  --color-cream-300: #d9cbb0;
 
-  --radius-xl2: 1.25rem;
-  --shadow-soft: 0 10px 30px -12px rgb(22 33 28 / 0.25);
-  --shadow-card: 0 1px 2px rgb(22 33 28 / 0.06), 0 12px 32px -16px rgb(22 33 28 / 0.25);
+  --color-ink-950: #17201b;
+  --color-ink-800: #27332d;
+  --color-ink-600: #46534c;
+  --color-ink-400: #7b877f;
+
+  --ease-out-soft: cubic-bezier(.2, .7, .2, 1);
+  --animate-marquee: marquee 48s linear infinite;
+  @keyframes marquee { to { transform: translateX(-50%); } }
 }
 
-:root {
-  color-scheme: light;
-  scroll-behavior: smooth;
+/* ---------- Base ----------
+   In the base layer so utilities (e.g. font-sans on a heading) can override it. */
+@layer base {
+  :root { color-scheme: light; scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    @apply bg-cream-50 font-sans text-ink-950 antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    font-synthesis: none; /* Instrument Serif has one weight: never fake-bold it */
+  }
+
+  h1, h2, h3, .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+  h1 em, h2 em, h3 em, .display em { font-style: italic; color: var(--color-clay-600); }
+  .on-dark h1 em, .on-dark h2 em, .on-dark h3 em, .on-dark .display em { color: var(--color-ochre-300); }
+  p { text-wrap: pretty; }
+
+  ::selection { background: var(--color-ochre-300); color: var(--color-ink-950); }
+  :focus-visible { outline: 2px solid var(--color-clay-500); outline-offset: 3px; border-radius: 4px; }
 }
-
-html { -webkit-text-size-adjust: 100%; }
-
-body {
-  @apply bg-sand-50 text-ink-900 font-sans antialiased;
-  font-feature-settings: "ss01", "cv11";
-}
-
-h1, h2, h3, .font-display { font-family: var(--font-display); }
-
-/* Display headings use Fraunces' optical sizing + slight tightening */
-h1, h2 { font-variation-settings: "opsz" 144, "SOFT" 30; letter-spacing: -0.01em; }
-
-::selection { background: var(--color-sol-300); color: var(--color-ink-900); }
 
 /* ---------- Utilities ---------- */
-@utility container-x {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-}
+@utility container-x { @apply mx-auto w-full max-w-[84rem] px-5 sm:px-8 lg:px-12; }
 
 @utility eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.18em] text-sol-600;
+  @apply inline-flex items-center gap-3 text-[0.75rem] font-semibold uppercase leading-none tracking-[0.18em] text-clay-700;
+  &::before { content: ""; @apply h-px w-8 bg-current opacity-60; }
 }
+
+@utility h-display { @apply text-[clamp(3rem,1.6rem+5.6vw,7rem)] leading-[0.92]; }
+@utility h-section { @apply text-[clamp(2.4rem,1.7rem+2.6vw,4.25rem)] leading-[0.98]; }
+@utility lede { @apply text-lg leading-relaxed text-ink-600 sm:text-xl; }
 
 @utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition
-         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sol-400 focus-visible:ring-offset-2;
+  @apply inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full px-6 text-[0.9375rem] font-semibold whitespace-nowrap
+         transition-[background-color,color,border-color,translate] duration-200 active:translate-y-px;
+  & svg:last-child:not(:first-child) { @apply transition-transform duration-200; }
+  &:hover svg:last-child:not(:first-child) { @apply translate-x-0.5; }
 }
-@utility btn-primary { @apply btn bg-green-800 text-white hover:bg-green-700 shadow-soft; }
-@utility btn-accent  { @apply btn bg-sol-500 text-white hover:bg-sol-600 shadow-soft; }
-@utility btn-ghost   { @apply btn border border-white/40 text-white hover:bg-white/10 backdrop-blur-sm; }
-@utility btn-outline { @apply btn border border-green-800 text-green-800 hover:bg-green-50; }
+@utility btn-primary { @apply btn bg-clay-600 text-white hover:bg-clay-700; }
+@utility btn-dark    { @apply btn bg-pine-900 text-cream-50 hover:bg-pine-800; }
+@utility btn-line    { @apply btn border border-ink-950/20 text-ink-950 hover:border-ink-950/40 hover:bg-ink-950/5; }
+@utility btn-light   { @apply btn bg-cream-50 text-pine-950 hover:bg-white; }
+@utility btn-ghost   { @apply btn border border-cream-50/30 text-cream-50 hover:border-cream-50/60 hover:bg-cream-50/10; }
 
-@utility card {
-  @apply rounded-xl2 bg-white shadow-card ring-1 ring-ink-900/5;
+@utility link-arrow {
+  @apply inline-flex items-center gap-1.5 font-semibold text-pine-800 underline decoration-pine-800/25 decoration-1 underline-offset-[6px]
+         transition-colors hover:text-clay-700 hover:decoration-clay-700;
 }
 
-/* Reveal-on-scroll (progressively enhanced; content visible without JS) */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .6s ease, box-shadow .3s ease !important; }
-.reveal.is-visible { opacity: 1; transform: none; }
+/* Photo frames. The arch echoes the terrace colonnade; radii clamp to a semicircle. */
+@utility arch { @apply overflow-hidden rounded-[999px_999px_1.25rem_1.25rem]; }
+@utility frame { @apply overflow-hidden rounded-[1.25rem]; }
+@utility img-cover { @apply block h-full w-full object-cover; }
+
+@utility rule { @apply border-t border-ink-950/12; }
+@utility panel { @apply rounded-[1.5rem] border border-ink-950/10 bg-cream-100; }
+
+@utility field {
+  @apply mt-2 block w-full rounded-xl border border-ink-950/15 bg-cream-50 px-4 py-3 text-base font-normal text-ink-950
+         transition outline-none placeholder:text-ink-400 focus:border-pine-700 focus:ring-4 focus:ring-pine-700/15;
+  &:user-invalid { @apply border-clay-600 ring-4 ring-clay-600/10; }
+}
+
+/* ---------- Motion ---------- */
+.reveal { opacity: 0; translate: 0 14px; transition: opacity .8s var(--ease-out-soft), translate .8s var(--ease-out-soft); }
+.reveal.is-visible, html.no-js .reveal { opacity: 1; translate: none; }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
   :root { scroll-behavior: auto; }
-}
-html.no-js .reveal { opacity: 1; transform: none; }
-
-/* Image treatment */
-.img-cover { @apply h-full w-full object-cover; }
-.grain::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .08; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  .reveal { opacity: 1; translate: none; transition: none; }
+  .animate-marquee { animation: none; }
 }
 
-/* Leaflet overrides */
-.leaflet-container { font: inherit; }
+/* ---------- Components that need real selectors ---------- */
+/* Dark sections: unlayered, so these beat the light-background utility colours */
+.on-dark .eyebrow { color: var(--color-ochre-300); }
+.on-dark .lede { color: color-mix(in srgb, var(--color-cream-50) 75%, transparent); }
+
+.site-header { transition: background-color .3s, box-shadow .3s, backdrop-filter .3s; }
+.site-header[data-scrolled="true"], .site-header[data-open="true"] {
+  background: color-mix(in srgb, var(--color-cream-50) 90%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 1px 0 rgb(23 32 27 / .08);
+}
+
+/* Today's row in the weekly programme (marked by script, in Spanish time) */
+[data-day] .today-pill { display: none; }
+[data-day][data-today] .today-pill { display: inline-flex; }
+
+dialog::backdrop { background: rgb(12 36 27 / .6); backdrop-filter: blur(4px); }
+dialog[open] { animation: dialog-in .25s var(--ease-out-soft); }
+@keyframes dialog-in { from { opacity: 0; translate: 0 12px; } }
+
+/* Long-form text (legal pages) */
+.prose-legal h2 { @apply mt-12 text-3xl text-pine-950; }
+.prose-legal p, .prose-legal li { @apply mt-3 text-ink-800; }
+.prose-legal ul { @apply mt-3 list-disc space-y-1 pl-6; }
+
+/* Leaflet */
+.leaflet-container { font: inherit; background: var(--color-cream-200); }
 .leaflet-popup-content-wrapper { border-radius: 14px; }

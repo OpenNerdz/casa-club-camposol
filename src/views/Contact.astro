@@ -1,72 +1,81 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import HoursList from '../components/HoursList.astro';
 import MapLeaflet from '../components/MapLeaflet.astro';
 import ContactForm from '../components/ContactForm.astro';
+import Icon from '../components/Icon.astro';
 import { contact } from '../content/contact';
 import { img } from '../data/images';
-import { site } from '../data/site';
-import { useTranslations, type Lang } from '../i18n/utils';
+import { site, whatsappBookingHref } from '../data/site';
+import { useTranslations, em, type Lang } from '../i18n/utils';
 import { businessJsonLd } from '../data/jsonld';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = contact[lang];
 const t = useTranslations(lang);
+const groups = [
+  { title: c.cards.club, sub: c.cards.clubSub, links: [
+    { href: site.phoneHref, icon: 'phone', label: site.phoneDisplay },
+    { href: whatsappBookingHref(lang), icon: 'whatsapp', label: 'WhatsApp', external: true },
+    { href: `mailto:${site.email}`, icon: 'mail', label: site.email },
+  ] },
+  { title: c.cards.golf, sub: c.cards.golfSub, links: [
+    { href: site.golfPhoneHref, icon: 'phone', label: site.golfPhoneDisplay },
+    { href: site.teeTimeUrl, icon: 'calendar', label: t('cta.teeTimes'), external: true },
+  ] },
+];
 ---
-<Base title={c.meta.title} description={c.meta.description} header="transparent" image={img.exterior} jsonLd={businessJsonLd(lang)}>
-  <Hero image={img.exterior} compact eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} />
+<Base title={c.meta.title} description={c.meta.description} image={img.exterior} jsonLd={businessJsonLd(lang)}>
+  <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.exterior} alt={c.alt} position="78% center">
+    <div class="mt-10 grid gap-8 sm:grid-cols-2">
+      {groups.map((g) => (
+        <div>
+          <h2 class="text-[1.9rem] leading-none text-pine-950">{g.title}</h2>
+          <p class="mt-1.5 text-sm text-ink-600">{g.sub}</p>
+          <ul class="mt-4 divide-y divide-ink-950/10 border-y border-ink-950/10">
+            {g.links.map((l) => (
+              <li><a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener' : undefined}
+                class="flex min-h-12 items-center gap-3 py-2 text-[0.9375rem] font-semibold text-pine-900 transition-colors hover:text-clay-700">
+                <Icon name={l.icon} size={17} class="shrink-0 text-clay-600" /><span class="min-w-0 [overflow-wrap:anywhere]">{l.label}</span></a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </PageHero>
 
-  <section class="container-x -mt-10 relative z-10 grid gap-6 md:grid-cols-3">
-    <div class="card p-7">
-      <span class="grid h-11 w-11 place-items-center rounded-full bg-sol-100 text-sol-600"><Icon name="utensils" size={20} /></span>
-      <h2 class="mt-4 text-xl text-green-950">{c.cards.club}</h2>
-      <ul class="mt-3 space-y-2 text-sm">
-        <li><a href={site.phoneHref} class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="phone" size={16} /> {site.phoneDisplay}</a></li>
-        <li><a href={site.whatsappHref} target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="whatsapp" size={16} /> WhatsApp</a></li>
-        <li><a href={`mailto:${site.email}`} class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline break-all"><Icon name="mail" size={16} /> {site.email}</a></li>
-      </ul>
-    </div>
-    <div class="card p-7">
-      <span class="grid h-11 w-11 place-items-center rounded-full bg-green-50 text-green-800"><Icon name="flag" size={20} /></span>
-      <h2 class="mt-4 text-xl text-green-950">{c.cards.golf}</h2>
-      <ul class="mt-3 space-y-2 text-sm">
-        <li><a href={site.golfPhoneHref} class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="phone" size={16} /> {site.golfPhoneDisplay}</a></li>
-        <li><a href={site.teeTimeUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="calendar" size={16} /> {t('cta.teeTimes')}</a></li>
-        <li><a href={site.social.facebookGolf} target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="facebook" size={16} /> Camposol Club de Golf</a></li>
-      </ul>
-    </div>
-    <div class="card p-7">
-      <span class="grid h-11 w-11 place-items-center rounded-full bg-green-50 text-green-800"><Icon name="pin" size={20} /></span>
-      <h2 class="mt-4 text-xl text-green-950">{c.cards.visit}</h2>
-      <address class="mt-3 text-sm not-italic leading-relaxed text-ink-700">{site.address.lines.map((l) => <span class="block">{l}</span>)}</address>
-      <a href={site.mapsUrl} target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-green-800 hover:underline"><Icon name="arrow" size={16} /> {t('cta.directions')}</a>
+  <!-- Find us -->
+  <section class="container-x py-16 sm:py-20">
+    <div class="grid gap-6 lg:grid-cols-12">
+      <MapLeaflet lang={lang} class="min-h-[22rem] lg:col-span-7 lg:min-h-[36rem]" />
+      <div class="panel p-7 sm:p-9 lg:col-span-5">
+        <h2 class="text-[2.4rem] leading-none text-pine-950" set:html={em(c.findTitle)} />
+        <address class="mt-4 not-italic leading-relaxed text-ink-800">{site.address.lines.map((l) => <span class="block">{l}</span>)}</address>
+        <a href={site.directionsUrl} target="_blank" rel="noopener" class="btn-dark mt-6"><Icon name="navigation" size={16} /> {t('cta.directions')}</a>
+        <h3 class="mt-10 text-2xl text-pine-950">{c.directions.title}</h3>
+        <ol class="mt-4 space-y-4 text-[0.9375rem] text-ink-800">
+          {c.directions.steps.map((s, i) => <li class="flex gap-4"><span class="display w-5 shrink-0 text-2xl leading-none text-clay-600">{i + 1}</span><span>{s}</span></li>)}
+        </ol>
+        <h3 class="mt-10 text-2xl text-pine-950">{c.hoursTitle}</h3>
+        <HoursList lang={lang} class="mt-2" />
+        <p class="mt-3 text-xs text-ink-600">{t('footer.hoursNote')}</p>
+      </div>
     </div>
   </section>
 
-  <section class="container-x grid gap-8 py-16 lg:grid-cols-5 sm:py-20">
-    <div class="lg:col-span-3"><MapLeaflet height="100%" class="min-h-[420px]" /></div>
-    <div class="card p-7 lg:col-span-2">
-      <h2 class="text-2xl text-green-950">{c.hoursTitle}</h2>
-      <ul class="mt-4 space-y-2 text-sm">{site.hours[lang].map((h) => <li class="flex justify-between gap-4 border-b border-ink-900/5 pb-2"><span class="text-ink-500">{h.label}</span><span class="font-semibold text-green-950">{h.value}</span></li>)}</ul>
-      <p class="mt-3 text-xs text-ink-500">{t('footer.hoursNote')}</p>
-      <h3 class="mt-8 text-xl text-green-950">{c.directions.title}</h3>
-      <ol class="mt-3 space-y-3 text-sm text-ink-700">{c.directions.steps.map((s, i) => <li class="flex gap-3"><span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sol-100 text-xs font-bold text-sol-600">{i + 1}</span><span>{s}</span></li>)}</ol>
-    </div>
-  </section>
-
-  <section class="bg-sand-100 py-16 sm:py-24">
-    <div class="container-x grid gap-10 lg:grid-cols-5">
-      <div class="reveal lg:col-span-2">
-        <p class="eyebrow">{t('cta.enquire')}</p>
-        <h2 class="mt-3 text-3xl font-medium text-green-950 sm:text-4xl">{c.formTitle}</h2>
-        <p class="mt-4 text-lg text-ink-500">{c.formText}</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href={site.whatsappHref} class="btn-accent" target="_blank" rel="noopener"><Icon name="whatsapp" size={16} /> {t('cta.whatsapp')}</a>
-          <a href={site.phoneHref} class="btn-outline"><Icon name="phone" size={16} /> {t('cta.call')}</a>
+  <!-- Enquiry form -->
+  <section id="enquiry" class="bg-cream-100 py-20 sm:py-28">
+    <div class="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-5">
+        <SectionHeading eyebrow={t('cta.enquire')} title={c.formTitle} intro={c.formText} />
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href={whatsappBookingHref(lang)} class="btn-primary" target="_blank" rel="noopener"><Icon name="whatsapp" size={16} /> WhatsApp</a>
+          <a href={site.phoneHref} class="btn-line"><Icon name="phone" size={16} /> {t('cta.call')}</a>
         </div>
       </div>
-      <div class="reveal lg:col-span-3"><ContactForm lang={lang} /></div>
+      <div class="lg:col-span-7"><ContactForm lang={lang} /></div>
     </div>
   </section>
 </Base>

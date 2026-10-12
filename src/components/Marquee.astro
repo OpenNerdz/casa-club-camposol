@@ -1,0 +1,13 @@
+---
+// A slow ticker of the regulars. Purely decorative: the same facts are in the timetable.
+interface Props { items: readonly string[] }
+const { items } = Astro.props;
+const row = [...items, ...items];
+---
+<div class="overflow-hidden border-y border-ink-950/10 bg-pine-900 py-4 text-cream-50" aria-hidden="true">
+  <div class="flex w-max animate-marquee gap-10 whitespace-nowrap">
+    {[0, 1].map(() => row.map((it) => (
+      <span class="flex items-center gap-10 display text-2xl italic sm:text-3xl">{it}<span class="h-1.5 w-1.5 rounded-full bg-ochre-500 not-italic"></span></span>
+    )))}
+  </div>
+</div>

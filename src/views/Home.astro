@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import Icon from '../components/Icon.astro';
-import Marquee from '../components/Marquee.astro';
 import TodayCard from '../components/TodayCard.astro';
 import Timetable from '../components/Timetable.astro';
 import Testimonials from '../components/Testimonials.astro';
@@ -12,7 +11,7 @@ import MapLeaflet from '../components/MapLeaflet.astro';
 import { home } from '../content/home';
 import { img } from '../data/images';
 import { site } from '../data/site';
-import { localePath, em, useTranslations, type Lang } from '../i18n/utils';
+import { localePath, useTranslations, type Lang } from '../i18n/utils';
 import { businessJsonLd } from '../data/jsonld';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -25,7 +24,7 @@ const enquiry = (type: string) => `${localePath(lang, '/contact/')}?type=${type}
   <section class="container-x grid gap-14 pb-20 pt-28 sm:pt-36 lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-36">
     <div class="lg:col-span-7 lg:pt-8">
       <p class="eyebrow">{c.hero.eyebrow}</p>
-      <h1 class="h-display mt-6 text-pine-950" set:html={em(c.hero.title)} />
+      <h1 class="h-display mt-5 text-pine-950">{c.hero.title}</h1>
       <p class="lede mt-7 max-w-xl">{c.hero.sub}</p>
       <div class="mt-9 flex flex-wrap gap-3">
         <a href={enquiry('table')} data-book class="btn-primary">{c.hero.cta1} <Icon name="arrow" size={17} /></a>
@@ -34,31 +33,18 @@ const enquiry = (type: string) => `${localePath(lang, '/contact/')}?type=${type}
       <TodayCard lang={lang} class="mt-12 max-w-md" />
     </div>
 
-    <div class="relative mx-auto w-full max-w-md self-start lg:col-span-5 lg:max-w-none">
-      <div class="arch relative ml-auto aspect-[3/4] w-[86%] bg-cream-200 lg:w-[92%]">
+    <div class="mx-auto w-full max-w-md self-start lg:col-span-5 lg:max-w-none">
+      <div class="frame aspect-[4/5] bg-cream-200">
         <img src={img.restaurant} alt={c.hero.alt} class="img-cover" fetchpriority="high" decoding="async" />
-      </div>
-      <div class="frame absolute -bottom-6 left-0 aspect-square w-[44%] border-[6px] border-cream-50 bg-cream-200 shadow-xl shadow-pine-950/15">
-        <img src={img.course2} alt={c.hero.insetAlt} class="img-cover" loading="lazy" decoding="async" />
-      </div>
-      <!-- Rotating sign-off badge -->
-      <div class="absolute -left-2 top-4 grid h-28 w-28 place-items-center rounded-full bg-ochre-500 text-pine-950 shadow-lg sm:h-32 sm:w-32" aria-hidden="true">
-        <svg viewBox="0 0 100 100" class="absolute inset-0 h-full w-full animate-[spin_36s_linear_infinite] motion-reduce:animate-none">
-          <defs><path id="badge-circle" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" /></defs>
-          <text class="fill-current text-[8.6px] font-semibold uppercase tracking-[0.12em]"><textPath href="#badge-circle" textLength="230" lengthAdjust="spacing">{c.hero.badge}</textPath></text>
-        </svg>
-        <Icon name="sun" size={28} />
       </div>
     </div>
   </section>
 
-  <Marquee items={c.marquee} />
-
   <!-- Intro -->
-  <section class="container-x grid gap-8 py-20 sm:py-28 lg:grid-cols-12">
-    <p class="eyebrow lg:col-span-3 lg:mt-4">{c.intro.eyebrow}</p>
+  <section class="container-x grid gap-6 border-t border-ink-950/10 py-20 sm:py-24 lg:grid-cols-12">
+    <p class="eyebrow lg:col-span-3 lg:mt-2">{c.intro.eyebrow}</p>
     <div class="reveal lg:col-span-9">
-      <p class="display text-[clamp(2rem,1.3rem+2.4vw,3.6rem)] leading-[1.08] text-pine-950" set:html={em(c.intro.text)} />
+      <p class="text-[clamp(1.45rem,1.2rem+1vw,2.1rem)] font-semibold leading-snug tracking-[-0.02em] text-pine-950">{c.intro.text}</p>
       <ul class="mt-10 flex flex-wrap gap-3">
         {c.intro.links.map((l) => (
           <li><a href={localePath(lang, l.href)} class="group inline-flex h-12 items-center gap-2 rounded-full border border-ink-950/15 px-5 font-semibold text-pine-900 transition-colors hover:border-pine-900 hover:bg-pine-900 hover:text-cream-50">
@@ -82,14 +68,14 @@ const enquiry = (type: string) => `${localePath(lang, '/contact/')}?type=${type}
   <!-- Restaurant -->
   <section class="container-x grid gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:items-center lg:gap-20">
     <div class="reveal mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
-      <div class="arch aspect-[3/4] bg-cream-200"><img src={img.food} alt={c.restaurant.alt} class="img-cover" loading="lazy" decoding="async" /></div>
+      <div class="frame aspect-[4/5] bg-cream-200"><img src={img.food} alt={c.restaurant.alt} class="img-cover" loading="lazy" decoding="async" /></div>
     </div>
     <div class="lg:col-span-7">
       <SectionHeading eyebrow={c.restaurant.eyebrow} title={c.restaurant.title} intro={c.restaurant.text} />
       <dl class="reveal mt-10 border-b border-ink-950/12">
         {c.restaurant.signatures.map((s) => (
           <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-6 border-t border-ink-950/12 py-4">
-            <dt class="display text-[1.75rem] leading-tight text-pine-950">{s.name}</dt>
+            <dt class="text-lg font-bold text-pine-950">{s.name}</dt>
             <dd class="text-xs font-semibold uppercase tracking-[0.14em] text-clay-700">{s.when}</dd>
             <dd class="col-span-2 mt-0.5 text-ink-600">{s.desc}</dd>
           </div>
@@ -110,7 +96,7 @@ const enquiry = (type: string) => `${localePath(lang, '/contact/')}?type=${type}
       </div>
       <dl class="reveal mt-16 grid max-w-4xl grid-cols-2 gap-x-8 gap-y-10 border-t border-cream-50/15 pt-10 sm:grid-cols-4">
         {c.golf.stats.map((s) => (
-          <div><dt class="display text-[3.25rem] leading-none text-cream-50">{s.v}</dt><dd class="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-50/65">{s.l}</dd></div>
+          <div><dt class="text-[2.5rem] font-bold leading-none tracking-[-0.03em] text-cream-50">{s.v}</dt><dd class="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-50/65">{s.l}</dd></div>
         ))}
       </dl>
     </div>
@@ -125,8 +111,8 @@ const enquiry = (type: string) => `${localePath(lang, '/contact/')}?type=${type}
   <section class="bg-cream-100 py-20 sm:py-28">
     <div class="container-x grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-20">
       <div class="reveal grid grid-cols-2 gap-4 lg:order-2 lg:col-span-6">
-        <div class="arch aspect-[3/5] bg-cream-200"><img src={img.events} alt={c.functions.alt} class="img-cover" loading="lazy" decoding="async" /></div>
-        <div class="arch mt-16 aspect-[3/5] bg-cream-200"><img src={img.heroEvents} alt="" class="img-cover" loading="lazy" decoding="async" /></div>
+        <div class="frame aspect-[3/4] bg-cream-200"><img src={img.events} alt={c.functions.alt} class="img-cover" loading="lazy" decoding="async" /></div>
+        <div class="frame aspect-[3/4] bg-cream-200"><img src={img.heroEvents} alt="" class="img-cover" loading="lazy" decoding="async" /></div>
       </div>
       <div class="lg:col-span-6">
         <SectionHeading eyebrow={c.functions.eyebrow} title={c.functions.title} intro={c.functions.text} />
@@ -141,7 +127,7 @@ const enquiry = (type: string) => `${localePath(lang, '/contact/')}?type=${type}
     <div class="mt-14 grid gap-6 lg:grid-cols-12">
       <MapLeaflet lang={lang} class="min-h-[22rem] lg:col-span-8 lg:min-h-[32rem]" />
       <div class="panel flex flex-col p-7 sm:p-8 lg:col-span-4">
-        <address class="display text-2xl not-italic leading-snug text-pine-950">
+        <address class="text-lg font-semibold not-italic leading-snug text-pine-950">
           {site.address.lines.slice(0, 3).map((l) => <span class="block">{l}</span>)}
         </address>
         <ul class="mt-6 divide-y divide-ink-950/10 border-y border-ink-950/10">

@@ -4,8 +4,7 @@
    The palette is taken from the clubhouse itself: pine-green fairways, the terracotta
    terrace tiles, the ochre roof trim and lime-washed walls. Edit here to re-brand. */
 @theme {
-  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
-  --font-sans: "Instrument Sans Variable", "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --color-pine-950: #0c241b;
   --color-pine-900: #123326;
@@ -36,8 +35,6 @@
   --color-ink-400: #7b877f;
 
   --ease-out-soft: cubic-bezier(.2, .7, .2, 1);
-  --animate-marquee: marquee 48s linear infinite;
-  @keyframes marquee { to { transform: translateX(-50%); } }
 }
 
 /* ---------- Base ----------
@@ -49,18 +46,10 @@
   body {
     @apply bg-cream-50 font-sans text-ink-950 antialiased;
     font-size: 1.0625rem;
-    line-height: 1.65;
-    font-synthesis: none; /* Instrument Serif has one weight: never fake-bold it */
+    line-height: 1.7;
   }
 
-  h1, h2, h3, .display {
-    font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.012em;
-    text-wrap: balance;
-  }
-  h1 em, h2 em, h3 em, .display em { font-style: italic; color: var(--color-clay-600); }
-  .on-dark h1 em, .on-dark h2 em, .on-dark h3 em, .on-dark .display em { color: var(--color-ochre-300); }
+  h1, h2, h3 { font-weight: 700; letter-spacing: -0.025em; text-wrap: balance; }
   p { text-wrap: pretty; }
 
   ::selection { background: var(--color-ochre-300); color: var(--color-ink-950); }
@@ -70,13 +59,10 @@
 /* ---------- Utilities ---------- */
 @utility container-x { @apply mx-auto w-full max-w-[84rem] px-5 sm:px-8 lg:px-12; }
 
-@utility eyebrow {
-  @apply inline-flex items-center gap-3 text-[0.75rem] font-semibold uppercase leading-none tracking-[0.18em] text-clay-700;
-  &::before { content: ""; @apply h-px w-8 bg-current opacity-60; }
-}
+@utility eyebrow { @apply block text-[0.75rem] font-semibold uppercase leading-none tracking-[0.14em] text-clay-700; }
 
-@utility h-display { @apply text-[clamp(3rem,1.6rem+5.6vw,7rem)] leading-[0.92]; }
-@utility h-section { @apply text-[clamp(2.4rem,1.7rem+2.6vw,4.25rem)] leading-[0.98]; }
+@utility h-display { @apply text-[clamp(2.5rem,1.6rem+3.4vw,4.5rem)] leading-[1.05] tracking-[-0.035em]; }
+@utility h-section { @apply text-[clamp(2rem,1.55rem+1.6vw,3rem)] leading-[1.1] tracking-[-0.03em]; }
 @utility lede { @apply text-lg leading-relaxed text-ink-600 sm:text-xl; }
 
 @utility btn {
@@ -96,8 +82,6 @@
          transition-colors hover:text-clay-700 hover:decoration-clay-700;
 }
 
-/* Photo frames. The arch echoes the terrace colonnade; radii clamp to a semicircle. */
-@utility arch { @apply overflow-hidden rounded-[999px_999px_1.25rem_1.25rem]; }
 @utility frame { @apply overflow-hidden rounded-[1.25rem]; }
 @utility img-cover { @apply block h-full w-full object-cover; }
 
@@ -116,7 +100,6 @@
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
   .reveal { opacity: 1; translate: none; transition: none; }
-  .animate-marquee { animation: none; }
 }
 
 /* ---------- Components that need real selectors ---------- */
@@ -140,7 +123,7 @@ dialog[open] { animation: dialog-in .25s var(--ease-out-soft); }
 @keyframes dialog-in { from { opacity: 0; translate: 0 12px; } }
 
 /* Long-form text (legal pages) */
-.prose-legal h2 { @apply mt-12 text-3xl text-pine-950; }
+.prose-legal h2 { @apply mt-12 text-2xl text-pine-950; }
 .prose-legal p, .prose-legal li { @apply mt-3 text-ink-800; }
 .prose-legal ul { @apply mt-3 list-disc space-y-1 pl-6; }
 

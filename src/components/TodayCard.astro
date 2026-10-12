@@ -9,16 +9,13 @@ const { lang, class: cls = '' } = Astro.props;
 const t = useTranslations(lang);
 ---
 <div class:list={['panel flex gap-4 p-5 sm:p-6', cls]}>
-  <span class="relative mt-1 grid h-3 w-3 shrink-0 place-items-center">
-    <span class="absolute h-3 w-3 animate-ping rounded-full bg-pine-600/40 motion-reduce:animate-none"></span>
-    <span class="h-2 w-2 rounded-full bg-pine-600"></span>
-  </span>
+  <span class="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-pine-600" aria-hidden="true"></span>
   <div class="min-w-0 flex-1">
     <p class="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ink-600">{t('today.label')}</p>
     <p data-today-for="0" class="mt-1.5 font-semibold text-pine-950">{t('today.fallback')}</p>
     {programme.map((d) => (
       <div data-today-for={d.day} hidden>
-        <p class="mt-1.5 display text-2xl leading-tight text-pine-950">{dayNames[lang].long[d.day - 1]}</p>
+        <p class="mt-1.5 text-xl font-bold tracking-tight text-pine-950">{dayNames[lang].long[d.day - 1]}</p>
         <ul class="mt-1 text-[0.9375rem] text-ink-800">
           {d.items.filter((it) => !it.minor).map((it) => <li>{it.title[lang]}{(it.time || it.note) && <span class="text-clay-700"> · {it.time ?? it.note?.[lang]}</span>}</li>)}
           {d.items.every((it) => it.minor) && d.items.map((it) => <li>{it.title[lang]}{it.note && <span class="text-clay-700"> · {it.note[lang]}</span>}</li>)}

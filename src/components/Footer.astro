@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import HoursList from './HoursList.astro';
 import { site, whatsappBookingHref } from '../data/site';
-import { useTranslations, localePath, em, type Lang } from '../i18n/utils';
+import { useTranslations, localePath, type Lang } from '../i18n/utils';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
@@ -26,7 +26,7 @@ const heading = 'font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18
   <!-- Sign-off: the last call to action on every page -->
   <div class="container-x"><div class="grid gap-8 border-b border-cream-50/10 py-16 sm:py-20 lg:grid-cols-12 lg:items-end">
     <div class="lg:col-span-7">
-      <p class="display text-[clamp(2.75rem,1.8rem+3.6vw,5.5rem)] leading-[0.95]" set:html={em(t('footer.signoff'))} />
+      <p class="text-[clamp(2rem,1.55rem+1.8vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.03em]">{t('footer.signoff')}</p>
       <p class="mt-5 max-w-xl text-lg text-cream-50/75">{t('footer.signoffText')}</p>
     </div>
     <div class="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">

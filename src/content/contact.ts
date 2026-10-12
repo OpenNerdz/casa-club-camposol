@@ -1,13 +1,13 @@
-// Contact page copy. Headlines accept *emphasis*. Phone numbers and hours live in src/data/site.ts.
+// Contact page copy. Phone numbers and hours live in src/data/site.ts.
 export const contact = {
   en: {
     meta: { title: 'Contact & Directions', description: 'Contact Casa Club Camposol: phone, WhatsApp, email, opening hours, map and directions to the clubhouse at Camposol Club de Golf, Calle Aljibe s/n, Sector C, Mazarrón.' },
-    hero: { eyebrow: 'Contact', title: 'Say *hello*', sub: 'Table bookings, event enquiries, society days or just a question: we are easy to reach.' },
+    hero: { eyebrow: 'Contact', title: 'Say hello', sub: 'Table bookings, event enquiries, society days or just a question: we are easy to reach.' },
     cards: { club: 'Casa Club', clubSub: 'Tables, events & the bar', golf: 'Golf office', golfSub: 'Tee times, buggies & lessons', email: 'Email' },
-    findTitle: 'Find *us*',
+    findTitle: 'Find us',
     alt: 'The Casa Club Camposol sign beside the bunkers and palms at the entrance',
     hoursTitle: 'Opening hours',
-    formTitle: 'Send an *enquiry*', formText: 'Tell us what you have in mind and we will reply by email or phone, usually the same day.',
+    formTitle: 'Send an enquiry', formText: 'Tell us what you have in mind and we will reply by email or phone, usually the same day.',
     directions: { title: 'Getting here', steps: [
       'Camposol is on the RM-3 Mazarrón–Alhama road, about 10 minutes north of Mazarrón town and 15 minutes from the Puerto de Mazarrón beaches.',
       'Follow signs for Camposol and then Sector C. The clubhouse and golf course are at the end of Calle Aljibe, beside the crazy-golf and driving range.',
@@ -17,12 +17,12 @@ export const contact = {
   },
   es: {
     meta: { title: 'Contacto y cómo llegar', description: 'Contacta con Casa Club Camposol: teléfono, WhatsApp, correo, horario, mapa y cómo llegar a la casa club del Camposol Club de Golf, Calle Aljibe s/n, Sector C, Mazarrón.' },
-    hero: { eyebrow: 'Contacto', title: '*Hablemos*', sub: 'Reservas de mesa, consultas para eventos, días de sociedad o cualquier pregunta: es fácil dar con nosotros.' },
+    hero: { eyebrow: 'Contacto', title: 'Hablemos', sub: 'Reservas de mesa, consultas para eventos, días de sociedad o cualquier pregunta: es fácil dar con nosotros.' },
     cards: { club: 'Casa Club', clubSub: 'Mesas, eventos y el bar', golf: 'Oficina de golf', golfSub: 'Salidas, buggies y clases', email: 'Correo' },
-    findTitle: 'Cómo *encontrarnos*',
+    findTitle: 'Cómo encontrarnos',
     alt: 'El cartel de Casa Club Camposol junto a los búnkeres y las palmeras de la entrada',
     hoursTitle: 'Horario',
-    formTitle: 'Envíanos una *consulta*', formText: 'Cuéntanos qué tienes en mente y te responderemos por correo o teléfono, normalmente el mismo día.',
+    formTitle: 'Envíanos una consulta', formText: 'Cuéntanos qué tienes en mente y te responderemos por correo o teléfono, normalmente el mismo día.',
     directions: { title: 'Cómo llegar', steps: [
       'Camposol está en la carretera RM-3 Mazarrón–Alhama, a unos 10 minutos al norte de Mazarrón y a 15 minutos de las playas de Puerto de Mazarrón.',
       'Sigue las indicaciones a Camposol y después a Sector C. La casa club y el campo de golf están al final de la Calle Aljibe, junto al minigolf y el campo de prácticas.',

@@ -45,9 +45,8 @@ const enquiryHref = `${localePath(lang, '/contact/')}#enquiry`;
 <div id="mobile-menu" hidden class="fixed inset-x-0 bottom-0 top-[4.5rem] z-[45] overflow-y-auto bg-cream-50 lg:hidden">
   <nav class="container-x flex min-h-full flex-col pb-10 pt-4" aria-label={t('nav.main')}>
     <ul class="divide-y divide-ink-950/10 border-b border-ink-950/10">
-      {nav.map((n, i) => (
-        <li><a href={n.href} aria-current={current === n.href ? 'page' : undefined} class="flex items-baseline gap-4 py-4 font-display text-[2.1rem] leading-tight text-pine-950 aria-[current=page]:text-clay-700">
-          <span class="w-6 font-sans text-xs font-semibold tracking-widest text-ink-400">0{i + 1}</span>{n.label}</a></li>
+      {nav.map((n) => (
+        <li><a href={n.href} aria-current={current === n.href ? 'page' : undefined} class="block py-4 text-2xl font-bold tracking-tight text-pine-950 aria-[current=page]:text-clay-700">{n.label}</a></li>
       ))}
     </ul>
     <div class="mt-auto grid gap-3 pt-8">

@@ -13,21 +13,16 @@ const onDark = tone === 'dark';
         class:list={['reveal grid grid-cols-[4.75rem_1fr] gap-4 border-t px-3 py-5 sm:grid-cols-[6rem_1fr] sm:px-4',
           onDark ? 'border-cream-50/12 data-today:bg-cream-50/[.06]' : 'border-ink-950/12 data-today:bg-ochre-100/60']}>
       <div>
-        <p class:list={['display text-[2rem] leading-none', onDark ? 'text-cream-50' : 'text-pine-950']}>{dayNames[lang].short[d.day - 1]}</p>
+        <p class:list={['text-lg font-bold leading-none', onDark ? 'text-cream-50' : 'text-pine-950']}>{dayNames[lang].short[d.day - 1]}</p>
         <span class:list={['today-pill mt-2 rounded-full px-2 py-0.5 text-[0.6875rem] font-bold uppercase tracking-wider', onDark ? 'bg-ochre-300 text-pine-950' : 'bg-clay-600 text-white']}>{t('week.today')}</span>
       </div>
-      <ul class="space-y-2 self-center">
+      <ul class="space-y-1.5">
         {d.items.map((it) => it.minor ? (
           <li class:list={['text-sm', onDark ? 'text-cream-50/55' : 'text-ink-400']}>{it.title[lang]}{it.note && ` · ${it.note[lang]}`}</li>
         ) : (
-          <li class="sm:flex sm:items-baseline sm:gap-3">
+          <li class="sm:flex sm:items-baseline sm:justify-between sm:gap-4">
             <span class="block font-semibold">{it.title[lang]}</span>
-            {(it.time || it.note) && (
-              <>
-                <span class:list={['hidden min-w-4 flex-1 translate-y-[-0.3em] border-b border-dotted sm:block', onDark ? 'border-cream-50/25' : 'border-ink-950/25']} aria-hidden="true"></span>
-                <span class:list={['block shrink-0 text-[0.9375rem] tabular-nums sm:text-base', onDark ? 'text-ochre-300' : 'text-clay-700']}>{it.time ?? it.note?.[lang]}</span>
-              </>
-            )}
+            {(it.time || it.note) && <span class:list={['block shrink-0 text-[0.9375rem] font-medium tabular-nums sm:text-base', onDark ? 'text-ochre-300' : 'text-clay-700']}>{it.time ?? it.note?.[lang]}</span>}
           </li>
         ))}
       </ul>

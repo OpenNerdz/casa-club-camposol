@@ -32,7 +32,7 @@ structured data (schema.org Restaurant + GolfCourse), sitemap and hreflang tags.
 - **One-off highlights** (tribute nights, Christmas lunch): `src/content/events.ts`. Give each a `date:
   'YYYY-MM-DD'`; it disappears from the page the day after, even before the next rebuild.
 - **Page copy** in both languages: `src/content/*.ts` (`home`, `restaurant`, `golf`, `events`, `gallery`,
-  `contact`, `legal`). In headlines, `*word*` sets that word in the italic accent.
+  `contact`, `legal`).
 - **Navigation / button / form / dialog labels**: `src/i18n/ui.ts`.
 - **Photos**: drop originals in `source/photos/`, then edit the mapping in `scripts/images.sh` and run
   `npm run images` (needs ffmpeg; also rebuilds the 600 px gallery thumbnails). The gallery list with
@@ -41,17 +41,14 @@ structured data (schema.org Restaurant + GolfCourse), sitemap and hreflang tags.
 
 ## Design
 
-The look is taken from the clubhouse itself: pine-green fairways, the terracotta terrace tiles, the ochre
-roof trim and lime-washed walls. Photos sit in arch frames that echo the terrace colonnade. Type is
-[Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) for headlines (one weight, with an
-italic accent) and [Instrument Sans](https://fonts.google.com/specimen/Instrument+Sans) for text, both
-self-hosted through Fontsource so no visitor data goes to Google.
+Plain and modern: [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans) throughout
+(self-hosted through Fontsource, so no visitor data goes to Google), with colours taken from the clubhouse
+itself: pine-green fairways, the terracotta terrace tiles, the ochre roof trim and lime-washed walls.
 
 Building blocks in `src/components/`: `PageHero`, `Section`/`SectionHeading`, `Timetable`, `TodayCard`,
 `Testimonials`, `CheckList`, `HoursList`, `MapLeaflet` (loads on scroll), `ContactForm`, `Lightbox`, plus
 site-wide `Header`, `Footer`, `BookDialog` (the "Book a table" sheet: WhatsApp with a pre-filled message,
 call, or enquiry form) and `MobileBar` (call / WhatsApp / directions on phones).
-- **Public domain**: `src/data/site-url.mjs` (used for canonical URLs, sitemap, Open Graph).
 
 ## Contact form
 
@@ -88,5 +85,5 @@ exact command) and then `node scripts/postinstall.mjs`, which patches its WASI l
 
 Photos are the venue's own, collected from Casa Club Camposol / Camposol Golf Facebook, Instagram and
 camposolgolf.com; sources and rights notes per file are in `source/photos/CREDITS.md`. Map imagery © Esri,
-Maxar, Earthstar Geographics; street map © OpenStreetMap contributors. Fonts: Instrument Serif and
-Instrument Sans (SIL Open Font License), self-hosted via Fontsource.
+Maxar, Earthstar Geographics; street map © OpenStreetMap contributors. Font: Plus Jakarta Sans (SIL Open
+Font License), self-hosted via Fontsource.

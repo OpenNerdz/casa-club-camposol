@@ -1,7 +1,6 @@
 ---
 // Opening of every inner page: headline on the left, an arched photo on the right.
 import Icon from './Icon.astro';
-import { em } from '../i18n/utils';
 interface Cta { href: string; label: string; icon?: string; book?: boolean; external?: boolean }
 interface Props { eyebrow: string; title: string; sub?: string; image: string; alt?: string; position?: string; cta1?: Cta; cta2?: Cta }
 const { eyebrow, title, sub, image, alt = '', position = 'center', cta1, cta2 } = Astro.props;
@@ -10,7 +9,7 @@ const linkAttrs = (c: Cta) => ({ href: c.href, 'data-book': c.book ? '' : undefi
 <section class="container-x grid gap-10 pb-12 pt-28 sm:pt-36 lg:grid-cols-12 lg:items-end lg:gap-16 lg:pb-20 lg:pt-40">
   <div class="lg:col-span-7 lg:pb-8">
     <p class="eyebrow">{eyebrow}</p>
-    <h1 class="h-display mt-6" set:html={em(title)} />
+    <h1 class="h-display mt-5 text-pine-950">{title}</h1>
     {sub && <p class="lede mt-7 max-w-xl">{sub}</p>}
     {(cta1 || cta2) && (
       <div class="mt-9 flex flex-wrap gap-3">
@@ -21,7 +20,7 @@ const linkAttrs = (c: Cta) => ({ href: c.href, 'data-book': c.book ? '' : undefi
     <slot />
   </div>
   <div class="lg:col-span-5">
-    <div class="arch relative mx-auto aspect-[4/5] max-h-[34rem] w-full max-w-md bg-cream-200 lg:max-w-none">
+    <div class="frame relative mx-auto aspect-[4/5] max-h-[34rem] w-full max-w-md bg-cream-200 lg:max-w-none">
       <img src={image} alt={alt} class="img-cover" style={`object-position:${position}`} fetchpriority="high" decoding="async" />
     </div>
   </div>

@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { site } from '../data/site';
-import { useTranslations, localePath, type Lang } from '../i18n/utils';
+import { useTranslations, localePath, withBase, type Lang } from '../i18n/utils';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
@@ -13,7 +13,7 @@ const hours = site.hours[lang];
   <div class="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
     <div>
       <a href={localePath(lang, '/')} class="flex items-center gap-3">
-        <img src="/images/logo-mark.svg" alt="" width="44" height="44" class="h-11 w-11" />
+        <img src={withBase('/images/logo-mark.svg')} alt="" width="44" height="44" class="h-11 w-11" />
         <span class="font-display text-2xl leading-none">Casa Club<span class="mt-1 block font-sans text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-sol-300">Camposol</span></span>
       </a>
       <p class="mt-5 max-w-xs text-sm leading-relaxed text-sand-200/80">{t('footer.blurb')}</p>

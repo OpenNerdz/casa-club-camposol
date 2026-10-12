@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
-import { getLangFromUrl, switchLang, type Lang } from '../i18n/utils';
+import { getLangFromUrl, switchLang, withBase, type Lang } from '../i18n/utils';
 
 interface Props {
   title: string;
@@ -14,7 +14,9 @@ interface Props {
   jsonLd?: object | object[];
   noindex?: boolean;
 }
-const { title, description, image = '/images/og-default.jpg', header = 'solid', jsonLd, noindex = false } = Astro.props;
+const { title, description, image = withBase('/images/og-default.jpg'), header = 'solid', jsonLd, noindex = false } = Astro.props;
+// Staging builds (e.g. GitHub Pages) set PUBLIC_NOINDEX=1 so search engines ignore them.
+const hideFromSearch = noindex || import.meta.env.PUBLIC_NOINDEX === '1';
 const lang: Lang = getLangFromUrl(Astro.url);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
@@ -34,11 +36,11 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <link rel="alternate" hreflang="en" href={altEn} />
     <link rel="alternate" hreflang="es" href={altEs} />
     <link rel="alternate" hreflang="x-default" href={altEn} />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    {hideFromSearch && <meta name="robots" content="noindex,nofollow" />}
     <meta name="theme-color" content="#123a2a" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
+    <link rel="manifest" href={withBase('/site.webmanifest')} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />

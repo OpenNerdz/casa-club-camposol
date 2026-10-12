@@ -1,6 +1,6 @@
 # Alternative to Vercel: build and publish the static site to GitHub Pages.
-# Enable Pages (Settings → Pages → Source: GitHub Actions) and set SITE_URL in
-# src/data/site-url.mjs to the Pages or custom domain before using this.
+# Builds at https://<owner>.github.io/<repo>/ with noindex (staging). For a custom
+# domain at the root, remove BASE_PATH/PUBLIC_NOINDEX below and set SITE_URL.
 name: Deploy to GitHub Pages
 on:
   push:
@@ -22,6 +22,10 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npm run build
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
+          SITE_URL: https://${{ github.repository_owner }}.github.io
+          PUBLIC_NOINDEX: '1'
       - uses: actions/upload-pages-artifact@v3
         with: { path: dist }
   deploy:

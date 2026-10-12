@@ -4,8 +4,12 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { SITE_URL } from './src/data/site-url.mjs';
 
+// BASE_PATH / SITE_URL env vars let the same code deploy to a sub-path (e.g. GitHub Pages).
+const base = process.env.BASE_PATH || '/';
+
 export default defineConfig({
-  site: SITE_URL,
+  site: process.env.SITE_URL || SITE_URL,
+  base,
   output: 'static',
   trailingSlash: 'always',
   integrations: [

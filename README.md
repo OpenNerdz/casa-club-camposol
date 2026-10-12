@@ -58,7 +58,9 @@ through its WASI build (see `scripts/postinstall.mjs`); run the WASI package ins
 
 - **Vercel** (recommended): import the repo, framework "Astro", defaults work; `vercel.json` adds caching
   and security headers. Point `casaclubcamposolgolf.com` at Vercel in the registrar.
-- **GitHub Pages**: `.github/workflows/deploy-pages.yml` builds on every push to `main`.
+- **GitHub Pages (staging, live now)**: `.github/workflows/deploy-pages.yml` builds on every push to `main`
+  and publishes to https://opennerdz.github.io/casa-club-camposol/ with a `noindex` tag, so staff can review
+  the site on any device. The build sets `BASE_PATH` so links work under the sub-path.
 - Any static host (Netlify, Cloudflare Pages, cPanel): upload the contents of `dist/`.
 
 ## Credits

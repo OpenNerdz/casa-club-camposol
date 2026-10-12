@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { site } from '../data/site';
-import { useTranslations, localePath, switchLang, type Lang } from '../i18n/utils';
+import { useTranslations, localePath, switchLang, withBase, type Lang } from '../i18n/utils';
 interface Props { lang: Lang; variant: 'transparent' | 'solid' }
 const { lang, variant } = Astro.props;
 const t = useTranslations(lang);
@@ -24,7 +24,7 @@ const transparent = variant === 'transparent';
   ]}>
   <div class="container-x flex h-[72px] items-center justify-between gap-4">
     <a href={localePath(lang, '/')} class="flex items-center gap-3" aria-label={site.name}>
-      <img src="/images/logo-mark.svg" alt="" width="40" height="40" class="h-10 w-10" />
+      <img src={withBase('/images/logo-mark.svg')} alt="" width="40" height="40" class="h-10 w-10" />
       <span class="font-display text-xl leading-none tracking-tight">
         <span class="block">Casa Club</span>
         <span class="block text-[0.72rem] font-sans font-semibold uppercase tracking-[0.22em] opacity-80">Camposol</span>

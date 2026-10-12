@@ -1,6 +1,8 @@
 import { site } from './site';
-import { SITE_URL } from './site-url.mjs';
+import { base } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
+
+const SITE_URL = `${(import.meta.env.SITE || 'https://casaclubcamposolgolf.com').replace(/\/$/, '')}${base}`;
 
 export function businessJsonLd(lang: Lang) {
   const base = {

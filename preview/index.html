@@ -1,76 +1,122 @@
 <title>Casa Club Camposol Preview</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;600;700&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
-  /* Layout: one centred column; a review hub that links into the real site pages. */
-  :root { --bg:#fbf8f2; --fg:#16211c; --muted:#55655d; --card:#ffffff; --line:rgba(22,33,28,.1); --accent:#1a4d38; --accent-fg:#ffffff; --warm:#d4731f; --warm-bg:#fbe9d4; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0f1a15; --fg:#eef3ef; --muted:#9fb0a7; --card:#172620; --line:rgba(255,255,255,.1); --accent:#3f9a70; --accent-fg:#0b1510; --warm:#f2b66e; --warm-bg:#3a2a16; color-scheme:dark } }
-  :root[data-theme="dark"] { --bg:#0f1a15; --fg:#eef3ef; --muted:#9fb0a7; --card:#172620; --line:rgba(255,255,255,.1); --accent:#3f9a70; --accent-fg:#0b1510; --warm:#f2b66e; --warm-bg:#3a2a16; color-scheme:dark }
-  body { background:var(--bg); color:var(--fg); font-family:Manrope,"Segoe UI",system-ui,sans-serif; line-height:1.55; }
-  .wrap { max-width:860px; margin:0 auto; padding-block:40px 64px; padding-inline:20px; }
-  h1,h2 { font-family:Fraunces,Georgia,serif; font-weight:500; letter-spacing:-.01em; text-wrap:balance; line-height:1.1; }
-  h1 { font-size:clamp(2rem,5vw,3rem); margin:0 0 8px; }
-  h2 { font-size:1.5rem; margin:36px 0 12px; }
-  .eyebrow { font-size:.72rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--warm); margin:0 0 10px; }
-  p { margin:0 0 12px; max-width:65ch; }
-  .muted { color:var(--muted); }
-  .cta { display:flex; flex-wrap:wrap; gap:12px; margin:24px 0 8px; }
-  .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:999px; font-weight:700; text-decoration:none; font-size:.95rem; }
-  .btn-primary { background:var(--accent); color:var(--accent-fg); }
-  .btn-outline { border:1.5px solid var(--accent); color:var(--accent); }
-  .btn:focus-visible { outline:3px solid var(--warm); outline-offset:2px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; margin-top:12px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; min-width:0; }
-  .card a { color:var(--accent); font-weight:700; text-decoration:none; }
-  .card a:hover { text-decoration:underline; }
-  .card .es { display:block; font-size:.9rem; color:var(--muted); margin-top:4px; }
-  .note { background:var(--warm-bg); border-radius:14px; padding:16px 18px; margin:16px 0; }
-  .note strong { color:var(--warm); }
-  ul { padding-left:20px; margin:0 0 12px; } li { margin-bottom:6px; }
-  img { max-width:100%; border-radius:14px; border:1px solid var(--line); display:block; }
-  .meta { font-size:.85rem; color:var(--muted); margin-top:40px; border-top:1px solid var(--line); padding-top:16px; }
-  code { font-family:ui-monospace,Menlo,monospace; font-size:.9em; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px; }
+  /* Layout: one reading column, the site's own palette and type; a review hub that links into the real pages. */
+  :root {
+    --bg: #fbf8f1; --panel: #f4ede0; --fg: #17201b; --muted: #46534c; --line: rgb(23 32 27 / .12);
+    --pine: #123326; --pine-fg: #fbf8f1; --clay: #a94a28; --clay-text: #8f3b1f; --ochre: #d9a23a;
+    --display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+    --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #0c241b; --panel: #123326; --fg: #f4ede0; --muted: #b9c6bd; --line: rgb(244 237 224 / .14);
+    --pine: #ecc878; --pine-fg: #0c241b; --clay: #ecc878; --clay-text: #ecc878; --ochre: #d9a23a; color-scheme: dark } }
+  :root[data-theme="dark"] {
+    --bg: #0c241b; --panel: #123326; --fg: #f4ede0; --muted: #b9c6bd; --line: rgb(244 237 224 / .14);
+    --pine: #ecc878; --pine-fg: #0c241b; --clay: #ecc878; --clay-text: #ecc878; --ochre: #d9a23a; color-scheme: dark }
+
+  body { background: var(--bg); color: var(--fg); font: 400 1.0625rem/1.65 var(--body); }
+  .wrap { max-width: 54rem; margin: 0 auto; padding-block: 3.5rem 5rem; padding-inline: 20px; display: grid; gap: 3.25rem; }
+  h1, h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.012em; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(2.75rem, 1.8rem + 4vw, 4.75rem); line-height: .95; }
+  h2 { font-size: clamp(1.9rem, 1.5rem + 1.4vw, 2.6rem); line-height: 1; }
+  h1 em, h2 em { color: var(--clay); }
+  p { margin: 0; max-width: 65ch; text-wrap: pretty; }
+  .eyebrow { display: flex; align-items: center; gap: .75rem; font-size: .75rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--clay-text); }
+  .eyebrow::before { content: ""; width: 2rem; height: 1px; background: currentColor; opacity: .6; }
+  .muted { color: var(--muted); }
+  section { display: grid; gap: 1.1rem; min-width: 0; }
+  .intro { display: grid; gap: 1.4rem; }
+
+  .cta { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .btn { display: inline-flex; align-items: center; height: 3rem; padding-inline: 1.5rem; border-radius: 999px; font-weight: 600; font-size: .95rem; text-decoration: none; }
+  .btn-primary { background: var(--pine); color: var(--pine-fg); }
+  .btn-line { border: 1px solid var(--line); color: var(--fg); }
+  .btn:hover { filter: brightness(1.08); }
+  a:focus-visible { outline: 2px solid var(--ochre); outline-offset: 3px; border-radius: 6px; }
+
+  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 1.25rem; padding: 1.1rem 1.3rem; }
+  .note strong { color: var(--clay-text); }
+
+  /* Page list: English name, Spanish name, what to look at */
+  .pages { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .pages li { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 9rem) minmax(0, 1fr); gap: .25rem 1.25rem; align-items: baseline; padding-block: .85rem; border-bottom: 1px solid var(--line); }
+  .pages a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 5px; }
+  .pages a:hover { text-decoration-color: var(--clay); }
+  .pages .en { font-family: var(--display); font-size: 1.45rem; line-height: 1.1; }
+  .pages .es { font-size: .95rem; }
+  .pages .what { font-size: .95rem; color: var(--muted); }
+  @media (max-width: 40rem) { .pages li { grid-template-columns: minmax(0, 1fr) auto; } .pages .what { grid-column: 1 / -1; } }
+
+  ul.list { margin: 0; padding-left: 1.2rem; display: grid; gap: .55rem; }
+  ul.list li::marker { color: var(--ochre); }
+  img { max-width: 100%; height: auto; border-radius: 1.25rem; border: 1px solid var(--line); display: block; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: .88em; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
+  .meta { font-size: .85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem; }
 </style>
+
 <div class="wrap">
-  <p class="eyebrow">Website review · Casa Club Camposol</p>
-  <h1>Casa Club Camposol website preview</h1>
-  <p class="muted">A private preview of the new bilingual website for the clubhouse, restaurant, bar and golf course at Camposol, Mazarrón. Nothing is public yet. Please browse every page, then send corrections using the checklist below.</p>
-  <div class="cta">
-    <a class="btn btn-primary" href="site/index.html">Open the site (English)</a>
-    <a class="btn btn-outline" href="site/es/index.html">Abrir el sitio (Español)</a>
-  </div>
+  <header class="intro">
+    <p class="eyebrow">Website review · Casa Club Camposol</p>
+    <h1>Casa Club Camposol <em>website preview</em></h1>
+    <p class="muted">A private preview of the bilingual website for the clubhouse, restaurant, bar and golf course at Camposol, Mazarrón. Nothing is public yet. Please browse every page, on your phone as well as a computer, then send corrections using the checklist at the bottom.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="site/index.html">Open the site in English</a>
+      <a class="btn btn-line" href="site/es/index.html">Abrir el sitio en español</a>
+    </div>
+  </header>
 
   <div class="note">
-    <strong>Preview limitations.</strong> This sandbox blocks a few things that work on the real site: the satellite map tiles will not load (see the screenshot below for how it looks), tap-to-call and WhatsApp buttons may do nothing here, and the enquiry form is not connected yet. Photos are the venue's own, taken from Facebook, Instagram and camposolgolf.com; higher-resolution originals will sharpen the hero images.
+    <strong>Preview limitations.</strong> This preview blocks a few things that work on the real site: the satellite map stays blank (the picture further down shows how it looks), the call and WhatsApp buttons may do nothing here, and the enquiry form is not connected yet. Photos are the venue's own, taken from Facebook, Instagram and camposolgolf.com; higher-resolution originals will make the large photos sharper.
   </div>
 
-  <h2>Pages to review</h2>
-  <div class="grid">
-    <div class="card"><a href="site/index.html">Home</a><span class="es"><a href="site/es/index.html">Inicio</a> · hero, weekly programme, reviews, map</span></div>
-    <div class="card"><a href="site/restaurant/index.html">Restaurant &amp; Bar</a><span class="es"><a href="site/es/restaurant/index.html">Restaurante y bar</a> · kitchen, menu highlights, hours</span></div>
-    <div class="card"><a href="site/golf/index.html">Golf</a><span class="es"><a href="site/es/golf/index.html">Golf</a> · course, tees, green fees, societies</span></div>
-    <div class="card"><a href="site/events/index.html">What's On</a><span class="es"><a href="site/es/events/index.html">Agenda</a> · programme, highlights, private hire</span></div>
-    <div class="card"><a href="site/gallery/index.html">Gallery</a><span class="es"><a href="site/es/gallery/index.html">Galería</a> · 24 photos with lightbox</span></div>
-    <div class="card"><a href="site/contact/index.html">Contact</a><span class="es"><a href="site/es/contact/index.html">Contacto</a> · cards, map, directions, form</span></div>
-    <div class="card"><a href="site/legal/index.html">Legal notice</a><span class="es"><a href="site/es/legal/index.html">Aviso legal</a> · company details</span></div>
-    <div class="card"><a href="site/privacy/index.html">Privacy &amp; cookies</a><span class="es"><a href="site/es/privacy/index.html">Privacidad</a> · RGPD text</span></div>
-  </div>
+  <section>
+    <h2>New in <em>this version</em></h2>
+    <ul class="list">
+      <li><strong>Book a table</strong> buttons open a short panel: WhatsApp with a booking message ready to fill in, a phone call, or the enquiry form.</li>
+      <li><strong>Today at Casa Club</strong> on the home page shows today's line-up, and today is highlighted in the weekly timetable (Spanish time).</li>
+      <li><strong>On phones</strong> a bar along the bottom gives one-tap Call, WhatsApp and Directions.</li>
+      <li><strong>What's On</strong> dates (Jersey Boys, Christmas lunch) disappear by themselves the day after they happen.</li>
+      <li><strong>Gallery</strong> photos can be filtered by terrace & dining, music & events, or golf, and swiped through on a phone.</li>
+    </ul>
+  </section>
 
-  <h2>What the map looks like on the live site</h2>
-  <img src="map-preview.png" width="717" height="600" alt="Satellite map of Camposol golf course with a marker on the clubhouse">
+  <section>
+    <h2>Pages to <em>review</em></h2>
+    <ul class="pages">
+      <li><a class="en" href="site/index.html">Home</a><a class="es" href="site/es/index.html">Inicio</a><span class="what">Today card, weekly timetable, restaurant, golf, reviews, private hire, map</span></li>
+      <li><a class="en" href="site/restaurant/index.html">Restaurant &amp; Bar</a><a class="es" href="site/es/restaurant/index.html">Restaurante y bar</a><span class="what">The kitchen, a day at the clubhouse, menu highlights, booking and hours</span></li>
+      <li><a class="en" href="site/golf/index.html">Golf</a><a class="es" href="site/es/golf/index.html">Golf</a><span class="what">Course, tees and ratings, facilities, green fees, societies</span></li>
+      <li><a class="en" href="site/events/index.html">What's On</a><a class="es" href="site/es/events/index.html">Agenda</a><span class="what">Weekly programme, dates for the diary, private hire, community</span></li>
+      <li><a class="en" href="site/gallery/index.html">Gallery</a><a class="es" href="site/es/gallery/index.html">Galería</a><span class="what">24 photos with filters and a full-screen viewer</span></li>
+      <li><a class="en" href="site/contact/index.html">Contact</a><a class="es" href="site/es/contact/index.html">Contacto</a><span class="what">Phones and email, map, directions, hours, enquiry form</span></li>
+      <li><a class="en" href="site/legal/index.html">Legal notice</a><a class="es" href="site/es/legal/index.html">Aviso legal</a><span class="what">Company details</span></li>
+      <li><a class="en" href="site/privacy/index.html">Privacy</a><a class="es" href="site/es/privacy/index.html">Privacidad</a><span class="what">GDPR (RGPD) text</span></li>
+    </ul>
+  </section>
 
-  <h2>Before launch: things only the team can confirm</h2>
-  <ul>
-    <li><strong>Phones &amp; email:</strong> Casa Club bookings and WhatsApp +34 602 42 01 67; golf office +34 968 978 886; eventos@casaclubcamposolgolf.com.</li>
-    <li><strong>Opening hours:</strong> the site says bar and terrace daily from 08:00, kitchen 08:00 to 16:00, open late on event nights. Please give the real bar and kitchen hours, summer and winter.</li>
-    <li><strong>Weekly programme:</strong> quiz Monday and Thursday 19:30; Funky Orange disco alternate Tuesdays; menú del día on weekdays; Friday fish &amp; chips, bingo 15:30 and live music 16:30 to 18:00; Sunday carvery. Saturday is shown as "tribute nights and karaoke".</li>
-    <li><strong>Events:</strong> The Jersey Boys tribute on 31 October 2026; Christmas Day lunch at 65 € per person, three courses with cava.</li>
-    <li><strong>Golf:</strong> green fees shown "from" 40 € (18 holes), 25 € (9 holes), buggy 20 €; maximum handicap 54; tee lengths and ratings from GolfPass.</li>
-    <li><strong>Menu highlights</strong> on the restaurant page are typical dishes, not your current menu, and need replacing.</li>
-    <li><strong>Company details</strong> on the legal pages come from the public registry (Casa Club Camposol Golf S.L., CIF B19345867) and should be checked by your adviser.</li>
-    <li><strong>Photos:</strong> several show identifiable customers; confirm you are happy to publish them, and send any better originals.</li>
-    <li><strong>Reviews quoted</strong> on the home page come from Google, Tripadvisor and Golfshake; swap for your own testimonials if preferred.</li>
-  </ul>
-  <p class="muted">The full checklist with sources lives in the project as <code>STAFF-REVIEW.md</code>.</p>
+  <section>
+    <h2>The map on the <em>live site</em></h2>
+    <img src="map-preview.png" width="717" height="600" alt="Satellite map of Camposol golf course with a marker on the clubhouse">
+  </section>
 
-  <p class="meta">Built with Astro and Tailwind CSS. Map imagery © Esri, Maxar, Earthstar Geographics. Generated October 2026 for internal review.</p>
+  <section>
+    <h2>Things only the team <em>can confirm</em></h2>
+    <ul class="list">
+      <li><strong>Phones &amp; email:</strong> Casa Club bookings and WhatsApp +34 602 42 01 67; golf office +34 968 978 886; eventos@casaclubcamposolgolf.com.</li>
+      <li><strong>Opening hours:</strong> the site says bar and terrace daily from 08:00, kitchen 08:00 to 16:00, open late on event nights. Please give the real bar and kitchen hours, summer and winter.</li>
+      <li><strong>Weekly programme:</strong> quiz Monday and Thursday 19:30; Funky Orange disco alternate Tuesdays; menú del día at lunchtime on weekdays; Friday fish &amp; chips, bingo 15:30 and live music 16:30 to 18:00; Sunday carvery. Saturday is shown as "tribute nights and karaoke".</li>
+      <li><strong>Events:</strong> The Jersey Boys tribute on Saturday 31 October 2026; Christmas Day lunch at 65 € per person, three courses with cava.</li>
+      <li><strong>Golf:</strong> green fees shown "from" 40 € (18 holes), 25 € (9 holes), buggy 20 €; maximum handicap 54; tee lengths and ratings from GolfPass.</li>
+      <li><strong>Menu highlights</strong> on the restaurant page are typical dishes, not your current menu, and need replacing.</li>
+      <li><strong>Company details</strong> on the legal pages come from the public registry (Casa Club Camposol Golf S.L., CIF B19345867) and should be checked by your adviser.</li>
+      <li><strong>Photos:</strong> several show identifiable customers; confirm you are happy to publish them, and send any better originals.</li>
+      <li><strong>Reviews quoted</strong> on the home page come from Google, Tripadvisor and Golfshake; swap in your own testimonials if you prefer.</li>
+    </ul>
+    <p class="muted">The full checklist with sources lives in the project as <code>STAFF-REVIEW.md</code>.</p>
+  </section>
+
+  <p class="meta">Built with Astro and Tailwind CSS. Fonts: Instrument Serif and Instrument Sans. Map imagery © Esri, Maxar, Earthstar Geographics. Updated October 2026 for internal review.</p>
 </div>

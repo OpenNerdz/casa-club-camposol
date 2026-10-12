@@ -40,14 +40,14 @@ const highlights = c.upcoming.items
   </Section>
 
   <Section eyebrow={c.upcoming.eyebrow} title={c.upcoming.title} class="bg-cream-100">
-    <ol class="mt-14 grid gap-5 md:grid-cols-2">
+    <ol class="mt-12 grid gap-4 md:grid-cols-2">
       {highlights.map((e, i) => (
-        <li data-until={e.until} class="reveal flex overflow-hidden rounded-[1.5rem] border border-ink-950/10 bg-cream-50" style={`transition-delay:${(i % 2) * 80}ms`}>
-          <div class="relative flex w-28 shrink-0 flex-col items-center justify-center bg-pine-900 px-3 py-6 text-center text-cream-50 sm:w-32">
+        <li data-until={e.until} class="reveal flex gap-5 rounded-[var(--radius-card)] border border-ink-950/8 bg-white p-4 sm:p-5" style={`transition-delay:${(i % 2) * 80}ms`}>
+          <div class:list={['flex w-24 shrink-0 flex-col items-center justify-center rounded-2xl px-2 py-5 text-center sm:w-28', e.big ? 'bg-clay-600 text-white' : 'bg-pine-900 text-cream-50']}>
             {e.big ? (
               <>
-                <span class="text-[2.6rem] font-bold leading-none tracking-[-0.03em]">{e.big}</span>
-                <span class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-ochre-300">{e.small}</span>
+                <span class="text-[2.75rem] font-extrabold leading-none tracking-[-0.04em]">{e.big}</span>
+                <span class="mt-1.5 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-white/80">{e.small}</span>
               </>
             ) : (
               <>
@@ -56,7 +56,7 @@ const highlights = c.upcoming.items
               </>
             )}
           </div>
-          <div class="p-6 sm:p-7">
+          <div class="py-2 pr-2">
             <p class="text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-clay-700">{e.tag}{e.weekday && <span class="text-ink-400"> · {e.weekday}</span>}</p>
             <h3 class="mt-2 text-xl text-pine-950">{e.title}</h3>
             <p class="mt-2 text-ink-600">{e.text}</p>
@@ -66,18 +66,18 @@ const highlights = c.upcoming.items
     </ol>
   </Section>
 
-  <section id="hire" class="container-x grid gap-14 py-20 sm:py-28 lg:grid-cols-12 lg:items-center lg:gap-20">
+  <section id="hire" class="container-x section-y grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-20">
     <div class="lg:col-span-7">
       <SectionHeading eyebrow={c.hire.eyebrow} title={c.hire.title} intro={c.hire.text} />
       <CheckList items={c.hire.points} columns={2} class="reveal mt-8" />
       <a href={`${localePath(lang, '/contact/')}?type=event#enquiry`} class="btn-dark mt-10">{c.hire.cta} <Icon name="arrow" size={16} /></a>
     </div>
-    <div class="reveal mx-auto w-full max-w-sm lg:col-span-5 lg:max-w-none">
-      <div class="frame aspect-[4/5] bg-cream-200"><img src={img.functionRoom} alt={c.alts.hire} class="img-cover" loading="lazy" decoding="async" /></div>
+    <div class="reveal lg:col-span-5">
+      <div class="frame aspect-[4/3] bg-cream-200 lg:aspect-[4/5]"><img src={img.functionRoom} alt={c.alts.hire} class="img-cover" loading="lazy" decoding="async" /></div>
     </div>
   </section>
 
-  <section class="container-x">
+  <section class="container-x pb-16 sm:pb-24 lg:pb-28">
     <div class="on-dark grid gap-10 rounded-[2rem] bg-pine-950 p-8 text-cream-50 sm:p-12 lg:grid-cols-12 lg:items-center lg:p-16">
       <div class="lg:col-span-8">
         <p class="eyebrow">{c.community.eyebrow}</p>
@@ -86,7 +86,7 @@ const highlights = c.upcoming.items
       </div>
       <div class="flex flex-col gap-3 lg:col-span-4 lg:items-end">
         <a href={`${localePath(lang, '/contact/')}?type=event#enquiry`} class="btn-light">{c.community.cta} <Icon name="arrow" size={16} /></a>
-        <a href={site.social.facebook} target="_blank" rel="noopener" class="btn-ghost"><Icon name="facebook" size={16} /> {c.follow.cta}</a>
+        <a href={site.social.facebook} target="_blank" rel="noopener" class="btn-glass"><Icon name="facebook" size={16} /> {c.follow.cta}</a>
       </div>
     </div>
   </section>

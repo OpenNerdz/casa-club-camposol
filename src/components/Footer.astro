@@ -22,7 +22,7 @@ const social = [
 ];
 const heading = 'font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-ochre-300';
 ---
-<footer class="on-dark mt-16 bg-pine-950 text-cream-50 sm:mt-20">
+<footer class="on-dark bg-pine-950 text-cream-50">
   <!-- Sign-off: the last call to action on every page -->
   <div class="container-x"><div class="grid gap-8 border-b border-cream-50/10 py-16 sm:py-20 lg:grid-cols-12 lg:items-end">
     <div class="lg:col-span-7">
@@ -31,13 +31,13 @@ const heading = 'font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18
     </div>
     <div class="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
       <a href={`${localePath(lang, '/contact/')}#enquiry`} data-book class="btn-light">{t('cta.book')} <Icon name="arrow" size={16} /></a>
-      <a href={whatsappBookingHref(lang)} target="_blank" rel="noopener" class="btn-ghost"><Icon name="whatsapp" size={16} /> WhatsApp</a>
+      <a href={whatsappBookingHref(lang)} target="_blank" rel="noopener" class="btn-glass"><Icon name="whatsapp" size={16} /> WhatsApp</a>
     </div>
   </div></div>
 
   <div class="container-x grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-12">
     <div class="lg:col-span-3">
-      <a href={localePath(lang, '/')} class="inline-block"><Logo tone="light" /></a>
+      <a href={localePath(lang, '/')} class="inline-block"><Logo /></a>
       <p class="mt-5 max-w-xs text-[0.9375rem] leading-relaxed text-cream-50/70">{t('footer.blurb')}</p>
       <ul class="mt-6 flex gap-2">
         {social.map((s) => <li><a href={s.href} class="grid h-11 w-11 place-items-center rounded-full border border-cream-50/15 transition-colors hover:border-ochre-300 hover:text-ochre-300" aria-label={s.label} rel="noopener" target="_blank"><Icon name={s.icon} size={18} /></a></li>)}

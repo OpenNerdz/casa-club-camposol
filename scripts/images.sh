@@ -19,6 +19,7 @@ enc golf-green-flag-mountains-01.jpg course.webp          "crop=iw:iw*10/16:0:52
 enc golf-green-palms-mountains-01.jpg course-2.webp       "crop=720:720:0:120"
 enc golf-buggies-bags-01.jpg         buggies.webp         "crop=iw:iw:0:420,scale=1000:-1"
 enc driving-range-bays-01.jpg        range.webp           "crop=iw:iw*3/4:0:360,scale=1400:-1"
+Q=74 enc golf-green-flag-mountains-01.jpg golf-portrait.webp "scale=760:-2"
 # Casa Club's own reel covers (portrait 720x1280) – kept at native size
 for pair in \
   "terrace-tables-colonnade-01.jpg:terrace.webp" \

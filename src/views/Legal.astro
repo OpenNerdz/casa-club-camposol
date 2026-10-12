@@ -10,8 +10,8 @@ const fill = (s: string) => s
   .replaceAll('{legalName}', site.legalName).replaceAll('{cif}', site.cif).replaceAll('{address}', site.address.lines.slice(0, 3).join(', '))
   .replaceAll('{registry}', site.registry).replaceAll('{email}', site.email).replaceAll('{phone}', site.phoneDisplay);
 ---
-<Base title={c.meta.title} description={c.meta.description} noindex>
-  <article class="container-x max-w-3xl pb-8 pt-28 sm:pt-36 lg:pt-40">
+<Base title={c.meta.title} description={c.meta.description} noindex tone="light">
+  <article class="container-x max-w-3xl pb-20 pt-28 sm:pb-28 sm:pt-36 lg:pt-40">
     <p class="eyebrow">{site.name}</p>
     <h1 class="h-section mt-5 text-pine-950">{c.title}</h1>
     <div class="prose-legal mt-4">

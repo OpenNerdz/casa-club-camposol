@@ -19,7 +19,7 @@ export const img = {
   buggies: `${b}/images/buggies.webp`,
   events: `${b}/images/events.webp`,
   exterior: `${b}/images/exterior.webp`,
-  golfPortrait: `${b}/images/gallery/golf-green-flag-mountains-01.webp`,
+  golfPortrait: `${b}/images/golf-portrait.webp`,
   functionRoom: `${b}/images/gallery/event-dance-floor-indoor-01.webp`,
   og: `${b}/images/og-default.jpg`,
 } as const;

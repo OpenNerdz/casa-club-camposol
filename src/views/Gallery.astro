@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import SectionHeading from '../components/SectionHeading.astro';
+import PageHero from '../components/PageHero.astro';
 import Lightbox from '../components/Lightbox.astro';
 import Icon from '../components/Icon.astro';
 import { galleryPage } from '../content/gallery';
@@ -13,10 +13,9 @@ const c = galleryPage[lang];
 const filters = Object.entries(c.filters) as [keyof typeof c.filters, string][];
 ---
 <Base title={c.meta.title} description={c.meta.description} image={img.terrace}>
-  <section class="container-x pb-8 pt-28 sm:pt-36 lg:pt-40">
-    <SectionHeading eyebrow={c.eyebrow} title={c.title} intro={c.intro} level="h1" size="display" />
-
-    <div class="mt-12 flex flex-wrap gap-2" role="group" aria-label={c.filterLabel} id="gallery-filters">
+  <PageHero eyebrow={c.eyebrow} title={c.title} sub={c.intro} />
+  <section class="container-x pb-16 pt-10 sm:pb-24 sm:pt-12">
+    <div class="flex flex-wrap gap-2" role="group" aria-label={c.filterLabel} id="gallery-filters">
       {filters.map(([key, label], i) => (
         <button type="button" data-filter={key} aria-pressed={i === 0 ? 'true' : 'false'}
           class="h-11 rounded-full border border-ink-950/15 px-5 text-[0.9375rem] font-semibold text-ink-800 transition-colors hover:border-ink-950/40 aria-pressed:border-pine-900 aria-pressed:bg-pine-900 aria-pressed:text-cream-50">{label}</button>
@@ -25,7 +24,7 @@ const filters = Object.entries(c.filters) as [keyof typeof c.filters, string][];
 
     <div class="mt-8 columns-2 gap-3 sm:gap-4 lg:columns-3" id="gallery-grid">
       {gallery.map((g, i) => (
-        <a href={g.src} data-lightbox data-caption={g.alt[lang]} data-cat={g.cat} class="group mb-3 block break-inside-avoid overflow-hidden rounded-[1.25rem] bg-cream-200 sm:mb-4">
+        <a href={g.src} data-lightbox data-caption={g.alt[lang]} data-cat={g.cat} class="group mb-3 block break-inside-avoid overflow-hidden rounded-2xl bg-cream-200 sm:mb-4 sm:rounded-[1.5rem]">
           <img src={g.thumb} alt={g.alt[lang]} width={600} height={Math.round((600 * g.h) / g.w)} loading={i < 6 ? 'eager' : 'lazy'} decoding="async"
             class="w-full transition duration-700 ease-out group-hover:scale-[1.03]" />
         </a>

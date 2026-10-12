@@ -1,32 +1,34 @@
 ---
-// The weekly programme as a fixture list. Today's row is marked by the script in Base.astro.
+// The weekly programme as one card per day: a swipeable row on phones (opening on today,
+// see Base.astro), seven columns on desktop. Today's card is marked in Spanish time.
 import { programme, dayNames } from '../data/programme';
 import { useTranslations, type Lang } from '../i18n/utils';
 interface Props { lang: Lang; tone?: 'dark' | 'light'; note?: string }
 const { lang, tone = 'light', note } = Astro.props;
 const t = useTranslations(lang);
-const onDark = tone === 'dark';
+const dark = tone === 'dark';
 ---
-<ol class:list={['mt-14 grid lg:grid-flow-col lg:grid-rows-[repeat(4,auto)] lg:gap-x-16', onDark ? 'text-cream-50' : 'text-ink-950']}>
-  {programme.map((d) => (
-    <li data-day={d.day}
-        class:list={['reveal grid grid-cols-[4.75rem_1fr] gap-4 border-t px-3 py-5 sm:grid-cols-[6rem_1fr] sm:px-4',
-          onDark ? 'border-cream-50/12 data-today:bg-cream-50/[.06]' : 'border-ink-950/12 data-today:bg-ochre-100/60']}>
-      <div>
-        <p class:list={['text-lg font-bold leading-none', onDark ? 'text-cream-50' : 'text-pine-950']}>{dayNames[lang].short[d.day - 1]}</p>
-        <span class:list={['today-pill mt-2 rounded-full px-2 py-0.5 text-[0.6875rem] font-bold uppercase tracking-wider', onDark ? 'bg-ochre-300 text-pine-950' : 'bg-clay-600 text-white']}>{t('week.today')}</span>
-      </div>
-      <ul class="space-y-1.5">
-        {d.items.map((it) => it.minor ? (
-          <li class:list={['text-sm', onDark ? 'text-cream-50/55' : 'text-ink-400']}>{it.title[lang]}{it.note && ` · ${it.note[lang]}`}</li>
-        ) : (
-          <li class="sm:flex sm:items-baseline sm:justify-between sm:gap-4">
-            <span class="block font-semibold">{it.title[lang]}</span>
-            {(it.time || it.note) && <span class:list={['block shrink-0 text-[0.9375rem] font-medium tabular-nums sm:text-base', onDark ? 'text-ochre-300' : 'text-clay-700']}>{it.time ?? it.note?.[lang]}</span>}
-          </li>
-        ))}
-      </ul>
-    </li>
-  ))}
-</ol>
-{note && <p class:list={['mt-8 max-w-2xl text-sm', onDark ? 'text-cream-50/60' : 'text-ink-600']}>{note}</p>}
+<div class="mt-12 sm:mt-14">
+  <ol data-week class="snap-row relative pt-3 lg:mx-0 lg:grid lg:grid-cols-7 lg:gap-3 lg:overflow-visible lg:px-0 lg:pb-0">
+    {programme.map((d) => (
+      <li data-day={d.day}
+          class:list={['relative flex min-h-[14rem] w-[70%] flex-col rounded-[1.5rem] border p-5 transition-colors sm:w-[40%] lg:w-auto',
+            dark ? 'border-cream-50/12 bg-cream-50/[.04] text-cream-50 data-today:border-ochre-300/70 data-today:bg-cream-50/10'
+                 : 'border-ink-950/10 bg-white text-ink-950 data-today:border-clay-600 data-today:shadow-[0_20px_40px_-24px_rgb(169_74_40/.5)]']}>
+        <p class="text-xl font-extrabold tracking-tight">{dayNames[lang].long[d.day - 1]}</p>
+        <span class:list={['today-pill absolute -top-2.5 right-4 rounded-full px-2.5 py-0.5 text-[0.625rem] font-bold uppercase tracking-wider', dark ? 'bg-ochre-300 text-pine-950' : 'bg-clay-600 text-white']}>{t('week.today')}</span>
+        <ul class="mt-5 flex flex-1 flex-col gap-3.5 text-[0.9375rem]">
+          {d.items.map((it) => it.minor ? (
+            <li class:list={['mt-auto text-[0.8125rem]', dark ? 'text-cream-50/50' : 'text-ink-400']}>{it.title[lang]}{it.note && ` · ${it.note[lang]}`}</li>
+          ) : (
+            <li>
+              <p class="font-semibold leading-snug">{it.title[lang]}</p>
+              {(it.time || it.note) && <p class:list={['mt-0.5 text-sm font-semibold tabular-nums', dark ? 'text-ochre-300' : 'text-clay-700']}>{it.time ?? it.note?.[lang]}</p>}
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ol>
+  {note && <p class:list={['mt-6 max-w-2xl text-sm', dark ? 'text-cream-50/60' : 'text-ink-600']}>{note}</p>}
+</div>

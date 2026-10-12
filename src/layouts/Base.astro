@@ -16,8 +16,10 @@ interface Props {
   image?: string;
   jsonLd?: object | object[];
   noindex?: boolean;
+  /** 'dark' when the page opens on a dark hero, so the header starts out white. */
+  tone?: 'dark' | 'light';
 }
-const { title, description, image = withBase('/images/og-default.jpg'), jsonLd, noindex = false } = Astro.props;
+const { title, description, image = withBase('/images/og-default.jpg'), jsonLd, noindex = false, tone = 'dark' } = Astro.props;
 // Staging builds (e.g. GitHub Pages) set PUBLIC_NOINDEX=1 so search engines ignore them.
 const hideFromSearch = noindex || import.meta.env.PUBLIC_NOINDEX === '1';
 const lang: Lang = getLangFromUrl(Astro.url);
@@ -41,7 +43,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <link rel="alternate" hreflang="es" href={altEs} />
     <link rel="alternate" hreflang="x-default" href={altEn} />
     {hideFromSearch && <meta name="robots" content="noindex,nofollow" />}
-    <meta name="theme-color" content="#fbf8f1" />
+    <meta name="theme-color" content="#0c241b" />
     <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
     <link rel="manifest" href={withBase('/site.webmanifest')} />
@@ -59,7 +61,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   </head>
   <body class="flex min-h-screen flex-col">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-pine-950 focus:px-5 focus:py-2.5 focus:text-cream-50">{t('nav.skip')}</a>
-    <Header lang={lang} />
+    <Header lang={lang} tone={tone} />
     <main id="main" class="flex-1">
       <slot />
     </main>
@@ -82,6 +84,11 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       const day = String(madridWeekday());
       document.querySelectorAll('[data-day]').forEach((el) => el.toggleAttribute('data-today', (el as HTMLElement).dataset.day === day));
       document.querySelectorAll<HTMLElement>('[data-today-for]').forEach((el) => { el.hidden = el.dataset.todayFor !== day; });
+      // On phones the week is a sideways row: open it on today's card.
+      document.querySelectorAll<HTMLElement>('[data-week]').forEach((row) => {
+        const card = row.querySelector<HTMLElement>('[data-today]');
+        if (card && row.scrollWidth > row.clientWidth) row.scrollLeft = card.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft);
+      });
 
       // Dated highlights disappear the day after they happen, even before the next rebuild.
       const today = madridDate();

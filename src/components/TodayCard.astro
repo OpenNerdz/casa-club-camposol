@@ -1,27 +1,27 @@
 ---
-// "Today at Casa Club": today's line-up, chosen in the browser in Spanish time.
-// Without JS (or before it runs) the generic fallback line shows instead.
+// "Today at Casa Club" on the home hero: today's line-up, chosen in the browser in
+// Spanish time. Without JS (or before it runs) the generic line shows instead.
 import Icon from './Icon.astro';
 import { programme, dayNames } from '../data/programme';
 import { useTranslations, type Lang } from '../i18n/utils';
-interface Props { lang: Lang; class?: string }
-const { lang, class: cls = '' } = Astro.props;
+interface Props { lang: Lang; class?: string; style?: string }
+const { lang, class: cls = '', style } = Astro.props;
 const t = useTranslations(lang);
 ---
-<div class:list={['panel flex gap-4 p-5 sm:p-6', cls]}>
-  <span class="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-pine-600" aria-hidden="true"></span>
-  <div class="min-w-0 flex-1">
-    <p class="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ink-600">{t('today.label')}</p>
-    <p data-today-for="0" class="mt-1.5 font-semibold text-pine-950">{t('today.fallback')}</p>
-    {programme.map((d) => (
-      <div data-today-for={d.day} hidden>
-        <p class="mt-1.5 text-xl font-bold tracking-tight text-pine-950">{dayNames[lang].long[d.day - 1]}</p>
-        <ul class="mt-1 text-[0.9375rem] text-ink-800">
-          {d.items.filter((it) => !it.minor).map((it) => <li>{it.title[lang]}{(it.time || it.note) && <span class="text-clay-700"> · {it.time ?? it.note?.[lang]}</span>}</li>)}
-          {d.items.every((it) => it.minor) && d.items.map((it) => <li>{it.title[lang]}{it.note && <span class="text-clay-700"> · {it.note[lang]}</span>}</li>)}
-        </ul>
-      </div>
-    ))}
-    <p class="mt-3 flex items-center gap-2 border-t border-ink-950/10 pt-3 text-sm text-ink-600"><Icon name="clock" size={15} /> {t('today.hours')}</p>
-  </div>
+<div class:list={['glass rounded-[1.5rem] p-5 text-cream-50 sm:p-6', cls]} style={style}>
+  <p class="flex items-center gap-2 text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-ochre-300">
+    <span class="h-2 w-2 rounded-full bg-ochre-300" aria-hidden="true"></span>{t('today.label')}
+  </p>
+  <p data-today-for="0" class="mt-3 text-lg font-bold">{t('today.fallback')}</p>
+  {programme.map((d) => (
+    <div data-today-for={d.day} hidden>
+      <p class="mt-3 text-2xl font-extrabold tracking-tight">{dayNames[lang].long[d.day - 1]}</p>
+      <ul class="mt-2 space-y-1 text-[0.9375rem] text-cream-50/85">
+        {d.items.filter((it) => !it.minor || d.items.every((x) => x.minor)).map((it) => (
+          <li class="flex justify-between gap-4"><span>{it.title[lang]}</span>{(it.time || it.note) && <span class="shrink-0 font-semibold text-ochre-300">{it.time ?? it.note?.[lang]}</span>}</li>
+        ))}
+      </ul>
+    </div>
+  ))}
+  <p class="mt-4 flex items-center gap-2 border-t border-cream-50/15 pt-3 text-sm text-cream-50/70"><Icon name="clock" size={15} /> {t('today.hours')}</p>
 </div>

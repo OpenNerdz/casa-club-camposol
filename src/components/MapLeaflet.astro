@@ -8,13 +8,13 @@ interface Props { lang: Lang; class?: string; zoom?: number }
 const { lang, class: cls = '', zoom = 16 } = Astro.props;
 const t = useTranslations(lang);
 ---
-<div class:list={['relative isolate overflow-hidden rounded-[1.5rem] bg-cream-200', cls]}>
+<div class:list={['relative isolate overflow-hidden rounded-[var(--radius-card)] bg-cream-200', cls]}>
   <div data-map class="absolute inset-0" role="region" aria-label={t('map.label')}
     data-lat={site.geo.lat} data-lng={site.geo.lng} data-zoom={zoom} data-name={site.name}
     data-satellite={t('map.satellite')} data-streets={t('map.streets')}>
     <div class="grid h-full place-items-center text-pine-800/40"><Icon name="pin" size={40} /></div>
   </div>
-  <a href={site.mapsUrl} target="_blank" rel="noopener" class="btn-light absolute bottom-4 left-4 z-[500] h-10 px-4 text-sm shadow-lg shadow-pine-950/20">
+  <a href={site.mapsUrl} target="_blank" rel="noopener" class="btn-light absolute right-4 top-4 z-[500] h-10 px-4 text-sm shadow-lg shadow-pine-950/20">
     <Icon name="external" size={15} /> {t('map.open')}
   </a>
 </div>
@@ -24,7 +24,10 @@ const t = useTranslations(lang);
     const [{ default: L }] = await Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]);
     el.replaceChildren();
     const { lat, lng, zoom, name, satellite: satLabel, streets: streetLabel } = el.dataset;
-    const map = L.map(el, { scrollWheelZoom: false }).setView([+lat!, +lng!], +zoom!);
+    const map = L.map(el, { scrollWheelZoom: false, zoomControl: false }).setView([+lat!, +lng!], +zoom!);
+    // Controls go where the floating address card is not: bottom right on desktop, top left on phones.
+    const corner = matchMedia('(min-width: 1024px)').matches ? 'bottomright' : 'topleft';
+    L.control.zoom({ position: corner }).addTo(map);
     // Key-free tiles: satellite shows the course layout; the street map is one tap away.
     const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 18, attribution: 'Imagery &copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics',
@@ -33,7 +36,7 @@ const t = useTranslations(lang);
       maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     });
     satellite.addTo(map);
-    L.control.layers({ [satLabel!]: satellite, [streetLabel!]: streets }, {}, { position: 'topright' }).addTo(map);
+    L.control.layers({ [satLabel!]: satellite, [streetLabel!]: streets }, {}, { position: corner }).addTo(map);
     const icon = L.divIcon({
       className: '',
       html: '<div style="width:44px;height:44px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#123326;border:3px solid #fbf8f1;box-shadow:0 8px 20px -6px rgba(0,0,0,.5);display:grid;place-items:center"><div style="width:14px;height:14px;border-radius:50%;background:#d9a23a"></div></div>',

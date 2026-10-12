@@ -11,15 +11,15 @@ export const home = {
       alt: 'Guests at the tables on the Casa Club terrace under the ochre roof on a sunny day',
     },
     intro: {
-      eyebrow: 'Welcome',
+      eyebrow: 'Welcome', title: 'Eat, drink, play and celebrate',
       text: 'Casa Club is Camposol’s social hub: a relaxed, friendly clubhouse where neighbours, golfers and visitors meet from breakfast through to the last song of the night.',
-      links: [
-        { href: '/restaurant/', label: 'Eat & drink' },
-        { href: '/golf/', label: 'Play the course' },
-        { href: '/events/', label: 'What’s on' },
-        { href: '/events/#hire', label: 'Private parties' },
-      ],
     },
+    experiences: [
+      { href: '/restaurant/', title: 'Restaurant & bar', text: 'Breakfasts, a weekday menú del día, Friday fish & chips and the famous Sunday carvery.', alt: 'Friends sharing dinner in the Casa Club dining room' },
+      { href: '/golf/', title: 'Golf', text: '18 holes, par 72, with a driving range, academy and crazy golf.', alt: 'A golfer teeing off beside the lake at Camposol' },
+      { href: '/events/', title: 'What’s on', text: 'Quiz nights, bingo, live music and tribute acts every week.', alt: 'A singer performing on the terrace stage' },
+      { href: '/events/#hire', title: 'Private parties', text: 'Birthdays, society dinners and celebrations.', alt: 'Guests dancing in the function room' },
+    ],
     week: {
       eyebrow: 'Every week', title: 'Your week at Casa Club',
       intro: 'Regular favourites you can plan around. Guest acts and this week’s specials go up on our Facebook page.',
@@ -36,7 +36,8 @@ export const home = {
         { name: 'Sunday carvery', when: 'Sundays', desc: 'Roasts carved to order; book ahead' },
       ],
       cta: 'See the restaurant',
-      alt: 'Friends sharing drinks around a table in the Casa Club dining room',
+      badge: 'Open daily from 08:00',
+      alt: 'The colonnade terrace full of guests on a sunny afternoon',
     },
     golf: {
       eyebrow: 'Golf', title: 'Eighteen holes in the Murcian sun',
@@ -56,7 +57,8 @@ export const home = {
       eyebrow: 'Private hire', title: 'Celebrate with us', text: 'Birthdays, anniversaries, society dinners, charity fundraisers and Christmas lunches. Our private function room and summer terrace can be dressed for anything from a casual buffet to a seated three-course dinner.',
       points: ['Private function room', 'Summer terrace with golf-course views', 'Set menus and buffets for groups', 'Live entertainment arranged on request'],
       cta: 'Enquire about an event',
-      alt: 'A singer performing for guests on the terrace stage',
+      chip: 'Function room & summer terrace',
+      alt: 'Guests dancing in the function room',
     },
     visit: {
       eyebrow: 'Visit', title: 'Easy to find, hard to leave',
@@ -80,15 +82,15 @@ export const home = {
       alt: 'Clientes en las mesas de la terraza de Casa Club bajo el tejado ocre en un día de sol',
     },
     intro: {
-      eyebrow: 'Bienvenidos',
+      eyebrow: 'Bienvenidos', title: 'Comer, beber, jugar y celebrar',
       text: 'Casa Club es el punto de encuentro de Camposol: una casa club relajada y cercana donde vecinos, golfistas y visitantes coinciden desde el desayuno hasta la última canción de la noche.',
-      links: [
-        { href: '/restaurant/', label: 'Comer y beber' },
-        { href: '/golf/', label: 'Jugar al golf' },
-        { href: '/events/', label: 'Agenda' },
-        { href: '/events/#hire', label: 'Fiestas privadas' },
-      ],
     },
+    experiences: [
+      { href: '/restaurant/', title: 'Restaurante y bar', text: 'Desayunos, menú del día entre semana, fish & chips los viernes y el famoso carvery del domingo.', alt: 'Amigos cenando en el comedor de Casa Club' },
+      { href: '/golf/', title: 'Golf', text: '18 hoyos, par 72, con campo de prácticas, academia y minigolf.', alt: 'Un golfista saliendo junto al lago de Camposol' },
+      { href: '/events/', title: 'Agenda', text: 'Noches de quiz, bingo, música en vivo y tributos cada semana.', alt: 'Un cantante actuando en el escenario de la terraza' },
+      { href: '/events/#hire', title: 'Fiestas privadas', text: 'Cumpleaños, cenas de sociedades y celebraciones.', alt: 'Clientes bailando en el salón de eventos' },
+    ],
     week: {
       eyebrow: 'Cada semana', title: 'Tu semana en Casa Club',
       intro: 'Citas fijas con las que puedes contar. Los artistas invitados y las novedades de la semana se publican en nuestro Facebook.',
@@ -105,7 +107,8 @@ export const home = {
         { name: 'Carvery dominical', when: 'Domingos', desc: 'Asados cortados al momento; reserva' },
       ],
       cta: 'Ver el restaurante',
-      alt: 'Amigos tomando algo alrededor de una mesa en el comedor de Casa Club',
+      badge: 'Abierto cada día desde las 8:00',
+      alt: 'La terraza porticada llena de clientes en una tarde de sol',
     },
     golf: {
       eyebrow: 'Golf', title: 'Dieciocho hoyos bajo el sol de Murcia',
@@ -125,7 +128,8 @@ export const home = {
       eyebrow: 'Eventos privados', title: 'Celebra con nosotros', text: 'Cumpleaños, aniversarios, cenas de sociedades de golf, eventos benéficos y comidas de Navidad. Nuestro salón privado y la terraza de verano se adaptan a todo, desde un bufé informal hasta una cena de tres platos.',
       points: ['Salón privado para eventos', 'Terraza de verano con vistas al campo', 'Menús cerrados y bufés para grupos', 'Animación y música en vivo a medida'],
       cta: 'Consultar para un evento',
-      alt: 'Un cantante actuando para los clientes en el escenario de la terraza',
+      chip: 'Salón privado y terraza de verano',
+      alt: 'Clientes bailando en el salón de eventos',
     },
     visit: {
       eyebrow: 'Visítanos', title: 'Fácil de encontrar, difícil de dejar',

@@ -18,128 +18,143 @@ const { lang } = Astro.props;
 const c = home[lang];
 const t = useTranslations(lang);
 const enquiry = (type: string) => `${localePath(lang, '/contact/')}?type=${type}#enquiry`;
+// Bento of the four things people come for; the first tile is the big one on desktop.
+const tileImages = [img.food, img.heroGolf, img.events, img.functionRoom];
+const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
 ---
 <Base title={c.meta.title} description={c.meta.description} image={img.og} jsonLd={businessJsonLd(lang)}>
-  <!-- Hero -->
-  <section class="container-x grid gap-14 pb-20 pt-28 sm:pt-36 lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-36">
-    <div class="lg:col-span-7 lg:pt-8">
-      <p class="eyebrow">{c.hero.eyebrow}</p>
-      <h1 class="h-display mt-5 text-pine-950">{c.hero.title}</h1>
-      <p class="lede mt-7 max-w-xl">{c.hero.sub}</p>
-      <div class="mt-9 flex flex-wrap gap-3">
-        <a href={enquiry('table')} data-book class="btn-primary">{c.hero.cta1} <Icon name="arrow" size={17} /></a>
-        <a href={localePath(lang, '/events/')} class="btn-line"><Icon name="calendar" size={17} /> {c.hero.cta2}</a>
-      </div>
-      <TodayCard lang={lang} class="mt-12 max-w-md" />
+  <!-- Hero: one portrait photo on phones, a day-to-night strip of three on desktop -->
+  <section class="on-dark relative isolate flex min-h-[100svh] items-end overflow-hidden bg-pine-950 text-cream-50 lg:min-h-[min(100svh,60rem)]">
+    <div class="absolute inset-0 -z-20 grid gap-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="overflow-hidden"><img src={img.restaurant} alt={c.hero.alt} class="img-cover hero-photo" fetchpriority="high" decoding="async" /></div>
+      <div class="hidden overflow-hidden sm:block"><img src={img.golfPortrait} alt="" class="img-cover hero-photo" loading="lazy" decoding="async" /></div>
+      <div class="hidden overflow-hidden lg:block"><img src={img.heroEvents} alt="" class="img-cover hero-photo" loading="lazy" decoding="async" /></div>
     </div>
+    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950 via-pine-950/60 to-pine-950/0"></div>
+    <div class="absolute inset-x-0 top-0 -z-10 h-44 bg-gradient-to-b from-pine-950/70 to-transparent"></div>
 
-    <div class="mx-auto w-full max-w-md self-start lg:col-span-5 lg:max-w-none">
-      <div class="frame aspect-[4/5] bg-cream-200">
-        <img src={img.restaurant} alt={c.hero.alt} class="img-cover" fetchpriority="high" decoding="async" />
+    <div class="container-x grid gap-8 pb-8 pt-40 sm:pb-12 lg:grid-cols-12 lg:items-end lg:gap-10 lg:pb-16">
+      <div class="lg:col-span-8">
+        <p class="eyebrow rise">{c.hero.eyebrow}</p>
+        <h1 class="h-hero rise mt-5 max-w-4xl" style="--i:1">{c.hero.title}</h1>
+        <p class="lede rise mt-6 max-w-xl" style="--i:2">{c.hero.sub}</p>
+        <div class="rise mt-8 flex flex-wrap gap-3" style="--i:3">
+          <a href={enquiry('table')} data-book class="btn-primary">{c.hero.cta1} <Icon name="arrow" size={17} /></a>
+          <a href={localePath(lang, '/events/')} class="btn-glass"><Icon name="calendar" size={17} /> {c.hero.cta2}</a>
+        </div>
       </div>
+      <TodayCard lang={lang} class="rise lg:col-span-4" style="--i:4" />
     </div>
   </section>
 
-  <!-- Intro -->
-  <section class="container-x grid gap-6 border-t border-ink-950/10 py-20 sm:py-24 lg:grid-cols-12">
-    <p class="eyebrow lg:col-span-3 lg:mt-2">{c.intro.eyebrow}</p>
-    <div class="reveal lg:col-span-9">
-      <p class="text-[clamp(1.45rem,1.2rem+1vw,2.1rem)] font-semibold leading-snug tracking-[-0.02em] text-pine-950">{c.intro.text}</p>
-      <ul class="mt-10 flex flex-wrap gap-3">
-        {c.intro.links.map((l) => (
-          <li><a href={localePath(lang, l.href)} class="group inline-flex h-12 items-center gap-2 rounded-full border border-ink-950/15 px-5 font-semibold text-pine-900 transition-colors hover:border-pine-900 hover:bg-pine-900 hover:text-cream-50">
-            {l.label} <Icon name="arrow" size={16} class="transition-transform group-hover:translate-x-0.5" /></a></li>
-        ))}
-      </ul>
+  <!-- What we offer -->
+  <section class="container-x section-y">
+    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+      <SectionHeading eyebrow={c.intro.eyebrow} title={c.intro.title} class="lg:col-span-6" />
+      <p class="lede reveal lg:col-span-6">{c.intro.text}</p>
     </div>
+    <ul class="snap-row mt-12 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:grid-rows-[repeat(2,18rem)]">
+      {c.experiences.map((x, i) => (
+        <li class:list={['w-[80%] sm:w-auto', tileLayout[i]]}>
+          <a href={localePath(lang, x.href)} class="group relative isolate flex aspect-[3/4] h-full flex-col overflow-hidden rounded-[var(--radius-card)] bg-pine-900 text-cream-50 sm:aspect-auto sm:min-h-[20rem] lg:min-h-0">
+            <img src={tileImages[i]} alt={x.alt} class="img-cover absolute inset-0 -z-10 transition duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async" />
+            <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950/90 via-pine-950/30 to-transparent"></div>
+            <span class="glass absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full transition-colors group-hover:bg-cream-50 group-hover:text-pine-950"><Icon name="external" size={18} /></span>
+            <div class="mt-auto p-6 sm:p-7">
+              <h3 class:list={['font-extrabold tracking-tight', i === 0 ? 'text-3xl lg:text-4xl' : 'text-2xl']}>{x.title}</h3>
+              <p class="mt-2 max-w-sm text-[0.9375rem] leading-relaxed text-cream-50/80">{x.text}</p>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
   </section>
 
   <!-- This week -->
-  <section id="week" class="on-dark bg-pine-950 py-20 text-cream-50 sm:py-28">
+  <section id="week" class="on-dark section-y bg-pine-950 text-cream-50">
     <div class="container-x">
       <div class="flex flex-wrap items-end justify-between gap-8">
         <SectionHeading eyebrow={c.week.eyebrow} title={c.week.title} intro={c.week.intro} />
-        <a href={localePath(lang, '/events/')} class="btn-ghost">{c.week.cta} <Icon name="arrow" size={16} /></a>
+        <a href={localePath(lang, '/events/')} class="btn-glass">{c.week.cta} <Icon name="arrow" size={16} /></a>
       </div>
       <Timetable lang={lang} tone="dark" note={c.week.note} />
     </div>
   </section>
 
   <!-- Restaurant -->
-  <section class="container-x grid gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:items-center lg:gap-20">
-    <div class="reveal mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
-      <div class="frame aspect-[4/5] bg-cream-200"><img src={img.food} alt={c.restaurant.alt} class="img-cover" loading="lazy" decoding="async" /></div>
+  <section class="container-x section-y grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+    <div class="reveal relative lg:col-span-7">
+      <div class="frame aspect-[4/5] bg-cream-200 sm:aspect-[4/3]"><img src={img.terrace} alt={c.restaurant.alt} class="img-cover" loading="lazy" decoding="async" /></div>
+      <p class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-cream-50/95 px-4 py-2.5 text-sm font-semibold text-pine-950 shadow-lg sm:bottom-6 sm:left-6"><Icon name="clock" size={16} class="text-clay-600" /> {c.restaurant.badge}</p>
     </div>
-    <div class="lg:col-span-7">
+    <div class="lg:col-span-5">
       <SectionHeading eyebrow={c.restaurant.eyebrow} title={c.restaurant.title} intro={c.restaurant.text} />
-      <dl class="reveal mt-10 border-b border-ink-950/12">
+      <ul class="reveal mt-8 grid gap-3 sm:grid-cols-2">
         {c.restaurant.signatures.map((s) => (
-          <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-6 border-t border-ink-950/12 py-4">
-            <dt class="text-lg font-bold text-pine-950">{s.name}</dt>
-            <dd class="text-xs font-semibold uppercase tracking-[0.14em] text-clay-700">{s.when}</dd>
-            <dd class="col-span-2 mt-0.5 text-ink-600">{s.desc}</dd>
-          </div>
+          <li class="rounded-2xl border border-ink-950/8 bg-white p-4">
+            <p class="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-clay-700">{s.when}</p>
+            <p class="mt-1.5 font-bold text-pine-950">{s.name}</p>
+            <p class="mt-0.5 text-sm text-ink-600">{s.desc}</p>
+          </li>
         ))}
-      </dl>
-      <a href={localePath(lang, '/restaurant/')} class="btn-dark mt-10">{c.restaurant.cta} <Icon name="arrow" size={16} /></a>
+      </ul>
+      <a href={localePath(lang, '/restaurant/')} class="btn-dark mt-8">{c.restaurant.cta} <Icon name="arrow" size={16} /></a>
     </div>
   </section>
 
   <!-- Golf -->
   <section class="on-dark relative isolate overflow-hidden bg-pine-950 text-cream-50">
-    <img src={img.course} alt="" class="img-cover absolute inset-0 -z-10 opacity-60" loading="lazy" decoding="async" />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-pine-950 via-pine-950/80 to-pine-950/20"></div>
-    <div class="container-x py-24 sm:py-32">
-      <div class="max-w-2xl">
+    <img src={img.course} alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950 via-pine-950/70 to-pine-950/30 lg:bg-gradient-to-r lg:from-pine-950/95 lg:via-pine-950/70 lg:to-pine-950/10"></div>
+    <div class="container-x grid gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:items-end lg:py-36">
+      <div class="lg:col-span-6">
         <SectionHeading eyebrow={c.golf.eyebrow} title={c.golf.title} intro={c.golf.text} />
-        <a href={localePath(lang, '/golf/')} class="btn-light mt-10">{c.golf.cta} <Icon name="arrow" size={16} /></a>
+        <a href={localePath(lang, '/golf/')} class="btn-light mt-9">{c.golf.cta} <Icon name="arrow" size={16} /></a>
       </div>
-      <dl class="reveal mt-16 grid max-w-4xl grid-cols-2 gap-x-8 gap-y-10 border-t border-cream-50/15 pt-10 sm:grid-cols-4">
+      <dl class="glass reveal grid grid-cols-2 overflow-hidden rounded-[var(--radius-card)] lg:col-span-5 lg:col-start-8">
         {c.golf.stats.map((s) => (
-          <div><dt class="text-[2.5rem] font-bold leading-none tracking-[-0.03em] text-cream-50">{s.v}</dt><dd class="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-50/65">{s.l}</dd></div>
+          <div class="p-6 sm:p-7"><dt class="whitespace-nowrap text-[1.9rem] font-extrabold leading-none tracking-[-0.04em] sm:text-[2.75rem]">{s.v}</dt><dd class="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-50/70">{s.l}</dd></div>
         ))}
       </dl>
     </div>
   </section>
 
   <!-- Reviews -->
-  <Section eyebrow={c.reviews.eyebrow} title={c.reviews.title}>
+  <Section eyebrow={c.reviews.eyebrow} title={c.reviews.title} class="bg-cream-100">
     <Testimonials items={c.reviews.items} />
   </Section>
 
   <!-- Private hire -->
-  <section class="bg-cream-100 py-20 sm:py-28">
-    <div class="container-x grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-20">
-      <div class="reveal grid grid-cols-2 gap-4 lg:order-2 lg:col-span-6">
-        <div class="frame aspect-[3/4] bg-cream-200"><img src={img.events} alt={c.functions.alt} class="img-cover" loading="lazy" decoding="async" /></div>
-        <div class="frame aspect-[3/4] bg-cream-200"><img src={img.heroEvents} alt="" class="img-cover" loading="lazy" decoding="async" /></div>
-      </div>
-      <div class="lg:col-span-6">
-        <SectionHeading eyebrow={c.functions.eyebrow} title={c.functions.title} intro={c.functions.text} />
-        <CheckList items={c.functions.points} columns={2} class="reveal mt-8" />
-        <a href={enquiry('event')} class="btn-dark mt-10">{c.functions.cta} <Icon name="arrow" size={16} /></a>
-      </div>
+  <section class="container-x section-y grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-5">
+      <SectionHeading eyebrow={c.functions.eyebrow} title={c.functions.title} intro={c.functions.text} />
+      <CheckList items={c.functions.points} class="reveal mt-8" />
+      <a href={enquiry('event')} class="btn-dark mt-9">{c.functions.cta} <Icon name="arrow" size={16} /></a>
+    </div>
+    <div class="reveal relative lg:col-span-7">
+      <div class="frame aspect-[4/5] bg-cream-200 sm:aspect-[4/3]"><img src={img.functionRoom} alt={c.functions.alt} class="img-cover" loading="lazy" decoding="async" /></div>
+      <p class="glass absolute bottom-4 left-4 rounded-full px-4 py-2.5 text-sm font-semibold text-white sm:bottom-6 sm:left-6">{c.functions.chip}</p>
     </div>
   </section>
 
-  <!-- Visit -->
-  <Section eyebrow={c.visit.eyebrow} title={c.visit.title} intro={c.visit.text}>
-    <div class="mt-14 grid gap-6 lg:grid-cols-12">
-      <MapLeaflet lang={lang} class="min-h-[22rem] lg:col-span-8 lg:min-h-[32rem]" />
-      <div class="panel flex flex-col p-7 sm:p-8 lg:col-span-4">
-        <address class="text-lg font-semibold not-italic leading-snug text-pine-950">
+  <!-- Visit: the map with the address card floating over it on desktop -->
+  <Section eyebrow={c.visit.eyebrow} title={c.visit.title} intro={c.visit.text} class="!pt-0">
+    <div class="relative mt-12 lg:h-[36rem]">
+      <MapLeaflet lang={lang} class="h-80 sm:h-[26rem] lg:absolute lg:inset-0 lg:h-auto" />
+      <div class="relative z-10 mx-3 -mt-12 rounded-[var(--radius-card)] bg-white p-6 shadow-2xl shadow-pine-950/15 sm:mx-6 sm:p-8 lg:absolute lg:left-6 lg:top-6 lg:m-0 lg:w-[24rem]">
+        <address class="text-lg font-bold not-italic leading-snug text-pine-950">
           {site.address.lines.slice(0, 3).map((l) => <span class="block">{l}</span>)}
         </address>
-        <ul class="mt-6 divide-y divide-ink-950/10 border-y border-ink-950/10">
+        <ul class="mt-5 divide-y divide-ink-950/8 border-y border-ink-950/8">
           {c.visit.distances.map((d) => (
             <li class="flex items-center justify-between gap-4 py-3 text-[0.9375rem]">
               <span class="flex items-center gap-3 text-ink-800"><Icon name={d.icon} size={17} class="text-ink-400" /> {d.place}</span>
-              <span class="font-semibold tabular-nums text-pine-800">{d.time}</span>
+              <span class="shrink-0 whitespace-nowrap font-bold tabular-nums text-pine-800">{d.time}</span>
             </li>
           ))}
         </ul>
-        <div class="mt-auto grid gap-4 pt-8">
-          <a href={site.directionsUrl} target="_blank" rel="noopener" class="btn-dark"><Icon name="navigation" size={16} /> {t('cta.directions')}</a>
+        <div class="mt-6 grid gap-3">
+          <a href={site.directionsUrl} target="_blank" rel="noopener" class="btn-primary"><Icon name="navigation" size={16} /> {t('cta.directions')}</a>
           <a href={localePath(lang, '/contact/')} class="link-arrow justify-center">{c.visit.cta} <Icon name="arrow" size={16} /></a>
         </div>
       </div>

@@ -13,6 +13,9 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = restaurant[lang];
 const t = useTranslations(lang);
+// Breakfast, menú del día, Fry Day, carvery in colour; the terrace and evenings as photos.
+const momentTone = ['bg-ochre-100 text-pine-950', 'bg-white text-pine-950 border border-ink-950/8', 'bg-clay-100 text-pine-950', 'bg-pine-900 text-cream-50', 'text-cream-50', 'text-cream-50'];
+const momentPhotos = [undefined, undefined, undefined, undefined, img.restaurant, img.bar];
 ---
 <Base title={c.meta.title} description={c.meta.description} image={img.terrace}>
   <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.terrace} alt={c.alts.hero}
@@ -20,7 +23,7 @@ const t = useTranslations(lang);
     cta2={{ href: site.phoneHref, label: c.booking.cta2, icon: 'phone' }} />
 
   <!-- The kitchen -->
-  <section class="container-x grid gap-14 py-20 sm:py-28 lg:grid-cols-12 lg:items-center lg:gap-20">
+  <section class="container-x section-y grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-20">
     <div class="lg:col-span-6">
       <SectionHeading eyebrow={c.intro.eyebrow} title={c.intro.title} intro={c.intro.text} />
     </div>
@@ -30,48 +33,54 @@ const t = useTranslations(lang);
     </div>
   </section>
 
-  <!-- A day at the clubhouse -->
+  <!-- A day at the clubhouse: colour and photo cards in a bento grid -->
   <Section eyebrow={c.day.eyebrow} title={c.day.title} class="bg-cream-100">
-    <ol class="mt-14 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-      {c.moments.map((m, i) => (
-        <li class="reveal border-t border-ink-950/12 py-7" style={`transition-delay:${(i % 3) * 80}ms`}>
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-clay-700">{m.when}</p>
-          <h3 class="mt-3 text-xl text-pine-950">{m.title}</h3>
-          <p class="mt-3 text-ink-600">{m.text}</p>
-        </li>
-      ))}
+    <ol class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {c.moments.map((m, i) => {
+        const photo = momentPhotos[i];
+        return (
+          <li class:list={['reveal relative isolate flex min-h-[15rem] flex-col overflow-hidden rounded-[var(--radius-card)] p-7', momentTone[i]]} style={`transition-delay:${(i % 3) * 80}ms`}>
+            {photo && <><img src={photo} alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" /><div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950/90 via-pine-950/40 to-pine-950/10"></div></>}
+            <p class="text-xs font-bold uppercase tracking-[0.14em] opacity-75">{m.when}</p>
+            <h3 class="mt-auto pt-10 text-2xl font-extrabold tracking-tight">{m.title}</h3>
+            <p class="mt-2 text-[0.9375rem] leading-relaxed opacity-85">{m.text}</p>
+          </li>
+        );
+      })}
     </ol>
   </Section>
 
-  <!-- Menu highlights, set like a printed menu card -->
-  <Section eyebrow={c.favourites.eyebrow} title={c.favourites.title} intro={c.favourites.text}>
-    <div class="reveal panel mt-12 grid gap-10 p-7 sm:grid-cols-2 sm:p-10 lg:grid-cols-4">
-      {c.favourites.groups.map((g) => (
-        <div>
-          <h3 class="border-b border-ink-950/12 pb-3 text-lg text-pine-950">{g.title}</h3>
-          <ul class="mt-4 space-y-2 text-ink-800">{g.items.map((it) => <li>{it}</li>)}</ul>
-        </div>
-      ))}
+  <!-- Menu highlights, set as a dark menu board -->
+  <section class="on-dark section-y bg-pine-950 text-cream-50">
+    <div class="container-x">
+      <SectionHeading eyebrow={c.favourites.eyebrow} title={c.favourites.title} intro={c.favourites.text} />
+      <div class="reveal mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {c.favourites.groups.map((g) => (
+          <div>
+            <h3 class="border-b border-cream-50/15 pb-3 text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-ochre-300">{g.title}</h3>
+            <ul class="mt-2 divide-y divide-cream-50/8">{g.items.map((it) => <li class="py-2.5 text-cream-50/90">{it}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <p class="mt-12 flex items-start gap-3 rounded-2xl bg-cream-50/5 p-5 text-cream-50/80"><Icon name="heart" size={18} class="mt-1 shrink-0 text-ochre-300" />{c.favourites.note}</p>
     </div>
-    <p class="mt-8 flex items-start gap-3 text-ink-600"><Icon name="heart" size={18} class="mt-1 shrink-0 text-clay-600" />{c.favourites.note}</p>
-  </Section>
+  </section>
 
   <!-- Booking & hours -->
-  <section class="container-x">
-    <div class="on-dark grid gap-12 rounded-[2rem] bg-pine-950 p-8 text-cream-50 sm:p-12 lg:grid-cols-12 lg:gap-16 lg:p-16">
-      <div class="lg:col-span-7">
-        <h2 class="h-section">{c.booking.title}</h2>
-        <p class="lede mt-5 max-w-xl">{c.booking.text}</p>
-        <div class="mt-9 flex flex-wrap gap-3">
-          <a href={whatsappBookingHref(lang)} target="_blank" rel="noopener" class="btn-light"><Icon name="whatsapp" size={17} /> {c.booking.cta1}</a>
-          <a href={site.phoneHref} class="btn-ghost"><Icon name="phone" size={17} /> {site.phoneDisplay}</a>
-        </div>
+  <section class="container-x section-y grid gap-5 lg:grid-cols-12">
+    <div class="relative isolate overflow-hidden rounded-[var(--radius-card)] bg-clay-600 p-8 text-white sm:p-12 lg:col-span-7">
+      <div class="absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full bg-white/10 blur-2xl"></div>
+      <h2 class="h-section">{c.booking.title}</h2>
+      <p class="mt-5 max-w-xl text-lg text-white/85">{c.booking.text}</p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href={whatsappBookingHref(lang)} target="_blank" rel="noopener" class="btn-light"><Icon name="whatsapp" size={17} /> {c.booking.cta1}</a>
+        <a href={site.phoneHref} class="btn-glass"><Icon name="phone" size={17} /> {site.phoneDisplay}</a>
       </div>
-      <div class="lg:col-span-5">
-        <h3 class="text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-ochre-300">{c.hoursTitle}</h3>
-        <HoursList lang={lang} tone="light" class="mt-3" />
-        <p class="mt-3 text-xs text-cream-50/55">{t('footer.hoursNote')}</p>
-      </div>
+    </div>
+    <div class="rounded-[var(--radius-card)] border border-ink-950/8 bg-white p-8 sm:p-10 lg:col-span-5">
+      <h3 class="flex items-center gap-2 text-xl text-pine-950"><Icon name="clock" size={20} class="text-clay-600" /> {c.hoursTitle}</h3>
+      <HoursList lang={lang} class="mt-4" />
+      <p class="mt-4 text-xs text-ink-600">{t('footer.hoursNote')}</p>
     </div>
   </section>
 </Base>

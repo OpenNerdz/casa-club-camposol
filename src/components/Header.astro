@@ -3,8 +3,8 @@ import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import { site, whatsappBookingHref } from '../data/site';
 import { useTranslations, localePath, switchLang, type Lang } from '../i18n/utils';
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props { lang: Lang; tone: 'dark' | 'light' }
+const { lang, tone } = Astro.props;
 const t = useTranslations(lang);
 const nav = [
   { href: localePath(lang, '/restaurant/'), label: t('nav.restaurant') },
@@ -18,22 +18,22 @@ const otherHref = switchLang(Astro.url, other);
 const current = Astro.url.pathname;
 const enquiryHref = `${localePath(lang, '/contact/')}#enquiry`;
 ---
-<header id="site-header" class="site-header fixed inset-x-0 top-0 z-50" data-scrolled="false" data-open="false">
+<header id="site-header" class="site-header fixed inset-x-0 top-0 z-50" data-tone={tone} data-scrolled="false" data-open="false">
   <div class="container-x flex h-[4.5rem] items-center gap-4 lg:h-20">
     <a href={localePath(lang, '/')} class="mr-auto" aria-label={`${site.name}, ${t('nav.home')}`}><Logo /></a>
 
     <nav class="hidden items-center gap-1 lg:flex" aria-label={t('nav.main')}>
       {nav.map((n) => (
         <a href={n.href} aria-current={current === n.href ? 'page' : undefined}
-           class="relative rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-ink-800 transition-colors hover:bg-ink-950/5 hover:text-ink-950 aria-[current=page]:text-clay-700 aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-0 aria-[current=page]:after:-bottom-0.5 aria-[current=page]:after:mx-auto aria-[current=page]:after:h-1 aria-[current=page]:after:w-1 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-clay-600">{n.label}</a>
+           class="relative rounded-full px-3.5 py-2 text-[0.9375rem] font-semibold opacity-85 transition hover:bg-current/10 hover:opacity-100 aria-[current=page]:opacity-100 aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-0 aria-[current=page]:after:-bottom-0.5 aria-[current=page]:after:mx-auto aria-[current=page]:after:h-1 aria-[current=page]:after:w-1 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-clay-500">{n.label}</a>
       ))}
     </nav>
 
     <a href={otherHref} hreflang={other} lang={other}
-       class="grid h-10 min-w-10 place-items-center rounded-full border border-ink-950/15 px-2.5 text-xs font-bold tracking-widest text-ink-800 transition-colors hover:border-ink-950/40"
+       class="grid h-10 min-w-10 place-items-center rounded-full border border-current/25 px-2.5 text-xs font-bold tracking-widest transition-colors hover:border-current/60"
        aria-label={other === 'es' ? 'Ver en español' : 'View in English'}>{other.toUpperCase()}</a>
     <a href={enquiryHref} data-book class="btn-primary hidden h-11 sm:inline-flex">{t('cta.book')}</a>
-    <button id="menu-toggle" type="button" class="-mr-2 grid h-11 w-11 place-items-center rounded-full text-ink-950 lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label={t('nav.menu')} data-label-open={t('nav.menu')} data-label-close={t('nav.close')}>
+    <button id="menu-toggle" type="button" class="-mr-2 grid h-11 w-11 place-items-center rounded-full lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label={t('nav.menu')} data-label-open={t('nav.menu')} data-label-close={t('nav.close')}>
       <Icon name="menu" size={26} class="icon-open" />
       <Icon name="close" size={26} class="icon-close hidden" />
     </button>

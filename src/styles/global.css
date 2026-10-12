@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ---------- Design tokens ----------
-   The palette is taken from the clubhouse itself: pine-green fairways, the terracotta
-   terrace tiles, the ochre roof trim and lime-washed walls. Edit here to re-brand. */
+   Colours from the clubhouse itself: pine-green fairways, terracotta terrace tiles,
+   the ochre roof trim and lime-washed walls. Edit here to re-brand. */
 @theme {
   --font-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 
@@ -17,7 +17,6 @@
   --color-clay-700: #8f3b1f;
   --color-clay-600: #a94a28; /* buttons: 5.7:1 against white */
   --color-clay-500: #c65d36;
-  --color-clay-200: #f0c9b4;
   --color-clay-100: #f8e4d8;
 
   --color-ochre-500: #d9a23a;
@@ -27,66 +26,66 @@
   --color-cream-50: #fbf8f1;
   --color-cream-100: #f4ede0;
   --color-cream-200: #e9dfca;
-  --color-cream-300: #d9cbb0;
 
   --color-ink-950: #17201b;
   --color-ink-800: #27332d;
   --color-ink-600: #46534c;
   --color-ink-400: #7b877f;
 
+  --radius-card: 1.75rem;
   --ease-out-soft: cubic-bezier(.2, .7, .2, 1);
 }
 
-/* ---------- Base ----------
-   In the base layer so utilities (e.g. font-sans on a heading) can override it. */
+/* ---------- Base ---------- */
 @layer base {
   :root { color-scheme: light; scroll-behavior: smooth; scroll-padding-top: 6rem; }
   html { -webkit-text-size-adjust: 100%; }
-
-  body {
-    @apply bg-cream-50 font-sans text-ink-950 antialiased;
-    font-size: 1.0625rem;
-    line-height: 1.7;
-  }
-
+  body { @apply bg-cream-50 font-sans text-ink-950 antialiased; font-size: 1.0625rem; line-height: 1.7; }
   h1, h2, h3 { font-weight: 700; letter-spacing: -0.025em; text-wrap: balance; }
   p { text-wrap: pretty; }
-
   ::selection { background: var(--color-ochre-300); color: var(--color-ink-950); }
-  :focus-visible { outline: 2px solid var(--color-clay-500); outline-offset: 3px; border-radius: 4px; }
+  :focus-visible { outline: 2px solid var(--color-clay-500); outline-offset: 3px; border-radius: 6px; }
 }
 
 /* ---------- Utilities ---------- */
 @utility container-x { @apply mx-auto w-full max-w-[84rem] px-5 sm:px-8 lg:px-12; }
+@utility section-y { @apply py-16 sm:py-24 lg:py-28; }
 
-@utility eyebrow { @apply block text-[0.75rem] font-semibold uppercase leading-none tracking-[0.14em] text-clay-700; }
-
-@utility h-display { @apply text-[clamp(2.5rem,1.6rem+3.4vw,4.5rem)] leading-[1.05] tracking-[-0.035em]; }
-@utility h-section { @apply text-[clamp(2rem,1.55rem+1.6vw,3rem)] leading-[1.1] tracking-[-0.03em]; }
+@utility eyebrow { @apply block text-[0.75rem] font-bold uppercase leading-none tracking-[0.16em] text-clay-700; }
+@utility h-hero { @apply text-[clamp(2.75rem,1.4rem+5.4vw,6.25rem)] font-extrabold leading-[0.98] tracking-[-0.045em]; }
+@utility h-display { @apply text-[clamp(2.4rem,1.5rem+3.4vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.04em]; }
+@utility h-section { @apply text-[clamp(2rem,1.45rem+2vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.035em]; }
 @utility lede { @apply text-lg leading-relaxed text-ink-600 sm:text-xl; }
 
 @utility btn {
   @apply inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full px-6 text-[0.9375rem] font-semibold whitespace-nowrap
-         transition-[background-color,color,border-color,translate] duration-200 active:translate-y-px;
+         transition-[background-color,color,border-color,translate,box-shadow] duration-200 active:translate-y-px;
   & svg:last-child:not(:first-child) { @apply transition-transform duration-200; }
   &:hover svg:last-child:not(:first-child) { @apply translate-x-0.5; }
 }
-@utility btn-primary { @apply btn bg-clay-600 text-white hover:bg-clay-700; }
+@utility btn-primary { @apply btn bg-clay-600 text-white shadow-[0_10px_30px_-10px_rgb(169_74_40/.7)] hover:bg-clay-700; }
 @utility btn-dark    { @apply btn bg-pine-900 text-cream-50 hover:bg-pine-800; }
 @utility btn-line    { @apply btn border border-ink-950/20 text-ink-950 hover:border-ink-950/40 hover:bg-ink-950/5; }
 @utility btn-light   { @apply btn bg-cream-50 text-pine-950 hover:bg-white; }
-@utility btn-ghost   { @apply btn border border-cream-50/30 text-cream-50 hover:border-cream-50/60 hover:bg-cream-50/10; }
+@utility btn-glass   { @apply btn border border-white/25 bg-white/10 text-white backdrop-blur-md hover:bg-white/20; }
 
 @utility link-arrow {
   @apply inline-flex items-center gap-1.5 font-semibold text-pine-800 underline decoration-pine-800/25 decoration-1 underline-offset-[6px]
          transition-colors hover:text-clay-700 hover:decoration-clay-700;
 }
 
-@utility frame { @apply overflow-hidden rounded-[1.25rem]; }
+@utility frame { @apply overflow-hidden rounded-[var(--radius-card)]; }
 @utility img-cover { @apply block h-full w-full object-cover; }
+@utility panel { @apply rounded-[var(--radius-card)] border border-ink-950/8 bg-white/70; }
+@utility glass { @apply border border-white/15 bg-white/10 backdrop-blur-xl; }
 
-@utility rule { @apply border-t border-ink-950/12; }
-@utility panel { @apply rounded-[1.5rem] border border-ink-950/10 bg-cream-100; }
+/* Horizontal snap scroller on phones; the markup switches it to a grid at a breakpoint. */
+@utility snap-row {
+  @apply -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-2 sm:-mx-8 sm:scroll-px-8 sm:px-8;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+  & > * { @apply shrink-0 snap-start; }
+}
 
 @utility field {
   @apply mt-2 block w-full rounded-xl border border-ink-950/15 bg-cream-50 px-4 py-3 text-base font-normal text-ink-950
@@ -95,26 +94,35 @@
 }
 
 /* ---------- Motion ---------- */
-.reveal { opacity: 0; translate: 0 14px; transition: opacity .8s var(--ease-out-soft), translate .8s var(--ease-out-soft); }
+/* One orchestrated moment: the hero photo settles and its text rises in. */
+@keyframes settle { from { transform: scale(1.08); } }
+@keyframes rise { from { opacity: 0; translate: 0 18px; } }
+.hero-photo { animation: settle 2.2s var(--ease-out-soft) both; }
+.rise { animation: rise .9s var(--ease-out-soft) both; animation-delay: calc(var(--i, 0) * 110ms + 150ms); }
+
+.reveal { opacity: 0; translate: 0 16px; transition: opacity .8s var(--ease-out-soft), translate .8s var(--ease-out-soft); }
 .reveal.is-visible, html.no-js .reveal { opacity: 1; translate: none; }
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
   .reveal { opacity: 1; translate: none; transition: none; }
+  .hero-photo, .rise { animation: none; }
 }
 
 /* ---------- Components that need real selectors ---------- */
 /* Dark sections: unlayered, so these beat the light-background utility colours */
 .on-dark .eyebrow { color: var(--color-ochre-300); }
-.on-dark .lede { color: color-mix(in srgb, var(--color-cream-50) 75%, transparent); }
+.on-dark .lede { color: color-mix(in srgb, var(--color-cream-50) 78%, transparent); }
 
-.site-header { transition: background-color .3s, box-shadow .3s, backdrop-filter .3s; }
+/* Header: white over a dark opening, cream once scrolled or with the menu open */
+.site-header { color: var(--color-ink-950); transition: background-color .3s, box-shadow .3s, color .3s; }
+.site-header[data-tone="dark"]:not([data-scrolled="true"]):not([data-open="true"]) { color: var(--color-cream-50); }
 .site-header[data-scrolled="true"], .site-header[data-open="true"] {
-  background: color-mix(in srgb, var(--color-cream-50) 90%, transparent);
+  background: color-mix(in srgb, var(--color-cream-50) 92%, transparent);
   backdrop-filter: blur(14px) saturate(1.2);
   box-shadow: 0 1px 0 rgb(23 32 27 / .08);
 }
 
-/* Today's row in the weekly programme (marked by script, in Spanish time) */
+/* Today's card in the weekly programme (marked by script, in Spanish time) */
 [data-day] .today-pill { display: none; }
 [data-day][data-today] .today-pill { display: inline-flex; }
 

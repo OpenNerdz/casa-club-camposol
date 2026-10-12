@@ -113,13 +113,14 @@
 .on-dark .eyebrow { color: var(--color-ochre-300); }
 .on-dark .lede { color: color-mix(in srgb, var(--color-cream-50) 78%, transparent); }
 
-/* Header: white over a dark opening, cream once scrolled or with the menu open */
+/* Header: transparent at the top of the page (white text over a dark opening), then a dark
+   pine bar once scrolled or with the menu open, matching the footer and the phone action bar. */
 .site-header { color: var(--color-ink-950); transition: background-color .3s, box-shadow .3s, color .3s; }
-.site-header[data-tone="dark"]:not([data-scrolled="true"]):not([data-open="true"]) { color: var(--color-cream-50); }
+.site-header[data-tone="dark"], .site-header[data-scrolled="true"], .site-header[data-open="true"] { color: var(--color-cream-50); }
 .site-header[data-scrolled="true"], .site-header[data-open="true"] {
-  background: color-mix(in srgb, var(--color-cream-50) 92%, transparent);
+  background: color-mix(in srgb, var(--color-pine-950) 94%, transparent);
   backdrop-filter: blur(14px) saturate(1.2);
-  box-shadow: 0 1px 0 rgb(23 32 27 / .08);
+  box-shadow: 0 1px 0 rgb(251 248 241 / .08);
 }
 
 /* Today's card in the weekly programme (marked by script, in Spanish time) */

@@ -10,6 +10,7 @@ if (process.platform === 'android') {
     const patched = src.replace("const __rootDir = __nodePath.parse(process.cwd()).root", "const __rootDir = process.cwd() /* termux patch */");
     if (patched !== src) { writeFileSync(f, patched); console.log('[postinstall] patched satteri WASI preopen for Android'); }
   } else {
-    console.log('[postinstall] Android: run `npm i -D --force @bruits/satteri-wasm32-wasi@<satteri version>` to enable the WASI fallback');
+    const v = JSON.parse(readFileSync(new URL('../node_modules/satteri/package.json', import.meta.url), 'utf8')).version;
+    console.log(`[postinstall] Android: run \`npm install --no-save --force @bruits/satteri-wasm32-wasi@${v}\` then \`node scripts/postinstall.mjs\` to enable the WASI fallback`);
   }
 }

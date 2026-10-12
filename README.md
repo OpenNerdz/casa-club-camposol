@@ -51,8 +51,9 @@ npm run preview    # serve dist/ locally
 npm run build:preview   # dist-preview/ with relative links (for sub-path hosting / review uploads)
 ```
 
-Node 22 or newer. On Termux/Android `npm install` applies a small patch so Astro's Markdown engine runs
-through its WASI build (see `scripts/postinstall.mjs`); run the WASI package install it prints if needed.
+Node 22 or newer. On Termux/Android, Astro's Markdown engine has no native binary: after `npm install`, run
+`npm install --no-save --force @bruits/satteri-wasm32-wasi@<satteri version>` (the postinstall message prints the
+exact command) and then `node scripts/postinstall.mjs`, which patches its WASI loader for Android.
 
 ## Deploy
 

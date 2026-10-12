@@ -19,8 +19,5 @@
     "astro": "^7.3.8",
     "leaflet": "^1.9.4",
     "tailwindcss": "^4.3.3"
-  },
-  "optionalDependencies": {
-    "@bruits/satteri-wasm32-wasi": "^0.10.5"
   }
 }

@@ -27,7 +27,7 @@ export const golf = {
     hero: { eyebrow: 'Camposol Club de Golf', title: 'Dieciocho hoyos con la sierra de compañía', sub: 'Un recorrido par 72 tipo parkland en un valle resguardado de lagos, palmeras y olivos, a diez minutos de la costa y abierto todo el año.', cta1: 'Reservar salida', cta2: 'Llamar a la oficina de golf' },
     course: { eyebrow: 'El campo', title: 'Amable en los primeros nueve, exigente en la vuelta', text: 'Inaugurado en 2002 y diseñado por Manuel Quesada Mendiola, el recorrido sube suavemente desde la casa club antes de regresar entre lagos y zonas de monte bajo. El hoyo 7, par 4 sobre el lago, es la firma del campo; los segundos nueve se estrechan con doglegs y búnkeres bien colocados. Calles anchas y un hándicap máximo de 54 lo hacen ideal para sociedades y jugadores en progreso, mientras que las barras blancas (slope 136) exigen lo suyo a los hándicaps bajos.' },
     teesTitle: 'Barras y valoración',
-    statLabels: { holes: 'hoyos', par: 'par', opened: 'inauguración' },
+    statLabels: { holes: 'hoyos', par: 'par', opened: 'apertura' },
     alts: { hero: 'Una bandera amarilla en el green con la Sierra de las Moreras al fondo', range: 'Los puestos cubiertos del campo de prácticas' },
     teeCols: ['Barras', 'Longitud', 'Par', 'Valor del campo', 'Slope'],
     facilities: { eyebrow: 'Instalaciones', title: 'Todo para un día completo de golf', items: [

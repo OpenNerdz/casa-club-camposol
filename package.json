@@ -10,7 +10,8 @@
     "check": "astro check",
     "postinstall": "node scripts/postinstall.mjs",
     "build:preview": "astro build --outDir dist-preview && node scripts/relativize.mjs dist-preview",
-    "images": "bash scripts/images.sh"
+    "images": "bash scripts/images.sh",
+    "preview:bundle": "npm run build:preview && rm -rf preview/site && cp -r dist-preview preview/site"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

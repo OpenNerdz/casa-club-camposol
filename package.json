@@ -20,7 +20,7 @@
     "leaflet": "^1.9.4",
     "tailwindcss": "^4.3.3"
   },
-  "devDependencies": {
+  "optionalDependencies": {
     "@bruits/satteri-wasm32-wasi": "^0.10.5"
   }
 }

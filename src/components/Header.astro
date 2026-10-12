@@ -1,0 +1,98 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { useTranslations, localePath, switchLang, type Lang } from '../i18n/utils';
+interface Props { lang: Lang; variant: 'transparent' | 'solid' }
+const { lang, variant } = Astro.props;
+const t = useTranslations(lang);
+const nav = [
+  { href: localePath(lang, '/restaurant/'), label: t('nav.restaurant') },
+  { href: localePath(lang, '/golf/'), label: t('nav.golf') },
+  { href: localePath(lang, '/events/'), label: t('nav.events') },
+  { href: localePath(lang, '/gallery/'), label: t('nav.gallery') },
+  { href: localePath(lang, '/contact/'), label: t('nav.contact') },
+];
+const other: Lang = lang === 'en' ? 'es' : 'en';
+const otherHref = switchLang(Astro.url, other);
+const current = Astro.url.pathname;
+const transparent = variant === 'transparent';
+---
+<header id="site-header" data-variant={variant}
+  class:list={[
+    'fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,color] duration-300',
+    transparent ? 'text-white' : 'bg-sand-50/90 text-ink-900 backdrop-blur shadow-[0_1px_0_rgba(22,33,28,.06)]',
+  ]}>
+  <div class="container-x flex h-[72px] items-center justify-between gap-4">
+    <a href={localePath(lang, '/')} class="flex items-center gap-3" aria-label={site.name}>
+      <img src="/images/logo-mark.svg" alt="" width="40" height="40" class="h-10 w-10" />
+      <span class="font-display text-xl leading-none tracking-tight">
+        <span class="block">Casa Club</span>
+        <span class="block text-[0.72rem] font-sans font-semibold uppercase tracking-[0.22em] opacity-80">Camposol</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Main">
+      {nav.map((n) => (
+        <a href={n.href} aria-current={current === n.href ? 'page' : undefined}
+           class="text-sm font-semibold tracking-wide opacity-90 transition hover:opacity-100 aria-[current=page]:underline aria-[current=page]:underline-offset-8 aria-[current=page]:decoration-sol-400 aria-[current=page]:decoration-2">{n.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href={otherHref} hreflang={other} lang={other}
+         class="hidden items-center gap-1 rounded-full border border-current/30 px-3 py-1.5 text-xs font-bold uppercase tracking-widest opacity-90 transition hover:opacity-100 sm:inline-flex"
+         aria-label={other === 'es' ? 'Ver en español' : 'View in English'}>
+        <Icon name="globe" size={14} /> {other.toUpperCase()}
+      </a>
+      <a href={site.phoneHref} class:list={['hidden md:inline-flex', transparent ? 'btn-ghost' : 'btn-primary']}>
+        <Icon name="phone" size={16} /> {t('cta.call')}
+      </a>
+      <button id="menu-toggle" type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-full lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label={t('nav.menu')}>
+        <Icon name="menu" size={24} class="icon-open" />
+        <Icon name="close" size={24} class="icon-close hidden" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-ink-900/10 bg-sand-50 text-ink-900 lg:hidden">
+    <nav class="container-x flex flex-col py-3" aria-label="Mobile">
+      {nav.map((n) => (
+        <a href={n.href} class="border-b border-ink-900/5 py-3.5 text-base font-semibold">{n.label}</a>
+      ))}
+      <div class="flex flex-wrap gap-3 py-4">
+        <a href={site.phoneHref} class="btn-primary"><Icon name="phone" size={16} /> {t('cta.call')}</a>
+        {site.whatsappHref && <a href={site.whatsappHref} class="btn-outline"><Icon name="whatsapp" size={16} /> WhatsApp</a>}
+        <a href={otherHref} hreflang={other} lang={other} class="btn-outline"><Icon name="globe" size={16} /> {other === 'es' ? 'Español' : 'English'}</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const transparent = header.dataset.variant === 'transparent';
+  const solidClasses = ['bg-sand-50/90', 'text-ink-900', 'backdrop-blur', 'shadow-[0_1px_0_rgba(22,33,28,.06)]'];
+
+  function setSolid(on: boolean) {
+    if (!transparent) return;
+    header.classList.toggle('text-white', !on);
+    for (const c of solidClasses) header.classList.toggle(c, on);
+    header.querySelectorAll<HTMLElement>('a.btn-ghost, a.btn-primary').forEach((a) => {
+      a.classList.toggle('btn-ghost', !on); a.classList.toggle('btn-primary', on);
+    });
+  }
+  let open = false;
+  toggle.addEventListener('click', () => {
+    open = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.classList.toggle('hidden', !open);
+    toggle.querySelector('.icon-open')!.classList.toggle('hidden', open);
+    toggle.querySelector('.icon-close')!.classList.toggle('hidden', !open);
+    setSolid(open || window.scrollY > 24);
+  });
+  const onScroll = () => setSolid(open || window.scrollY > 24);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>

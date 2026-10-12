@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { gallery, img } from '../data/images';
+import { site } from '../data/site';
+import { type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = lang === 'en'
+  ? { title: 'Gallery', description: 'Photos of Casa Club Camposol: the clubhouse, terrace, bar, restaurant, events and the Camposol golf course in Mazarrón.', eyebrow: 'Gallery', h1: 'A look around the club', intro: 'The terrace, the bar, the course and a few of our nights. Come and see it for yourself.' }
+  : { title: 'Galería', description: 'Fotos de Casa Club Camposol: la casa club, la terraza, el bar, el restaurante, los eventos y el campo de golf de Camposol en Mazarrón.', eyebrow: 'Galería', h1: 'Un paseo por el club', intro: 'La terraza, el bar, el campo y algunas de nuestras noches. Ven a verlo con tus propios ojos.' };
+---
+<Base title={c.title} description={c.description} image={img.terrace}>
+  <section class="container-x pb-8 pt-32 sm:pt-40">
+    <div class="max-w-2xl">
+      <p class="eyebrow">{c.eyebrow}</p>
+      <h1 class="mt-3 text-4xl font-medium text-green-950 sm:text-6xl">{c.h1}</h1>
+      <p class="mt-5 text-lg text-ink-500">{c.intro}</p>
+    </div>
+    <div class="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>a]:mb-4 [&>a]:block">
+      {gallery.map((g, i) => (
+        <a href={g.src} data-lightbox data-caption={g.alt[lang]} class="reveal group overflow-hidden rounded-xl2 shadow-card" style={`transition-delay:${(i % 3) * 70}ms`}>
+          <img src={g.src} alt={g.alt[lang]} width={g.w} height={g.h} loading={i < 4 ? 'eager' : 'lazy'} decoding="async" class="w-full transition duration-700 group-hover:scale-[1.03]" />
+        </a>
+      ))}
+    </div>
+    <p class="mt-10 text-sm text-ink-500">{lang === 'en' ? `More photos every week on ` : `Más fotos cada semana en `}<a href={site.social.facebook} class="font-semibold text-green-800 underline" target="_blank" rel="noopener">Facebook</a>.</p>
+  </section>
+  <Lightbox />
+</Base>

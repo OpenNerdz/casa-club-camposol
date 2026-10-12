@@ -1,0 +1,80 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { useTranslations, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<form id="contact-form" class="card p-6 sm:p-8" method="post" action={site.formEndpoint || '#'} data-endpoint={site.formEndpoint} data-mailto={site.email} novalidate>
+  <input type="hidden" name="subject" value={`Web enquiry · ${site.name}`} />
+  <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+  <div class="grid gap-5 sm:grid-cols-2">
+    <label class="block text-sm font-semibold">
+      {t('form.name')}
+      <input name="name" required autocomplete="name" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20" />
+    </label>
+    <label class="block text-sm font-semibold">
+      {t('form.phone')}
+      <input name="phone" type="tel" autocomplete="tel" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20" />
+    </label>
+    <label class="block text-sm font-semibold sm:col-span-2">
+      {t('form.email')}
+      <input name="email" type="email" required autocomplete="email" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20" />
+    </label>
+    <label class="block text-sm font-semibold">
+      {t('form.type')}
+      <select name="enquiry" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20">
+        <option>{t('form.type.table')}</option>
+        <option>{t('form.type.event')}</option>
+        <option>{t('form.type.golf')}</option>
+        <option>{t('form.type.other')}</option>
+      </select>
+    </label>
+    <label class="block text-sm font-semibold">
+      {t('form.date')}
+      <input name="date" type="date" class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20" />
+    </label>
+    <label class="block text-sm font-semibold sm:col-span-2">
+      {t('form.message')}
+      <textarea name="message" rows="4" required class="mt-1.5 w-full rounded-xl border border-ink-900/15 bg-sand-50 px-4 py-3 font-normal outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20"></textarea>
+    </label>
+  </div>
+  <label class="mt-5 flex items-start gap-3 text-sm text-ink-500">
+    <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 rounded border-ink-900/30 accent-green-700" />
+    <span>{t('form.consent')}</span>
+  </label>
+  <div class="mt-6 flex flex-wrap items-center gap-4">
+    <button type="submit" class="btn-primary"><Icon name="mail" size={16} /> {t('form.send')}</button>
+    <p id="form-status" class="text-sm text-ink-500" aria-live="polite"></p>
+  </div>
+</form>
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = document.getElementById('form-status')!;
+  const msgs = {
+    sending: form.closest('html')!.lang.startsWith('es') ? 'Enviando…' : 'Sending…',
+    ok: form.closest('html')!.lang.startsWith('es') ? '¡Gracias! Te responderemos muy pronto.' : 'Thank you! We will get back to you shortly.',
+    err: form.closest('html')!.lang.startsWith('es') ? 'No se pudo enviar. Llámanos o escríbenos por WhatsApp.' : 'Could not send. Please call or WhatsApp us instead.',
+    invalid: form.closest('html')!.lang.startsWith('es') ? 'Revisa los campos marcados.' : 'Please check the highlighted fields.',
+  };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); status.textContent = msgs.invalid; return; }
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (data.botcheck) return;
+    const endpoint = form.dataset.endpoint;
+    if (!endpoint) {
+      // No form service configured yet: fall back to the visitor's email client.
+      const body = Object.entries(data).filter(([k]) => !['botcheck', 'subject', 'consent'].includes(k)).map(([k, v]) => `${k}: ${v}`).join('\n');
+      location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(String(data.subject))}&body=${encodeURIComponent(body)}`;
+      status.textContent = msgs.ok; return;
+    }
+    status.textContent = msgs.sending;
+    try {
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+      if (!r.ok) throw new Error(String(r.status));
+      form.reset(); status.textContent = msgs.ok;
+    } catch { status.textContent = msgs.err; }
+  });
+</script>

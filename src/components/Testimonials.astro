@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+interface Props { items: readonly { quote: string; who: string }[] }
+const { items } = Astro.props;
+---
+<div class="mt-12 grid gap-6 md:grid-cols-3">
+  {items.map((r, i) => (
+    <figure class="card reveal flex flex-col p-7" style={`transition-delay:${i * 90}ms`}>
+      <div class="flex gap-0.5 text-sol-500">{[0,1,2,3,4].map(() => <Icon name="star" size={16} class="fill-current" />)}</div>
+      <blockquote class="mt-4 flex-1 font-display text-lg leading-snug text-green-950">“{r.quote}”</blockquote>
+      <figcaption class="mt-5 text-sm font-semibold text-ink-500">{r.who}</figcaption>
+    </figure>
+  ))}
+</div>

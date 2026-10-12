@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import MapLeaflet from '../components/MapLeaflet.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { contact } from '../content/contact';
+import { img } from '../data/images';
+import { site } from '../data/site';
+import { useTranslations, type Lang } from '../i18n/utils';
+import { businessJsonLd } from '../data/jsonld';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = contact[lang];
+const t = useTranslations(lang);
+---
+<Base title={c.meta.title} description={c.meta.description} header="transparent" image={img.exterior} jsonLd={businessJsonLd(lang)}>
+  <Hero image={img.exterior} compact eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} />
+
+  <section class="container-x -mt-10 relative z-10 grid gap-6 md:grid-cols-3">
+    <div class="card p-7">
+      <span class="grid h-11 w-11 place-items-center rounded-full bg-sol-100 text-sol-600"><Icon name="utensils" size={20} /></span>
+      <h2 class="mt-4 text-xl text-green-950">{c.cards.club}</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href={site.phoneHref} class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="phone" size={16} /> {site.phoneDisplay}</a></li>
+        <li><a href={site.whatsappHref} target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="whatsapp" size={16} /> WhatsApp</a></li>
+        <li><a href={`mailto:${site.email}`} class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline break-all"><Icon name="mail" size={16} /> {site.email}</a></li>
+      </ul>
+    </div>
+    <div class="card p-7">
+      <span class="grid h-11 w-11 place-items-center rounded-full bg-green-50 text-green-800"><Icon name="flag" size={20} /></span>
+      <h2 class="mt-4 text-xl text-green-950">{c.cards.golf}</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href={site.golfPhoneHref} class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="phone" size={16} /> {site.golfPhoneDisplay}</a></li>
+        <li><a href={site.teeTimeUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="calendar" size={16} /> {t('cta.teeTimes')}</a></li>
+        <li><a href={site.social.facebookGolf} target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-semibold text-green-800 hover:underline"><Icon name="facebook" size={16} /> Camposol Club de Golf</a></li>
+      </ul>
+    </div>
+    <div class="card p-7">
+      <span class="grid h-11 w-11 place-items-center rounded-full bg-green-50 text-green-800"><Icon name="pin" size={20} /></span>
+      <h2 class="mt-4 text-xl text-green-950">{c.cards.visit}</h2>
+      <address class="mt-3 text-sm not-italic leading-relaxed text-ink-700">{site.address.lines.map((l) => <span class="block">{l}</span>)}</address>
+      <a href={site.mapsUrl} target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-green-800 hover:underline"><Icon name="arrow" size={16} /> {t('cta.directions')}</a>
+    </div>
+  </section>
+
+  <section class="container-x grid gap-8 py-16 lg:grid-cols-5 sm:py-20">
+    <div class="lg:col-span-3"><MapLeaflet height="100%" class="min-h-[420px]" /></div>
+    <div class="card p-7 lg:col-span-2">
+      <h2 class="text-2xl text-green-950">{c.hoursTitle}</h2>
+      <ul class="mt-4 space-y-2 text-sm">{site.hours[lang].map((h) => <li class="flex justify-between gap-4 border-b border-ink-900/5 pb-2"><span class="text-ink-500">{h.label}</span><span class="font-semibold text-green-950">{h.value}</span></li>)}</ul>
+      <p class="mt-3 text-xs text-ink-500">{t('footer.hoursNote')}</p>
+      <h3 class="mt-8 text-xl text-green-950">{c.directions.title}</h3>
+      <ol class="mt-3 space-y-3 text-sm text-ink-700">{c.directions.steps.map((s, i) => <li class="flex gap-3"><span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sol-100 text-xs font-bold text-sol-600">{i + 1}</span><span>{s}</span></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="bg-sand-100 py-16 sm:py-24">
+    <div class="container-x grid gap-10 lg:grid-cols-5">
+      <div class="reveal lg:col-span-2">
+        <p class="eyebrow">{t('cta.enquire')}</p>
+        <h2 class="mt-3 text-3xl font-medium text-green-950 sm:text-4xl">{c.formTitle}</h2>
+        <p class="mt-4 text-lg text-ink-500">{c.formText}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={site.whatsappHref} class="btn-accent" target="_blank" rel="noopener"><Icon name="whatsapp" size={16} /> {t('cta.whatsapp')}</a>
+          <a href={site.phoneHref} class="btn-outline"><Icon name="phone" size={16} /> {t('cta.call')}</a>
+        </div>
+      </div>
+      <div class="reveal lg:col-span-3"><ContactForm lang={lang} /></div>
+    </div>
+  </section>
+</Base>

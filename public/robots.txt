@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://casaclubcamposolgolf.com/sitemap-index.xml

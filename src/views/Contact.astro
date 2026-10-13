@@ -15,26 +15,29 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = contact[lang];
 const t = useTranslations(lang);
+// Long email addresses may only wrap after the "@" or before the domain ending, never mid-word.
+const breakable = (email: string) => email.replace('@', '@<wbr>').replace(/\.(?=[^.]+$)/, '<wbr>.');
 const groups = [
   { title: c.cards.club, sub: c.cards.clubSub, links: [
     { href: site.phoneHref, icon: 'phone', label: site.phoneDisplay },
     { href: whatsappBookingHref(lang), icon: 'whatsapp', label: 'WhatsApp', external: true },
-    { href: `mailto:${site.email}`, icon: 'mail', label: site.email },
+    { href: `mailto:${site.email}`, icon: 'mail', label: site.email, html: breakable(site.email) },
   ] },
   { title: c.cards.golf, sub: c.cards.golfSub, links: [
     { href: site.golfPhoneHref, icon: 'phone', label: site.golfPhoneDisplay },
+    { href: site.golfMobileHref, icon: 'phone', label: site.golfMobileDisplay },
     { href: site.teeTimeUrl, icon: 'calendar', label: t('cta.teeTimes'), external: true },
   ] },
 ];
 ---
-<Base title={c.meta.title} description={c.meta.description} image={img.exterior} jsonLd={businessJsonLd(lang)}>
+<Base title={c.meta.title} description={c.meta.description} image={img.ogContact} jsonLd={businessJsonLd(lang)}>
   <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.exterior} alt={c.alt} position="78% center" />
 
   <!-- Ways to get in touch -->
   <section class="container-x pt-12 sm:pt-16">
     <div class="grid gap-4 md:grid-cols-2">
       {groups.map((g, i) => (
-        <div class:list={['reveal rounded-[var(--radius-card)] p-7 sm:p-9', i === 0 ? 'bg-pine-900 text-cream-50' : 'border border-ink-950/8 bg-white text-pine-950']}>
+        <div class:list={['reveal rounded-[var(--radius-card)] p-6 sm:p-9', i === 0 ? 'bg-pine-900 text-cream-50' : 'border border-ink-950/8 bg-white text-pine-950']}>
           <h2 class="text-2xl font-extrabold tracking-tight">{g.title}</h2>
           <p class:list={['mt-1 text-[0.9375rem]', i === 0 ? 'text-cream-50/70' : 'text-ink-600']}>{g.sub}</p>
           <ul class="mt-6 grid gap-2.5">
@@ -42,8 +45,8 @@ const groups = [
               <li><a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener' : undefined}
                 class:list={['group flex min-h-14 items-center gap-4 rounded-2xl px-4 py-3 font-semibold transition-colors', i === 0 ? 'bg-cream-50/8 hover:bg-cream-50/15' : 'bg-cream-100 hover:bg-cream-200']}>
                 <span class:list={['grid h-9 w-9 shrink-0 place-items-center rounded-full', i === 0 ? 'bg-ochre-300 text-pine-950' : 'bg-pine-900 text-cream-50']}><Icon name={l.icon} size={17} /></span>
-                <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">{l.label}</span>
-                <Icon name="arrow" size={16} class="shrink-0 opacity-50 transition group-hover:translate-x-0.5 group-hover:opacity-100" /></a></li>
+                {'html' in l ? <span class="min-w-0 flex-1 text-[0.9375rem]" set:html={l.html} /> : <span class="min-w-0 flex-1">{l.label}</span>}
+                <Icon name="arrow" size={16} class="hidden shrink-0 opacity-50 transition group-hover:translate-x-0.5 group-hover:opacity-100 sm:block" /></a></li>
             ))}
           </ul>
         </div>

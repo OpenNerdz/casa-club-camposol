@@ -1,4 +1,5 @@
 import { ui, type Lang, type UIKey } from './ui';
+export type { Lang } from './ui';
 
 export const defaultLang: Lang = 'en';
 export const langs: Lang[] = ['en', 'es'];
@@ -31,6 +32,8 @@ export function localePath(lang: Lang, path: string): string {
 export function switchLang(url: URL, to: Lang): string {
   const from = getLangFromUrl(url);
   let p = stripBase(url.pathname);
+  // The 404 page has no Spanish twin: send visitors to the other language's homepage instead.
+  if (/^\/404(\.html|\/)?$/.test(p)) return localePath(to, '/');
   if (from !== defaultLang) p = p.replace(new RegExp(`^/${from}`), '') || '/';
   return localePath(to, p);
 }

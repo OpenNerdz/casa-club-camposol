@@ -26,7 +26,7 @@ export function businessJsonLd(lang: Lang) {
       addressCountry: site.address.country,
     },
     geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
-    openingHours: site.openingHours,
+    ...(site.openingHours.length ? { openingHours: site.openingHours } : {}),
     sameAs: [site.social.facebook, site.social.facebookGolf].filter(Boolean),
     containedInPlace: { '@type': 'GolfCourse', '@id': `${SITE_URL}/#golf` },
   };

@@ -139,4 +139,6 @@ dialog[open] { animation: dialog-in .25s var(--ease-out-soft); }
 
 /* Leaflet */
 .leaflet-container { font: inherit; background: var(--color-cream-200); }
+/* Map credits stay small (the inherited body size made them wrap and spill out on phones) */
+.leaflet-container .leaflet-control-attribution { font-size: 11px; line-height: 1.5; }
 .leaflet-popup-content-wrapper { border-radius: 14px; }

@@ -1,6 +1,7 @@
 ---
-// Enquiry form. Posts JSON to site.formEndpoint, or opens the visitor's email app when no
-// endpoint is configured. ?type=event|golf|table|other preselects the enquiry type.
+// Enquiry form. Posts JSON to site.formEndpoint (Formspree, or Web3Forms with site.formAccessKey),
+// or opens the visitor's email app when no endpoint is configured.
+// ?type=event|golf|table|other preselects the enquiry type.
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 import { useTranslations, type Lang } from '../i18n/utils';
@@ -16,6 +17,7 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
   method="post" action={site.formEndpoint || `mailto:${site.email}`} data-endpoint={site.formEndpoint} data-mailto={site.email}
   data-messages={JSON.stringify(messages)} novalidate>
   <input type="hidden" name="subject" value={`Web enquiry · ${site.name}`} />
+  {site.formAccessKey && <input type="hidden" name="access_key" value={site.formAccessKey} />}
   <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
   <div class="grid gap-5 sm:grid-cols-2">
     <label class={label}>{t('form.name')}<input name="name" required autocomplete="name" class="field" /></label>
@@ -64,7 +66,7 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
     const endpoint = form.dataset.endpoint;
     if (!endpoint) {
       // No form service configured yet: hand over to the visitor's email app.
-      const body = Object.entries(data).filter(([k, v]) => v && !['botcheck', 'subject', 'consent'].includes(k)).map(([k, v]) => `${k}: ${v}`).join('\n');
+      const body = Object.entries(data).filter(([k, v]) => v && !['botcheck', 'subject', 'consent', 'access_key'].includes(k)).map(([k, v]) => `${k}: ${v}`).join('\n');
       location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(String(data.subject))}&body=${encodeURIComponent(body)}`;
       status.textContent = msg.okMail;
       return;

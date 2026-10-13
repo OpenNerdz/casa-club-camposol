@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 const c = galleryPage[lang];
 const filters = Object.entries(c.filters) as [keyof typeof c.filters, string][];
 ---
-<Base title={c.meta.title} description={c.meta.description} image={img.terrace}>
+<Base title={c.meta.title} description={c.meta.description} image={img.og}>
   <PageHero eyebrow={c.eyebrow} title={c.title} sub={c.intro} />
   <section class="container-x pb-16 pt-10 sm:pb-24 sm:pt-12">
     <div class="flex flex-wrap gap-2" role="group" aria-label={c.filterLabel} id="gallery-filters">

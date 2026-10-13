@@ -12,8 +12,13 @@ enc() { # enc <src> <dst> <ffmpeg -vf filter>
 enc golf-course-lake-panorama-01.jpg hero.webp            "crop=iw:iw*9/16,scale=2000:-1"
 enc golf-course-lake-tee-01.jpg      hero-golf.webp       "crop=iw:iw*9/16,scale=2000:-1"
 enc golf-entrance-sign-palms-01.jpg  exterior.webp        "crop=iw:iw*9/16,scale=2000:-1"
-# Open Graph image (JPEG for social crawlers)
-ffmpeg -v error -y -i "$RAW/golf-course-lake-panorama-01.jpg" -vf "crop=iw:iw*630/1200,scale=1200:630" -q:v 4 -update 1 "$OUT/og-default.jpg"
+# Open Graph images (JPEG: not every social crawler reads WebP)
+og() { ffmpeg -v error -y -i "$RAW/$1" -vf "$3" -q:v 4 -update 1 "$OUT/$2"; }
+og golf-course-lake-panorama-01.jpg   og-default.jpg    "crop=iw:iw*630/1200,scale=1200:630"
+og golf-green-flag-mountains-01.jpg   og-golf.jpg       "crop=iw:iw*630/1200:0:700,scale=1200:630"
+og golf-entrance-sign-palms-01.jpg    og-contact.jpg    "crop=iw:iw*630/1200,scale=1200:630"
+og terrace-tables-colonnade-01.jpg    og-restaurant.jpg "crop=iw:iw*630/1200:0:560"
+og live-music-gazebo-day-01.jpg       og-events.jpg     "crop=iw:iw*630/1200:0:420"
 # Section images
 enc golf-green-flag-mountains-01.jpg course.webp          "crop=iw:iw*10/16:0:520,scale=1600:-1"
 enc golf-green-palms-mountains-01.jpg course-2.webp       "crop=720:720:0:120"
@@ -27,7 +32,7 @@ for pair in \
   "restaurant-interior-crowd-01.jpg:bar.webp" \
   "restaurant-diners-01.jpg:food.webp" \
   "live-music-terrace-singer-01.jpg:events.webp" \
-  "live-music-gazebo-night-01.jpg:hero-events.webp"; do
+  "live-music-gazebo-day-01.jpg:hero-events.webp"; do
   enc "${pair%%:*}" "${pair##*:}" "scale=iw:ih"
 done
 # Gallery (max 1400px on the long side)

@@ -15,22 +15,26 @@ const { lang } = Astro.props;
 const c = events[lang];
 const t = useTranslations(lang);
 const locale = lang === 'es' ? 'es-ES' : 'en-GB';
+// One-off events carry a `date` (and maybe a `time`); recurring ones a free-text `when`.
+type Highlight = { date?: string; time?: string; when?: string; title: string; text: string; tag: string };
+const items: readonly Highlight[] = c.upcoming.items;
 // Past one-off events are dropped at build time, and in the browser by Base.astro's script.
 const buildDay = new Date().toISOString().slice(0, 10);
-const highlights = c.upcoming.items
-  .filter((e) => !('date' in e) || e.date >= buildDay)
+const highlights = items
+  .filter((e) => !e.date || e.date >= buildDay)
   .map((e) => {
-    if (!('date' in e)) return { ...e, until: undefined, big: undefined, small: e.when, weekday: undefined };
+    if (!e.date) return { ...e, until: undefined, big: undefined, small: e.when, weekday: undefined };
     const d = new Date(`${e.date}T12:00:00`);
+    const weekday = d.toLocaleDateString(locale, { weekday: 'long' });
     return {
       ...e, until: e.date,
       big: d.getDate(),
       small: d.toLocaleDateString(locale, { month: 'short', year: 'numeric' }),
-      weekday: d.toLocaleDateString(locale, { weekday: 'long' }),
+      weekday: e.time ? `${weekday} ${e.time}` : weekday,
     };
   });
 ---
-<Base title={c.meta.title} description={c.meta.description} image={img.events}>
+<Base title={c.meta.title} description={c.meta.description} image={img.ogEvents}>
   <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.heroEvents} alt={c.alts.hero}
     cta1={{ href: `${localePath(lang, '/contact/')}?type=table#enquiry`, label: t('cta.book'), book: true }}
     cta2={{ href: site.social.facebook, label: c.follow.cta, icon: 'facebook', external: true }} />
@@ -84,7 +88,7 @@ const highlights = c.upcoming.items
         <h2 class="h-section mt-4">{c.community.title}</h2>
         <p class="lede mt-5 max-w-2xl">{c.community.text}</p>
       </div>
-      <div class="flex flex-col gap-3 lg:col-span-4 lg:items-end">
+      <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-4 lg:flex-col lg:items-stretch">
         <a href={`${localePath(lang, '/contact/')}?type=event#enquiry`} class="btn-light">{c.community.cta} <Icon name="arrow" size={16} /></a>
         <a href={site.social.facebook} target="_blank" rel="noopener" class="btn-glass"><Icon name="facebook" size={16} /> {c.follow.cta}</a>
       </div>

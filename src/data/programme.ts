@@ -16,16 +16,16 @@ const quiz: ProgrammeItem = { title: { en: 'Quiz night', es: 'Noche de quiz' }, 
 
 export const programme: ProgrammeDay[] = [
   { day: 1, items: [quiz, menuDelDia] },
-  { day: 2, items: [{ title: { en: 'Funky Orange daytime disco', es: 'Funky Orange, disco de tarde' }, note: { en: 'alternate weeks', es: 'semanas alternas' } }, menuDelDia] },
+  { day: 2, items: [{ title: { en: 'Funky Orange daytime disco', es: 'Funky Orange, disco de tarde' }, note: { en: 'selected weeks', es: 'algunas semanas' } }, menuDelDia] },
   { day: 3, items: [menuDelDia] },
   { day: 4, items: [quiz, menuDelDia] },
   { day: 5, items: [
-    { title: { en: 'Fry Day fish & chips', es: 'Fry Day: fish & chips' } },
+    { title: { en: 'Fish & chips', es: 'Fish & chips' } },
     { title: { en: 'Bingo', es: 'Bingo' }, time: '15:30' },
     { title: { en: 'Live music', es: 'Música en vivo' }, time: '16:30–18:00' },
     menuDelDia,
   ] },
-  { day: 6, items: [{ title: { en: 'Tribute nights & karaoke', es: 'Tributos y karaoke' } }] },
+  { day: 6, items: [{ title: { en: 'Tribute & live music nights', es: 'Tributos y música en vivo' }, note: { en: 'selected Saturdays', es: 'algunos sábados' } }] },
   { day: 7, items: [{ title: { en: 'Sunday carvery', es: 'Carvery dominical' }, note: { en: 'book ahead', es: 'reserva antes' } }] },
 ];
 

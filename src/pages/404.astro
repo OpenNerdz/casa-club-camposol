@@ -1,0 +1,26 @@
+---
+// Served by Vercel, GitHub Pages and most static hosts for any unknown URL.
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { localePath } from '../i18n/utils';
+const links = [
+  { href: localePath('en', '/restaurant/'), label: 'Restaurant & Bar' },
+  { href: localePath('en', '/golf/'), label: 'Golf' },
+  { href: localePath('en', '/events/'), label: 'What’s On' },
+  { href: localePath('en', '/contact/'), label: 'Contact' },
+];
+---
+<Base title="Page not found" description="Sorry, that page could not be found." noindex>
+  <PageHero eyebrow="404" title="Sorry, we can’t find that page"
+    sub="It may have moved, or the link may be mistyped. These will get you back on course."
+    cta1={{ href: localePath('en', '/'), label: 'Back to the homepage' }}
+    cta2={{ href: localePath('es', '/'), label: 'Ir a la página en español' }} />
+  <section class="container-x pb-20 pt-12 sm:pb-28">
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {links.map((l) => (
+        <li><a href={l.href} class="group flex items-center justify-between rounded-2xl border border-ink-950/10 bg-white px-5 py-4 font-semibold text-pine-950 transition-colors hover:border-ink-950/30">{l.label} <Icon name="arrow" size={16} class="opacity-50 transition group-hover:translate-x-0.5 group-hover:opacity-100" /></a></li>
+      ))}
+    </ul>
+  </section>
+</Base>

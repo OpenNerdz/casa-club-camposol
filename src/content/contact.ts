@@ -9,10 +9,10 @@ export const contact = {
     hoursTitle: 'Opening hours',
     formTitle: 'Send an enquiry', formText: 'Tell us what you have in mind and we will reply by email or phone, usually the same day.',
     directions: { title: 'Getting here', steps: [
-      'Camposol is on the RM-3 Mazarrón–Alhama road, about 10 minutes north of Mazarrón town and 15 minutes from the Puerto de Mazarrón beaches.',
-      'Follow signs for Camposol and then Sector C. The clubhouse and golf course are at the end of Calle Aljibe, beside the crazy-golf and driving range.',
-      'Free parking next to the clubhouse. Step-free access to the terrace and bar.',
-      'From Corvera (Murcia) airport allow about 30 minutes; from Alicante airport about 80 minutes via the AP-7 and RM-3.',
+      'Camposol is on the RM-3 Totana–Mazarrón road, about 10 minutes north of Mazarrón town and 15 minutes from the Puerto de Mazarrón beaches. Leave the RM-3 at the Camposol exit.',
+      'Follow the signs for Camposol and then Sector C. Casa Club is the clubhouse of Camposol golf course, on Calle Aljibe.',
+      'Free parking at the clubhouse.',
+      'From Murcia airport (Corvera) allow about 30 minutes; from Alicante airport about 80 minutes.',
     ] },
   },
   es: {
@@ -24,10 +24,10 @@ export const contact = {
     hoursTitle: 'Horario',
     formTitle: 'Envíanos una consulta', formText: 'Cuéntanos qué tienes en mente y te responderemos por correo o teléfono, normalmente el mismo día.',
     directions: { title: 'Cómo llegar', steps: [
-      'Camposol está en la carretera RM-3 Mazarrón–Alhama, a unos 10 minutos al norte de Mazarrón y a 15 minutos de las playas de Puerto de Mazarrón.',
-      'Sigue las indicaciones a Camposol y después a Sector C. La casa club y el campo de golf están al final de la Calle Aljibe, junto al minigolf y el campo de prácticas.',
-      'Aparcamiento gratuito junto a la casa club. Acceso sin escalones a la terraza y al bar.',
-      'Desde el aeropuerto de Corvera (Murcia) calcula unos 30 minutos; desde el aeropuerto de Alicante, unos 80 minutos por la AP-7 y la RM-3.',
+      'Camposol está en la autovía RM-3 Totana–Mazarrón, a unos 10 minutos al norte de Mazarrón y a 15 minutos de las playas de Puerto de Mazarrón. Toma la salida de Camposol.',
+      'Sigue las indicaciones a Camposol y después a Sector C. Casa Club es la casa club del campo de golf de Camposol, en la Calle Aljibe.',
+      'Aparcamiento gratuito en la casa club.',
+      'Desde el aeropuerto de Murcia (Corvera) calcula unos 30 minutos; desde el aeropuerto de Alicante, unos 80 minutos.',
     ] },
   },
 } as const;

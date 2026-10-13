@@ -21,13 +21,19 @@ export const site = {
   // Golf office / tee times
   golfPhoneDisplay: '+34 968 978 886', // CONFIRM
   golfPhoneHref: 'tel:+34968978886',
+  // The golf club's mobile, listed on its own website and social pages. CONFIRM.
+  golfMobileDisplay: '+34 624 41 38 01',
+  golfMobileHref: 'tel:+34624413801',
   email: 'eventos@casaclubcamposolgolf.com',
   golfEmail: 'info@camposolclubdegolf.com', // CONFIRM (old domain), not shown on the site yet
   teeTimeUrl: 'https://eu.golfmanager.com/camposol',
 
-  /** Optional form service endpoint (e.g. https://api.web3forms.com/submit or a Formspree URL).
+  /** Optional form service endpoint: a Formspree URL (https://formspree.io/f/…) or
+   *  https://api.web3forms.com/submit together with formAccessKey below.
    *  Leave empty to fall back to the visitor's email app. */
   formEndpoint: '',
+  /** Web3Forms only: the public access key from web3forms.com (sent with each enquiry). */
+  formAccessKey: '',
 
   address: {
     lines: ['Calle Aljibe s/n', 'Urb. Camposol, Sector C', '30875 Mazarrón, Murcia', 'España'],
@@ -55,32 +61,33 @@ export const site = {
     en: [
       { label: 'Bar & terrace', value: 'Daily from 08:00' },
       { label: 'Kitchen', value: '08:00 – 16:00' },
-      { label: 'Event nights', value: 'Open late' },
+      { label: 'Quiz & event nights', value: 'Open late' },
       { label: 'Golf office', value: 'Daily 08:00 – 16:00' },
     ],
     es: [
       { label: 'Bar y terraza', value: 'Todos los días desde las 8:00' },
       { label: 'Cocina', value: '8:00 – 16:00' },
-      { label: 'Noches de eventos', value: 'Abierto hasta tarde' },
+      { label: 'Noches de quiz y eventos', value: 'Abierto hasta tarde' },
       { label: 'Oficina de golf', value: 'Todos los días 8:00 – 16:00' },
     ],
   },
 
-  // Schema.org openingHoursSpecification (machine readable). CONFIRM.
-  openingHours: ['Mo-Su 08:00-16:00'],
+  // Schema.org opening hours for search engines, e.g. ['Mo-Su 08:00-23:00']. Left empty until the
+  // real closing times are confirmed: a wrong value here would show the bar as closed on quiz nights.
+  openingHours: [] as string[],
 
   golf: {
     holes: 18,
     par: 72,
     designer: 'Manuel Quesada Mendiola',
-    opened: 2002,
+    // Lengths, course and slope ratings as listed on 1golf.eu (matches AllSquare and Golfify). CONFIRM.
     tees: [
-      { name: 'White', es: 'Blancas', metres: 5895, par: 72, cr: 71.9, slope: 136 },
-      { name: 'Yellow', es: 'Amarillas', metres: 5674, par: 72 },
-      { name: 'Blue', es: 'Azules', metres: 5470, par: 73 },
-      { name: 'Red', es: 'Rojas', metres: 5270, par: 73 },
+      { name: 'White', es: 'Blancas', metres: 5895, par: 72, cr: 72.0, slope: 129 },
+      { name: 'Yellow', es: 'Amarillas', metres: 5674, par: 72, cr: 70.9, slope: 126 },
+      { name: 'Blue', es: 'Azules', metres: 5484, par: 73, cr: 75.4, slope: 136 },
+      { name: 'Red', es: 'Rojas', metres: 5270, par: 73, cr: 74.1, slope: 134 },
     ],
-    // Indicative prices seen in 2025–26 listings. CONFIRM before publishing.
+    // Indicative prices from 2025–26 listings and reviews (18 holes €35–40). CONFIRM before publishing.
     fees: [
       { key: '18', eur: 40 },
       { key: '9', eur: 25 },

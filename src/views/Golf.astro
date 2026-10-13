@@ -12,16 +12,20 @@ import { localePath, type Lang } from '../i18n/utils';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = golf[lang];
-const fmt = (n: number) => n.toLocaleString(lang === 'es' ? 'es-ES' : 'en-GB');
+const locale = lang === 'es' ? 'es-ES' : 'en-GB';
+const fmt = (n: number) => n.toLocaleString(locale);
+const fmtRating = (n: number) => n.toLocaleString(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+// "€40" in English, "40 €" in Spanish; the currency sign is styled separately.
+const priceParts = (eur: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).formatToParts(eur);
 // Tee-marker colours for the scorecard swatches
 const swatch: Record<string, string> = { White: '#ffffff', Yellow: '#f2c94c', Blue: '#2f6fd6', Red: '#c8102e' };
 const stats = [
   { v: site.golf.holes, l: c.statLabels.holes },
   { v: site.golf.par, l: c.statLabels.par },
-  { v: site.golf.opened, l: c.statLabels.opened },
+  { v: 7, l: c.statLabels.days },
 ];
 ---
-<Base title={c.meta.title} description={c.meta.description} image={img.course}>
+<Base title={c.meta.title} description={c.meta.description} image={img.ogGolf}>
   <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.golfPortrait} alt={c.alts.hero} position="center 35%"
     cta1={{ href: site.teeTimeUrl, label: c.hero.cta1, icon: 'calendar', external: true }}
     cta2={{ href: site.golfPhoneHref, label: c.hero.cta2, icon: 'phone' }} />
@@ -34,7 +38,7 @@ const stats = [
         {stats.map((s) => <div class="min-w-0 rounded-2xl bg-pine-100 p-4 sm:p-5"><dt class="text-[1.75rem] font-extrabold leading-none tracking-[-0.04em] text-pine-900 sm:text-[2.5rem]">{s.v}</dt><dd class="mt-2 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-pine-700 [overflow-wrap:anywhere] sm:text-xs">{s.l}</dd></div>)}
       </dl>
     </div>
-    <div class="reveal min-w-0 self-end lg:col-span-5">
+    <div class="reveal min-w-0 self-center lg:col-span-5">
       <div class="overflow-hidden rounded-[var(--radius-card)] border border-ink-950/8 bg-white shadow-[0_30px_60px_-40px_rgb(23_32_27/.45)]">
         <h3 class="bg-pine-900 px-6 py-4 text-lg text-cream-50">{c.teesTitle}</h3>
         <div class="overflow-x-auto">
@@ -50,8 +54,8 @@ const stats = [
                   </th>
                   <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{fmt(tee.metres)} m</td>
                   <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{tee.par}</td>
-                  <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{'cr' in tee ? tee.cr : '–'}</td>
-                  <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{'slope' in tee ? tee.slope : '–'}</td>
+                  <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{fmtRating(tee.cr)}</td>
+                  <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{tee.slope}</td>
                 </tr>
               ))}
             </tbody>
@@ -79,17 +83,23 @@ const stats = [
     </div>
   </section>
 
-  <!-- Green fees -->
+  <!-- Green fees: a price list beside the booking card -->
   <Section eyebrow={c.fees.eyebrow} title={c.fees.title} intro={c.fees.text}>
-    <div class="mt-12 grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
-      {c.fees.rows.map((r, i) => { const f = site.golf.fees.find((x) => x.key === r.key)!; return (
-        <div class="reveal flex flex-col rounded-[var(--radius-card)] border border-ink-950/8 bg-white p-7" style={`transition-delay:${i * 80}ms`}>
-          <p class="text-sm font-bold uppercase tracking-[0.14em] text-ink-600">{r.label}</p>
-          <p class="mt-auto pt-10 text-sm text-ink-600">{c.fees.from}</p>
-          <p class="text-5xl font-extrabold tracking-[-0.04em] text-pine-950">{f.eur}<span class="ml-1 text-2xl text-clay-600">€</span></p>
-        </div>
-      ); })}
-      <div class="reveal flex flex-col rounded-[var(--radius-card)] bg-pine-900 p-7 text-cream-50 sm:col-span-3 lg:col-span-1">
+    <div class="mt-12 grid gap-4 lg:grid-cols-12">
+      <div class="reveal rounded-[var(--radius-card)] border border-ink-950/8 bg-white px-7 py-3 sm:px-9 sm:py-4 lg:col-span-8">
+        <dl class="divide-y divide-ink-950/8">
+          {c.fees.rows.map((r) => { const f = site.golf.fees.find((x) => x.key === r.key)!; return (
+            <div class="flex items-center justify-between gap-6 py-5">
+              <dt class="text-lg font-semibold text-pine-950">{r.label}</dt>
+              <dd class="whitespace-nowrap text-4xl font-extrabold tabular-nums tracking-[-0.04em] text-pine-950 sm:text-5xl">
+                {priceParts(f.eur).map((p) => p.type === 'currency' ? <span class="text-[0.55em] text-clay-600">{p.value}</span> : p.value)}
+              </dd>
+            </div>
+          ); })}
+        </dl>
+        <p class="border-t border-ink-950/8 py-5 text-sm text-ink-600">{c.fees.note}</p>
+      </div>
+      <div class="reveal flex flex-col rounded-[var(--radius-card)] bg-pine-900 p-7 text-cream-50 sm:p-9 lg:col-span-4">
         <h3 class="text-xl">{c.booking.title}</h3>
         <p class="mt-2 text-[0.9375rem] text-cream-50/75">{c.booking.text}</p>
         <div class="mt-auto grid gap-2.5 pt-6">
@@ -98,13 +108,12 @@ const stats = [
         </div>
       </div>
     </div>
-    <p class="mt-6 text-sm text-ink-600">{c.fees.note}</p>
   </Section>
 
   <!-- Societies -->
   <section class="section-y bg-cream-100">
     <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-20">
-      <div class="reveal frame aspect-[4/3] bg-cream-200 lg:col-span-6"><img src={img.range} alt={c.alts.range} class="img-cover" loading="lazy" decoding="async" /></div>
+      <div class="reveal frame aspect-[4/3] bg-cream-200 lg:col-span-6"><img src={img.clubhouseBuggies} alt={c.alts.societies} class="img-cover" loading="lazy" decoding="async" /></div>
       <div class="lg:col-span-6">
         <SectionHeading eyebrow={c.societies.eyebrow} title={c.societies.title} intro={c.societies.text} />
         <CheckList items={c.societies.points} class="reveal mt-8" />

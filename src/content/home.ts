@@ -6,7 +6,7 @@ export const home = {
     hero: {
       eyebrow: 'Camposol Club de Golf · Mazarrón',
       title: 'The clubhouse at the heart of Camposol',
-      sub: 'Restaurant, bar and sun terrace overlooking the first tee. Great food, live music and golf in the Murcian sunshine, open to everyone, seven days a week.',
+      sub: 'Restaurant, bar and sun terrace overlooking the golf course. Great food, live music and golf in the Murcian sunshine, open to everyone, seven days a week.',
       cta1: 'Book a table', cta2: 'See what’s on',
       alt: 'Guests at the tables on the Casa Club terrace under the ochre roof on a sunny day',
     },
@@ -17,8 +17,8 @@ export const home = {
     experiences: [
       { href: '/restaurant/', title: 'Restaurant & bar', text: 'Breakfasts, a weekday menú del día, Friday fish & chips and the famous Sunday carvery.', alt: 'Friends sharing dinner in the Casa Club dining room' },
       { href: '/golf/', title: 'Golf', text: '18 holes, par 72, with a driving range, academy and crazy golf.', alt: 'A golfer teeing off beside the lake at Camposol' },
-      { href: '/events/', title: 'What’s on', text: 'Quiz nights, bingo, live music and tribute acts every week.', alt: 'A singer performing on the terrace stage' },
-      { href: '/events/#hire', title: 'Private parties', text: 'Birthdays, society dinners and celebrations.', alt: 'Guests dancing in the function room' },
+      { href: '/events/', title: 'What’s on', text: 'Quiz nights, bingo and live music every week, plus tribute shows.', alt: 'A singer performing on the terrace' },
+      { href: '/events/#hire', title: 'Private parties', text: 'Birthdays, society dinners and celebrations.', alt: 'Guests dancing at a night party on the terrace' },
     ],
     week: {
       eyebrow: 'Every week', title: 'Your week at Casa Club',
@@ -32,7 +32,7 @@ export const home = {
       signatures: [
         { name: 'Breakfast', when: 'From 08:00', desc: 'Full English, tostadas and proper coffee' },
         { name: 'Menú del día', when: 'Mon – Fri', desc: 'Three courses that change daily' },
-        { name: 'Fry Day', when: 'Fridays', desc: 'Fish & chips with all the trimmings' },
+        { name: 'Fish & chips', when: 'Fridays', desc: 'With all the trimmings, then bingo and live music' },
         { name: 'Sunday carvery', when: 'Sundays', desc: 'Roasts carved to order; book ahead' },
       ],
       cta: 'See the restaurant',
@@ -41,16 +41,16 @@ export const home = {
     },
     golf: {
       eyebrow: 'Golf', title: 'Eighteen holes in the Murcian sun',
-      text: 'Designed by Manuel Quesada, Camposol Club de Golf winds through a valley of lakes, olive groves and palms with the Sierra de las Moreras as a backdrop: a friendly test for every handicap, with a tougher back nine for those who want it.',
-      stats: [{ v: '18', l: 'holes' }, { v: '72', l: 'par' }, { v: '5,895 m', l: 'from the white tees' }, { v: '136', l: 'slope rating' }],
+      text: 'Designed by Manuel Quesada, Camposol Club de Golf winds through a valley of lakes, olive groves and palms with the Murcian sierras as a backdrop: an open, friendly front nine and a tighter, hillier back nine for those who want a challenge.',
+      stats: [{ v: '18', l: 'holes' }, { v: '72', l: 'par' }, { v: '5,895 m', l: 'from the white tees' }, { v: '129', l: 'slope rating' }],
       cta: 'Green fees & tee times',
     },
     reviews: {
       eyebrow: 'What people say', title: 'Loved by locals, golfers and visitors',
       items: [
         { quote: 'The new owners are a credit to the course, the club, the crazy golf and the driving range. The meals are excellent and the Sunday carvery is well worth it.', who: 'Google review, 2026' },
-        { quote: 'The clubhouse is top notch: not the usual stuffy location, with cheap drinks and entertainment in the evenings.', who: 'Tripadvisor review, 2025' },
-        { quote: 'An excellent clubhouse providing good food and a great selection of drinks. Much improved over the past year.', who: 'Golfshake review, 2026' },
+        { quote: 'Club house is top notch, not the usual stuffy location, cheap drinks, entertainment in the evenings.', who: 'Tripadvisor review, 2025' },
+        { quote: '…excellent clubhouse providing good food and drinks selection.', who: 'Golfshake review' },
       ],
     },
     functions: {
@@ -58,15 +58,15 @@ export const home = {
       points: ['Private function room', 'Summer terrace with golf-course views', 'Set menus and buffets for groups', 'Live entertainment arranged on request'],
       cta: 'Enquire about an event',
       chip: 'Function room & summer terrace',
-      alt: 'Guests dancing in the function room',
+      alt: 'A live band performing in the function room',
     },
     visit: {
       eyebrow: 'Visit', title: 'Easy to find, hard to leave',
-      text: 'We are in Sector C of Camposol, right beside the first tee. Free parking, step-free access to the terrace, and only ten minutes from Mazarrón.',
+      text: 'We are at Camposol golf course in Sector C of Camposol, with free parking at the clubhouse and only ten minutes from Mazarrón town.',
       distances: [
         { place: 'Mazarrón town', time: '10 min', icon: 'car' },
         { place: 'Puerto de Mazarrón beaches', time: '15 min', icon: 'car' },
-        { place: 'Corvera (Murcia) airport', time: '30 min', icon: 'plane' },
+        { place: 'Murcia airport (Corvera)', time: '30 min', icon: 'plane' },
         { place: 'Alicante airport', time: '80 min', icon: 'plane' },
       ],
       cta: 'All contact details',
@@ -77,7 +77,7 @@ export const home = {
     hero: {
       eyebrow: 'Camposol Club de Golf · Mazarrón',
       title: 'La casa club en el corazón de Camposol',
-      sub: 'Restaurante, bar y terraza al sol con vistas al tee del hoyo 1. Buena comida, música en vivo y golf bajo el sol de Murcia, abierto a todo el mundo los siete días de la semana.',
+      sub: 'Restaurante, bar y terraza al sol con vistas al campo de golf. Buena comida, música en vivo y golf bajo el sol de Murcia, abierto a todo el mundo los siete días de la semana.',
       cta1: 'Reservar mesa', cta2: 'Ver la agenda',
       alt: 'Clientes en las mesas de la terraza de Casa Club bajo el tejado ocre en un día de sol',
     },
@@ -88,8 +88,8 @@ export const home = {
     experiences: [
       { href: '/restaurant/', title: 'Restaurante y bar', text: 'Desayunos, menú del día entre semana, fish & chips los viernes y el famoso carvery del domingo.', alt: 'Amigos cenando en el comedor de Casa Club' },
       { href: '/golf/', title: 'Golf', text: '18 hoyos, par 72, con campo de prácticas, academia y minigolf.', alt: 'Un golfista saliendo junto al lago de Camposol' },
-      { href: '/events/', title: 'Agenda', text: 'Noches de quiz, bingo, música en vivo y tributos cada semana.', alt: 'Un cantante actuando en el escenario de la terraza' },
-      { href: '/events/#hire', title: 'Fiestas privadas', text: 'Cumpleaños, cenas de sociedades y celebraciones.', alt: 'Clientes bailando en el salón de eventos' },
+      { href: '/events/', title: 'Agenda', text: 'Noches de quiz, bingo y música en vivo cada semana, además de tributos.', alt: 'Un cantante actuando en la terraza' },
+      { href: '/events/#hire', title: 'Fiestas privadas', text: 'Cumpleaños, cenas de sociedades y celebraciones.', alt: 'Clientes bailando en una fiesta nocturna en la terraza' },
     ],
     week: {
       eyebrow: 'Cada semana', title: 'Tu semana en Casa Club',
@@ -103,7 +103,7 @@ export const home = {
       signatures: [
         { name: 'Desayunos', when: 'Desde las 8:00', desc: 'Desayuno inglés, tostadas y buen café' },
         { name: 'Menú del día', when: 'Lun – Vie', desc: 'Tres platos que cambian cada día' },
-        { name: 'Fry Day', when: 'Viernes', desc: 'Fish & chips con todas sus guarniciones' },
+        { name: 'Fish & chips', when: 'Viernes', desc: 'Con sus guarniciones, y después bingo y música' },
         { name: 'Carvery dominical', when: 'Domingos', desc: 'Asados cortados al momento; reserva' },
       ],
       cta: 'Ver el restaurante',
@@ -112,16 +112,16 @@ export const home = {
     },
     golf: {
       eyebrow: 'Golf', title: 'Dieciocho hoyos bajo el sol de Murcia',
-      text: 'Diseñado por Manuel Quesada, el Camposol Club de Golf serpentea por un valle de lagos, olivos y palmeras con la Sierra de las Moreras de fondo: un reto amable para cualquier hándicap, con unos segundos nueve más exigentes para quien los busque.',
-      stats: [{ v: '18', l: 'hoyos' }, { v: '72', l: 'par' }, { v: '5.895 m', l: 'desde barras blancas' }, { v: '136', l: 'valor slope' }],
+      text: 'Diseñado por Manuel Quesada, el Camposol Club de Golf serpentea por un valle de lagos, olivos y palmeras con las sierras murcianas de fondo: unos primeros nueve abiertos y amables, y unos segundos nueve más estrechos y ondulados para quien busque un reto.',
+      stats: [{ v: '18', l: 'hoyos' }, { v: '72', l: 'par' }, { v: '5.895 m', l: 'desde barras blancas' }, { v: '129', l: 'valor slope' }],
       cta: 'Green fees y salidas',
     },
     reviews: {
       eyebrow: 'Opiniones', title: 'Vecinos, golfistas y visitantes repiten',
       items: [
-        { quote: 'Los nuevos propietarios son un orgullo para el campo, el club, el minigolf y el campo de prácticas. La comida es excelente y el carvery del domingo merece mucho la pena.', who: 'Reseña de Google, 2026' },
-        { quote: 'La casa club es de primera: nada de ambiente estirado, bebidas baratas y entretenimiento por las tardes.', who: 'Reseña de Tripadvisor, 2025' },
-        { quote: 'Una casa club excelente con buena comida y gran selección de bebidas. Ha mejorado mucho en el último año.', who: 'Reseña de Golfshake, 2026' },
+        { quote: 'Los nuevos propietarios son un orgullo para el campo, el club, el minigolf y el campo de prácticas. La comida es excelente y el carvery del domingo merece mucho la pena.', who: 'Reseña de Google, 2026 (traducida)' },
+        { quote: 'La casa club es de primera, nada del típico ambiente estirado, bebidas baratas, entretenimiento por las noches.', who: 'Reseña de Tripadvisor, 2025 (traducida)' },
+        { quote: '…una casa club excelente, con buena comida y selección de bebidas.', who: 'Reseña de Golfshake (traducida)' },
       ],
     },
     functions: {
@@ -129,15 +129,15 @@ export const home = {
       points: ['Salón privado para eventos', 'Terraza de verano con vistas al campo', 'Menús cerrados y bufés para grupos', 'Animación y música en vivo a medida'],
       cta: 'Consultar para un evento',
       chip: 'Salón privado y terraza de verano',
-      alt: 'Clientes bailando en el salón de eventos',
+      alt: 'Un grupo actuando en directo en el salón de eventos',
     },
     visit: {
       eyebrow: 'Visítanos', title: 'Fácil de encontrar, difícil de dejar',
-      text: 'Estamos en el Sector C de Camposol, junto al tee del hoyo 1. Aparcamiento gratuito, acceso sin escalones a la terraza y a solo diez minutos de Mazarrón.',
+      text: 'Estamos en el campo de golf de Camposol, en el Sector C, con aparcamiento gratuito junto a la casa club y a solo diez minutos de Mazarrón.',
       distances: [
         { place: 'Mazarrón', time: '10 min', icon: 'car' },
         { place: 'Playas de Puerto de Mazarrón', time: '15 min', icon: 'car' },
-        { place: 'Aeropuerto de Corvera (Murcia)', time: '30 min', icon: 'plane' },
+        { place: 'Aeropuerto de Murcia (Corvera)', time: '30 min', icon: 'plane' },
         { place: 'Aeropuerto de Alicante', time: '80 min', icon: 'plane' },
       ],
       cta: 'Todos los datos de contacto',

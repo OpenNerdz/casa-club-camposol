@@ -15,6 +15,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       i18n: { defaultLocale: 'en', locales: { en: 'en-GB', es: 'es-ES' } },
+      // The legal pages are noindex, so they stay out of the sitemap too.
+      filter: (page) => !/\/(legal|privacy)\/$/.test(page),
     }),
   ],
   i18n: {

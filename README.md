@@ -16,12 +16,13 @@ structured data (schema.org Restaurant + GolfCourse), sitemap and hreflang tags.
 | English | Spanish | Content |
 | --- | --- | --- |
 | `/` | `/es/` | Hero with today's line-up, weekly programme, restaurant, golf, reviews, private hire, map |
-| `/restaurant/` | `/es/restaurant/` | Kitchen, a day at the clubhouse, menu highlights, booking & hours |
+| `/restaurant/` | `/es/restaurant/` | Kitchen, a day at the clubhouse, menus & specials, booking & hours |
 | `/golf/` | `/es/golf/` | Course, tees scorecard, facilities, green fees, booking, societies |
 | `/events/` | `/es/events/` | Weekly programme, dated highlights, private hire, community |
 | `/gallery/` | `/es/gallery/` | Filterable photo gallery with lightbox |
 | `/contact/` | `/es/contact/` | Contact cards, map, hours, directions, enquiry form |
-| `/legal/`, `/privacy/` | `/es/legal/`, `/es/privacy/` | Aviso legal, privacy & cookies |
+| `/legal/`, `/privacy/` | `/es/legal/`, `/es/privacy/` | Aviso legal, privacy & cookies (noindex, kept out of the sitemap) |
+| `/404.html` | | Page-not-found page, served automatically by Vercel and GitHub Pages |
 
 ## Editing content (no coding needed beyond text)
 
@@ -30,12 +31,14 @@ structured data (schema.org Restaurant + GolfCourse), sitemap and hreflang tags.
 - **Weekly programme** (quiz nights, Fry Day, carvery…): `src/data/programme.ts`. It feeds the home and
   What's On timetables and the "Today at Casa Club" card, which picks today's row in Spanish time.
 - **One-off highlights** (tribute nights, Christmas lunch): `src/content/events.ts`. Give each a `date:
-  'YYYY-MM-DD'`; it disappears from the page the day after, even before the next rebuild.
+  'YYYY-MM-DD'` and, if known, a `time: '20:00'`; it disappears from the page the day after, even before the
+  next rebuild.
 - **Page copy** in both languages: `src/content/*.ts` (`home`, `restaurant`, `golf`, `events`, `gallery`,
   `contact`, `legal`).
 - **Navigation / button / form / dialog labels**: `src/i18n/ui.ts`.
 - **Photos**: drop originals in `source/photos/`, then edit the mapping in `scripts/images.sh` and run
-  `npm run images` (needs ffmpeg; also rebuilds the 600 px gallery thumbnails). The gallery list with
+  `npm run images` (needs ffmpeg; also rebuilds the 600 px gallery thumbnails and the JPEG social-share
+  images `og-*.jpg`). The gallery list with
   captions lives in `src/data/images.ts`; categories for the filter come from the file names.
 - **Colours & fonts**: `src/styles/global.css` (`@theme` block). Logo mark: `public/images/logo-mark.svg`.
 
@@ -53,9 +56,11 @@ call, or enquiry form) and `MobileBar` (call / WhatsApp / directions on phones).
 ## Contact form
 
 The form posts JSON to `site.formEndpoint`. Leave it empty and the form opens the visitor's email app
-instead. Links can preselect the enquiry type with `?type=table|event|golf|other`. To receive enquiries by email without a server, create a free endpoint at
-[Web3Forms](https://web3forms.com) or [Formspree](https://formspree.io) and paste the URL into
-`src/data/site.ts`. Spam is filtered by a honeypot field.
+instead. Links can preselect the enquiry type with `?type=table|event|golf|other`. To receive enquiries by
+email without a server, either create a free form at [Formspree](https://formspree.io) and paste its URL
+(`https://formspree.io/f/…`) into `formEndpoint`, or use [Web3Forms](https://web3forms.com): set
+`formEndpoint` to `https://api.web3forms.com/submit` and paste your access key into `formAccessKey`, both in
+`src/data/site.ts`. Spam is filtered by a honeypot field (`botcheck`, which Web3Forms also understands).
 
 ## Develop & build
 
@@ -63,6 +68,7 @@ instead. Links can preselect the enquiry type with `?type=table|event|golf|other
 npm install
 npm run dev        # http://localhost:4321
 npm run build      # static site in dist/
+npm run check      # type-check the whole project
 npm run preview    # serve dist/ locally
 npm run build:preview   # dist-preview/ with relative links (for sub-path hosting / review uploads)
 ```

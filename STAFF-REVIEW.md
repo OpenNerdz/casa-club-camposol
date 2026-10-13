@@ -1,8 +1,8 @@
 # Staff review checklist — Casa Club Camposol website
 
 This site was built from public information (listings, Facebook posts, press, company registry) and the
-venue's own published photos. On 13 Oct 2026 every fact was re-checked against public sources; anything that
-could not be backed up was corrected or removed (see "Changed after the fact-check" below). Nothing here has
+venue's own published photos. On 13 Oct 2026 every fact was re-checked twice against public sources; anything
+that could not be backed up was corrected or removed (see "Changed after the fact-check" below). Nothing here has
 been confirmed by the business yet. Please go through the list, correct anything that is wrong in
 `src/data/site.ts`, `src/data/programme.ts` or `src/content/*.ts`, and tick the box.
 
@@ -70,16 +70,20 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
       Please give the real hours, including summer and winter if they differ.
 
 ### Weekly programme (home + events pages, `src/data/programme.ts`)
-- [ ] Quiz nights Monday and Thursday 19:30: confirmed (Euro Weekly News, Aug 2026; camposolhub). The What's On
-      page names the quizmasters: Carl Thomas (Mondays, since 2009) and Paul Pryce (Thursdays).
-- [ ] Funky Orange daytime disco: confirmed on Tuesdays (2024). It is shown as "selected weeks"; say which.
+- [ ] Quiz nights Monday and Thursday 19:30: confirmed (Euro Weekly News, 23 and 31 Aug 2026; camposolhub). The
+      Monday quiz has run since 2009 (founded by a member called Brian) and is hosted by Carl Thomas; Paul Pryce
+      hosts Thursdays. Both are free to enter with no sign-up (EWN). The site says so.
+- [ ] Tuesday: the "Funky Orange" daytime disco was removed. Its only source is a Sept 2024 listing and nothing
+      from 2025–26 mentions it. Add it back in `programme.ts` (day 2) if it still runs, with the weeks it is on.
+- [ ] Midweek guest acts (e.g. Conecta2 on Wed 30 Sep 2026, VJK on Thu 1 Oct 2026, 14:00–17:00, per camposolhub)
+      are not listed individually: the site says guest acts are announced on Facebook each week.
 - [ ] Friday: fish & chips, bingo 15:30, live music 16:30–18:00. Confirmed (camposolhub, Oct 2026). Renamed
       from "Fry Day", which is another Camposol bar's branding.
 - [ ] Saturday is now "Tribute & live music nights, selected Saturdays" (matches the Halloween, 14 Nov and
       19 Dec shows). Karaoke was removed because no source mentions it.
 - [ ] Menú del día on weekdays: a choice of starters and mains with dessert or coffee (Camposol Today, Sept
       2025). €10 in a March 2026 review; the price is not shown on the site.
-- [ ] Sunday carvery: confirmed. "Book ahead" note kept.
+- [ ] Sunday carvery: confirmed. "Book ahead" is advice, not a sourced rule.
 
 ### Coming up (events page, `src/content/events.ts`)
 - [ ] From your Facebook cover: **The Jersey Boys Experience** Halloween special (the poster gives no date, so the
@@ -91,8 +95,13 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
       removed); kids' talent show confirmed; Camposol Golf Association plays a nine-hole "Monday Mayhem".
 
 ### Restaurant
-- [ ] Breakfast from 08:00 (full English, tostadas), weekday menú del día, Friday fish & chips, Sunday carvery,
-      private function room, large terrace. Allergy note kept (EU rules require allergen information on request).
+- [ ] **Breakfast**: no public source confirms breakfast or the 08:00 opening under the new management (the
+      "8am till late" line comes from the old club website). The site says "from 08:00" and "full English,
+      tostadas and proper coffee" in several places (home, restaurant, golf facilities, the Today card): please
+      confirm or correct.
+- [ ] Weekday menú del día (Camposol Today, Sept 2025: three starters, a range of mains, dessert or coffee),
+      Friday fish & chips, Sunday carvery, large terrace: confirmed. Private function room: on your entrance sign.
+      Allergy note kept (EU rules require allergen information on request).
 
 ### Golf
 - [ ] 18 holes, par 72, designed by Manuel Quesada Mendiola, originally opened as Sensol Golf. The opening year
@@ -100,14 +109,17 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
 - [ ] Tees (1golf, AllSquare and Golfify agree): White 5,895 m, CR 72.0, slope 129; Yellow 5,674 m, CR 70.9,
       slope 126; Blue 5,484 m, par 73, CR 75.4, slope 136; Red 5,270 m, par 73, CR 74.1, slope 134. GolfPass
       gives slightly different figures (White 71.9 / 136).
-- [ ] Green fees shown as "from" prices: 18 holes from €35 (Golfshake walk-on rate, Jan 2026), 9 holes from €22
-      (1golf), buggy from €20. Other recent reports: €40 for 18 and €25 for 9. No official price list is
-      published anywhere, so please give your current rates.
+- [ ] Green fees shown as "from" prices: 18 holes from €35 (Golfshake Jan 2026, Leadingcourses 2026, a June 2025
+      Tripadvisor review), 9 holes from €22 (1golf). Other reports: €40 for 18 (1golf) and €25 for 9. The buggy
+      price was removed because reports conflict (€10 paid in June 2025 vs "from €20" on golfinspain); the fees
+      note now just says buggies, trolleys and clubs can be hired. No official price list is published anywhere,
+      so please give your current rates (and the buggy rate to add back as a third row in `site.ts`/`golf.ts`).
 - [ ] Rules shown: handicap certificate required; advance booking essential; a small insurance supplement for
       players without a Spanish golf licence (€3 per Golfshake). The maximum handicap was removed because
       sources disagree (54 on 1golf, 28/36 on GolfInSpain). "Soft spikes only" was removed: no source mentions it.
 - [ ] Course description rewritten from golfer reviews: open, flat front nine; tighter, hillier back nine with
-      ravines; water on four holes; the 7th is a par 4 where long hitters can carry the lake. The previous
+      ravines; water on several holes ("four" was one reviewer's count of the back nine only); the 7th is a par 4
+      (stroke index 1 on one scorecard) where long hitters can carry the lake (1golf). The previous
       "parkland" and "climbs away from the clubhouse" wording was not supported.
 - [ ] Facilities shown: driving range with putting/chipping greens, **18-hole crazy golf** in front of the terrace
       (opened about April 2025, Costa Cálida forum), the academy, buggy hire, pro shop, Casa Club. **Driving
@@ -118,11 +130,13 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
 
 ### Reviews quoted on the home page
 - [ ] Tripadvisor: quoted word for word ("Club house is top notch, not the usual stuffy location, cheap drinks,
-      entertainment in the evenings"), written by Frank B., probably in June 2025.
+      entertainment in the evenings") from the "Camposol Club De Golf" attraction listing. Its date could not be
+      pinned down (2023 or June 2025), so no year is shown.
 - [ ] Golfshake: trimmed to the confirmed words ("…excellent clubhouse providing good food and drinks
       selection"). The "much improved" part could not be confirmed.
-- [ ] The unverifiable Google quote was removed. In its place: a May 2025 Tripadvisor review ("Since the new
-      Spanish owners have taken over… really turned things around. The food is fab."). Add your own favourite
+- [ ] The unverifiable Google quote was removed. In its place: a 2025 Tripadvisor review ("Since the new
+      Spanish owners have taken over… really turned things around. The food is fab."), also from the golf club's
+      attraction listing; it mentions the crazy golf, so it is from after April 2025. Add your own favourite
       reviews in `src/content/home.ts` if you prefer.
 - [ ] The Spanish versions are translations and are labelled "(traducida)".
 
@@ -137,6 +151,14 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
       is the covered terrace at night. The "golfers with a buggy" photo shows electric trolleys. Captions have
       been fixed. The `driving-range-bays` photo is ambiguous (it could be a putting or bowls green), so its
       caption is now neutral and it is no longer used for the driving range.
+
+### Background
+- The previous operator ("The Club House", Mazarron Entertainments SL, since 2013) closed around June 2024;
+  Casa Club Camposol Golf S.L. was formed in Aug/Sep 2024 and Euro Weekly News listed "Casa Club Camposol" events
+  from 12 Sep 2024. The company registries give the registered address as 30870 Mazarrón; the site uses 30875
+  (the Camposol postcode) everywhere.
+- Recent coverage confirms the venue is active: End of Summer Party (23 Sep 2026, Euro Weekly News) and the Women
+  of Camposol fiesta for MABS (26 Sep 2026, singer Georgia Baie).
 
 ## 3. Nice to have later
 - Real menu PDF or priced menu; photos of dishes (none were found online).

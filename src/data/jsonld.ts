@@ -15,6 +15,7 @@ export function businessJsonLd(lang: Lang) {
     telephone: site.phoneDisplay,
     email: site.email,
     image: `${SITE_URL}/images/og-default.jpg`,
+    logo: `${SITE_URL}/images/logo-512.png`,
     servesCuisine: ['Spanish', 'British', 'International'],
     priceRange: '€€',
     address: {

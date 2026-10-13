@@ -31,7 +31,7 @@ export const home = {
       text: 'From a proper breakfast before your round to a long Sunday lunch with the family, the kitchen serves British and Spanish favourites made fresh every day, with friendly service, fair prices and one of the best terrace views in Camposol.',
       signatures: [
         { name: 'Breakfast', when: 'From 08:00', desc: 'Full English, tostadas and proper coffee' },
-        { name: 'Menú del día', when: 'Mon – Fri', desc: 'Three courses that change daily' },
+        { name: 'Menú del día', when: 'Mon – Fri', desc: 'Starter, main and dessert or coffee' },
         { name: 'Fish & chips', when: 'Fridays', desc: 'With all the trimmings, then bingo and live music' },
         { name: 'Sunday carvery', when: 'Sundays', desc: 'Roasts carved to order; book ahead' },
       ],
@@ -102,7 +102,7 @@ export const home = {
       text: 'Desde un buen desayuno antes de tu partida hasta una larga comida de domingo en familia, la cocina prepara cada día clásicos británicos y españoles, con trato cercano, precios justos y una de las mejores terrazas de Camposol.',
       signatures: [
         { name: 'Desayunos', when: 'Desde las 8:00', desc: 'Desayuno inglés, tostadas y buen café' },
-        { name: 'Menú del día', when: 'Lun – Vie', desc: 'Tres platos que cambian cada día' },
+        { name: 'Menú del día', when: 'Lun – Vie', desc: 'Primero, segundo y postre o café' },
         { name: 'Fish & chips', when: 'Viernes', desc: 'Con sus guarniciones, y después bingo y música' },
         { name: 'Carvery dominical', when: 'Domingos', desc: 'Asados cortados al momento; reserva' },
       ],

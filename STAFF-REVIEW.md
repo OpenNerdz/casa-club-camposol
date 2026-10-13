@@ -30,45 +30,56 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
 - [ ] **Opening hours for search engines**: fill `openingHours` in `src/data/site.ts` (for example
       `['Mo-Su 08:00-23:00']`) once you know your real closing times. It was removed because the old value
       (08:00–16:00) would have told Google you are closed on quiz nights.
+- [ ] **Logo**: the site now uses your round badge (green ring, "CASA CLUB" / "CAMPOSOL GOLF", crossed irons),
+      redrawn as a vector from the clubhouse sign and your Facebook cover. If you have the original artwork,
+      replace `public/images/logo-mark.svg` (and `public/favicon.svg`, `public/apple-touch-icon.png`,
+      `public/images/logo-512.png`) with it. The golf club's separate "Camposol Golf · Casa Club"
+      sun-and-flag graphic is not used.
 
 ## 2. Facts to confirm (what public sources say, Oct 2026)
 
 ### Contact
 - [ ] Casa Club bookings / WhatsApp **+34 602 42 01 67**: confirmed (your Facebook page and the clubhouse sign).
       An old line, +34 968 97 88 55, still appears on Tripadvisor and the old club website; ask them to update it.
-- [ ] Golf office: both numbers are now shown on the contact page. Landline **+34 968 978 886** (1golf, GolfPass,
-      Madrid Golf) and mobile **+34 624 41 38 01** (the golf club's own website and social pages). Remove
-      whichever is no longer answered. The old numbers 968 018 268 / 692 656 652 appear nowhere and are not used.
-- [ ] Email **eventos@casaclubcamposolgolf.com**: confirmed (Facebook). No golf email is shown: sources disagree
-      (info@camposolclubdegolf.com, info@casaclubcamposolgolf.com, info@camposolgolfclub.com).
+- [ ] Golf office: **+34 624 41 38 01** is now the main golf number (it is the one on the golf club's own
+      Facebook and Instagram). The landline **+34 968 978 886**, still listed by golf directories, is shown
+      second on the contact page: delete `golfLandline…` in `site.ts` if it is no longer answered. The old
+      numbers 968 018 268 / 692 656 652 are not used.
+- [ ] Email **eventos@casaclubcamposolgolf.com**: confirmed (Facebook, Camposol Hub). Golf email shown:
+      **info@casaclubcamposolgolf.com** (the golf club's Facebook page; its Instagram says info@camposolgolfclub.com).
+- [ ] Golf academy: PGA professional **Jerónimo Janssens Koster**, lessons **+34 604 81 82 05** (the academy's
+      Facebook page). Lesson prices seen on his website in 2025 (30 min €30, 50 min €50) are not shown.
 - [ ] Address: Calle Aljibe s/n, Urb. Camposol Sector C, **30875** Mazarrón. Postcode directories give 30875 for
       Urbanización Camposol; 30870 (used by some golf directories) is Mazarrón town.
 - [ ] Map pin 37.670098, −1.354977: matches the Google and Tripadvisor pins to within a few metres.
 - [ ] Social links: facebook.com/theclubhouse.camposol and facebook.com/CamposolClubDeGolf are confirmed.
-      instagram.com/casaclubcamposol is shown but not indexed by search engines; check it is public. The TikTok
+      instagram.com/casaclubcamposol is shown (a photo was taken from it on 12 Oct 2026) but search engines do
+      not index it; check it is public. The TikTok
       handle noted earlier, `@casa.club.camposo`, looks like a typo and is not shown. The golf club's Instagram is
       @camposol.clubdegolf (not shown).
 - [ ] Online tee booking https://eu.golfmanager.com/camposol: confirmed (linked from the golf Facebook page).
 
 ### Opening hours (footer, contact and restaurant pages)
-- [ ] Shown: bar & terrace daily from 08:00; kitchen 08:00–16:00 (your Google listing); quiz & event nights
-      open late; golf office daily 08:00–16:00. The old club website said "every day 8am till late". The
-      Thursday quiz listing says the kitchen opens from 18:00 on quiz nights. Please give the real hours,
-      including summer and winter if they differ.
+- [ ] Shown: bar & terrace daily from 08:00; kitchen from 08:00; **Thursday quiz: full menu from 18:00** (Euro
+      Weekly News, 23 Aug 2026); event nights open late; golf office daily from 08:00. The 08:00–16:00 hours on
+      Tripadvisor/Google date from the previous operator ("The Club House"), so no closing times are shown.
+      Please give the real hours, including summer and winter if they differ.
 
 ### Weekly programme (home + events pages, `src/data/programme.ts`)
-- [ ] Quiz nights Monday and Thursday 19:30: confirmed (Euro Weekly News, Aug 2026; camposolhub).
+- [ ] Quiz nights Monday and Thursday 19:30: confirmed (Euro Weekly News, Aug 2026; camposolhub). The What's On
+      page names the quizmasters: Carl Thomas (Mondays, since 2009) and Paul Pryce (Thursdays).
 - [ ] Funky Orange daytime disco: confirmed on Tuesdays (2024). It is shown as "selected weeks"; say which.
 - [ ] Friday: fish & chips, bingo 15:30, live music 16:30–18:00. Confirmed (camposolhub, Oct 2026). Renamed
       from "Fry Day", which is another Camposol bar's branding.
 - [ ] Saturday is now "Tribute & live music nights, selected Saturdays" (matches the Halloween, 14 Nov and
       19 Dec shows). Karaoke was removed because no source mentions it.
-- [ ] Menú del día on weekdays (€10 in a March 2026 review; the price is not shown on the site).
+- [ ] Menú del día on weekdays: a choice of starters and mains with dessert or coffee (Camposol Today, Sept
+      2025). €10 in a March 2026 review; the price is not shown on the site.
 - [ ] Sunday carvery: confirmed. "Book ahead" note kept.
 
 ### Coming up (events page, `src/content/events.ts`)
-- [ ] From your Facebook cover: **The Jersey Boys Experience** Halloween special (shown on Sat 31 Oct; check the
-      date), **Commitment Issues** (Sat 14 Nov, €15, bookings by WhatsApp with Venuvo Events on
+- [ ] From your Facebook cover: **The Jersey Boys Experience** Halloween special (the poster gives no date, so the
+      card says "Halloween" and disappears after 31 Oct; set the exact date in `events.ts` if you like), **Commitment Issues** (Sat 14 Nov, €15, bookings by WhatsApp with Venuvo Events on
       +34 604 52 22 87) and **The Troupers Swing Band** (Sat 19 Dec, 20:00, €7).
 - [ ] Christmas Day lunch 25 Dec, 3 courses + cava, €65 pp (camposolhub). This could not be found again; confirm it.
 - [ ] Community: Age Concern and FMA events confirmed; Bereavement Café confirmed for 5 Oct 2026 ("monthly"
@@ -84,17 +95,19 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
 - [ ] Tees (1golf, AllSquare and Golfify agree): White 5,895 m, CR 72.0, slope 129; Yellow 5,674 m, CR 70.9,
       slope 126; Blue 5,484 m, par 73, CR 75.4, slope 136; Red 5,270 m, par 73, CR 74.1, slope 134. GolfPass
       gives slightly different figures (White 71.9 / 136).
-- [ ] Green fees shown as indicative: 18 holes €40, 9 holes €25, buggy €20 (2026 review). 1golf lists 9 holes
-      at €22 and a November 2025 review paid €35 for 18. Confirm current prices.
-- [ ] Rules shown: handicap certificate required (maximum 54, per 1golf); advance booking essential. "Soft
-      spikes only" was removed because no source mentions it.
+- [ ] Green fees shown as "from" prices: 18 holes from €35 (Golfshake walk-on rate, Jan 2026), 9 holes from €22
+      (1golf), buggy from €20. Other recent reports: €40 for 18 and €25 for 9. No official price list is
+      published anywhere, so please give your current rates.
+- [ ] Rules shown: handicap certificate required; advance booking essential; a small insurance supplement for
+      players without a Spanish golf licence (€3 per Golfshake). The maximum handicap was removed because
+      sources disagree (54 on 1golf, 28/36 on GolfInSpain). "Soft spikes only" was removed: no source mentions it.
 - [ ] Course description rewritten from golfer reviews: open, flat front nine; tighter, hillier back nine with
       ravines; water on four holes; the 7th is a par 4 where long hitters can carry the lake. The previous
       "parkland" and "climbs away from the clubhouse" wording was not supported.
-- [ ] Facilities shown: driving range with putting/chipping greens, crazy golf, Camposol Golf Academy with a
-      PGA professional, buggy hire, pro shop, Casa Club. **A January 2026 Golfshake review said the driving
-      range was closed**: confirm it is open. Removed as unconfirmed (add back if true): "recently refurbished",
-      "covered bays", "18-hole" crazy golf, junior sessions, trolley and club hire, changing rooms and lockers.
+- [ ] Facilities shown: driving range with putting/chipping greens, **18-hole crazy golf** in front of the terrace
+      (opened about April 2025, Costa Cálida forum), the academy, buggy hire, pro shop, Casa Club. **Driving
+      range**: refurbished from May 2025; reports since conflict on whether it is open, so please confirm.
+      Removed as unconfirmed (add back if true): "covered bays", trolley and club hire, changing rooms and lockers.
 - [ ] Mountains: the copy now says "the Murcian sierras". The Sierra de las Moreras is near Bolnuevo, about
       8 km south, and is not the backdrop of the course.
 
@@ -121,8 +134,6 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
 
 ## 3. Nice to have later
 - Real menu PDF or priced menu; photos of dishes (none were found online).
-- A proper logo file (SVG/PNG): the site uses a drawn sun-and-flag mark matching your round badge; swap
-  `public/images/logo-mark.svg` for your artwork.
 - Short video of the terrace (the Instagram reel found online belongs to @levantelovesgolf and was not used).
 - Google Business Profile: rename "The Club House" to "Casa Club Camposol", update the phone number and hours,
   and add the website URL.

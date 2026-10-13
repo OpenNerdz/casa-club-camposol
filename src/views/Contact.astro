@@ -25,7 +25,8 @@ const groups = [
   ] },
   { title: c.cards.golf, sub: c.cards.golfSub, links: [
     { href: site.golfPhoneHref, icon: 'phone', label: site.golfPhoneDisplay },
-    { href: site.golfMobileHref, icon: 'phone', label: site.golfMobileDisplay },
+    { href: site.golfLandlineHref, icon: 'phone', label: site.golfLandlineDisplay },
+    { href: `mailto:${site.golfEmail}`, icon: 'mail', label: site.golfEmail, html: breakable(site.golfEmail) },
     { href: site.teeTimeUrl, icon: 'calendar', label: t('cta.teeTimes'), external: true },
   ] },
 ];

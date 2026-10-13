@@ -40,7 +40,9 @@ structured data (schema.org Restaurant + GolfCourse), sitemap and hreflang tags.
   `npm run images` (needs ffmpeg; also rebuilds the 600 px gallery thumbnails and the JPEG social-share
   images `og-*.jpg`). The gallery list with
   captions lives in `src/data/images.ts`; categories for the filter come from the file names.
-- **Colours & fonts**: `src/styles/global.css` (`@theme` block). Logo mark: `public/images/logo-mark.svg`.
+- **Colours & fonts**: `src/styles/global.css` (`@theme` block). Logo: `public/images/logo-mark.svg` (the
+  round Casa Club badge, redrawn as a vector; lettering is outlined so it renders the same everywhere), with
+  `public/favicon.svg`, `public/apple-touch-icon.png` and `public/images/logo-512.png` (used by Google).
 
 ## Design
 

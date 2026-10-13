@@ -6,11 +6,11 @@ export const restaurant = {
     intro: { eyebrow: 'The kitchen', title: 'A clubhouse that feeds the whole neighbourhood', text: 'Casa Club’s kitchen cooks British and Spanish comfort food: hearty breakfasts, a great-value weekday menú del día, fish & chips every Friday and a Sunday carvery that regularly packs the place out. The terrace looks out over the golf course and the hills beyond.' },
     moments: [
       { when: 'From 08:00', title: 'Breakfast', text: 'Full English, tostadas con tomate and proper coffee from 08:00. Perfect before an early tee time.' },
-      { when: 'Mon – Fri lunch', title: 'Menú del día', text: 'A changing three-course lunch menu on weekdays. Honest home cooking at a friendly price.' },
+      { when: 'Mon – Fri lunch', title: 'Menú del día', text: 'A weekday lunch that changes daily: a choice of starters and mains, with dessert or coffee included.' },
       { when: 'Fridays', title: 'Fish & chips Friday', text: 'Fish & chips with all the trimmings every Friday, followed by bingo at 15:30 and live music from 16:30.' },
       { when: 'Sundays', title: 'Sunday carvery', text: 'Roast meats carved to order with all the trimmings. Booking strongly recommended: it fills up fast.' },
       { when: 'All day', title: 'The terrace', text: 'A big, sunny terrace overlooking the course, with shade under the colonnade. Ideal for a long lunch or a cold drink after your round.' },
-      { when: 'Event nights', title: 'Evenings', text: 'Quiz nights on Mondays and Thursdays, live music and tribute shows, with a full bar of draught beer, Spanish wines, spirits and gin & tonics.' },
+      { when: 'Event nights', title: 'Evenings', text: 'Quiz nights on Mondays and Thursdays (full menu from 18:00 on Thursdays), live music and tribute shows, with a full bar of draught beer, Spanish wines, spirits and gin & tonics.' },
     ],
     menus: {
       eyebrow: 'Menus & specials', title: 'Today’s menu is on Facebook',
@@ -33,11 +33,11 @@ export const restaurant = {
     intro: { eyebrow: 'La cocina', title: 'Una casa club que alimenta a todo el barrio', text: 'La cocina de Casa Club prepara platos británicos y españoles de toda la vida: desayunos contundentes, un menú del día entre semana a muy buen precio, fish & chips todos los viernes y un carvery dominical que llena el local cada semana. La terraza mira al campo de golf y a las sierras.' },
     moments: [
       { when: 'Desde las 8:00', title: 'Desayunos', text: 'Desayuno inglés completo, tostadas con tomate y buen café desde las 8:00. Perfecto antes de una salida temprana.' },
-      { when: 'Mediodía, lun – vie', title: 'Menú del día', text: 'Un menú de tres platos que cambia cada día de lunes a viernes. Cocina casera a un precio amable.' },
+      { when: 'Mediodía, lun – vie', title: 'Menú del día', text: 'Un menú de mediodía que cambia cada día: primeros y segundos a elegir, con postre o café incluido.' },
       { when: 'Viernes', title: 'Viernes de fish & chips', text: 'Fish & chips con sus guarniciones todos los viernes, seguido de bingo a las 15:30 y música en vivo desde las 16:30.' },
       { when: 'Domingos', title: 'Carvery dominical', text: 'Asados cortados al momento con todas sus guarniciones. Muy recomendable reservar: se llena rápido.' },
       { when: 'Todo el día', title: 'La terraza', text: 'Una terraza amplia y soleada con vistas al campo y sombra bajo los porches. Ideal para una comida larga o una bebida fría después de jugar.' },
-      { when: 'Noches de eventos', title: 'Las noches', text: 'Noches de quiz los lunes y jueves, música en vivo y tributos, con bar completo: cerveza de barril, vinos españoles, destilados y gin-tonics.' },
+      { when: 'Noches de eventos', title: 'Las noches', text: 'Noches de quiz los lunes y jueves (los jueves, carta completa desde las 18:00), música en vivo y tributos, con bar completo: cerveza de barril, vinos españoles, destilados y gin-tonics.' },
     ],
     menus: {
       eyebrow: 'Menús y sugerencias', title: 'El menú de hoy, en Facebook',

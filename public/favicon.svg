@@ -1,18 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Casa Club Camposol">
-  <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a4534"/><stop offset="1" stop-color="#0c241b"/></linearGradient>
-    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecc878"/><stop offset="1" stop-color="#c65d36"/></linearGradient>
-    <clipPath id="c"><circle cx="60" cy="60" r="54"/></clipPath>
-  </defs>
-  <circle cx="60" cy="60" r="56" fill="url(#sky)"/>
-  <circle cx="60" cy="60" r="56" fill="none" stroke="#d9a23a" stroke-width="2.5"/>
-  <g clip-path="url(#c)">
-    <circle cx="60" cy="58" r="20" fill="url(#sun)"/>
-    <path d="M-10 86 C 20 66, 45 70, 60 78 S 100 72, 130 84 L130 130 L-10 130 Z" fill="#2f7056"/>
-    <path d="M-10 96 C 25 80, 50 86, 70 92 S 110 88, 130 98 L130 130 L-10 130 Z" fill="#245a44"/>
-    <path d="M-10 108 C 30 98, 60 104, 90 100 S 120 100, 130 106 L130 130 L-10 130 Z" fill="#1a4534"/>
-    <line x1="84" y1="56" x2="84" y2="88" stroke="#fbf8f1" stroke-width="2.4" stroke-linecap="round"/>
-    <path d="M85 56 L100 61 L85 66 Z" fill="#fbf8f1"/>
-    <ellipse cx="84" cy="88.5" rx="7" ry="2" fill="#0c241b" opacity=".6"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Casa Club Camposol Golf"><title>Casa Club Camposol Golf</title><defs><radialGradient id="silver" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#fbfaf9"/><stop offset=".65" stop-color="#e4e0df"/><stop offset="1" stop-color="#c9c3c2"/></radialGradient><radialGradient id="ball" cx=".38" cy=".35" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d6d1d0"/></radialGradient><clipPath id="disc"><circle cx="100" cy="100" r="57.6"/></clipPath></defs><circle cx="100" cy="100" r="99.5" fill="#0b3a23"/><circle cx="100" cy="100" r="98.2" fill="#e0c74f"/><circle cx="100" cy="100" r="92.6" fill="#0b3a23"/><circle cx="100" cy="100" r="91.4" fill="#01b862"/><circle cx="100" cy="100" r="61.6" fill="#0b3a23"/><circle cx="100" cy="100" r="60.2" fill="#8e8786"/><circle cx="100" cy="100" r="58.6" fill="url(#silver)"/><g clip-path="url(#disc)"><line x1="186.6" y1="56.5" x2="78.0" y2="128.0" stroke="#262626" stroke-width="2.3" stroke-linecap="round"/><path d="M79.96,127.40 L79.00,131.47 C76.86,136.58 75.12,140.19 73.02,143.02 C70.75,145.75 65.01,142.90 65.32,139.16 C66.78,134.23 70.65,129.53 74.31,127.60 L77.54,126.00Z" fill="#3b3b3b" stroke="#1b1b1b" stroke-width=".8" stroke-linejoin="round"/><path d="M77.06,133.23 L72.38,130.53 M75.56,135.83 L70.88,133.13 M74.06,138.43 L69.38,135.73 M72.56,141.02 L67.88,138.32" stroke="#9a9a9a" stroke-width=".7" fill="none"/><line x1="13.4" y1="56.5" x2="122.0" y2="128.0" stroke="#262626" stroke-width="2.3" stroke-linecap="round"/><path d="M120.04,127.40 L121.00,131.47 C123.14,136.58 124.88,140.19 126.98,143.02 C129.25,145.75 134.99,142.90 134.68,139.16 C133.22,134.23 129.35,129.53 125.69,127.60 L122.46,126.00Z" fill="#3b3b3b" stroke="#1b1b1b" stroke-width=".8" stroke-linejoin="round"/><path d="M122.94,133.23 L127.62,130.53 M124.44,135.83 L129.12,133.13 M125.94,138.43 L130.62,135.73 M127.44,141.02 L132.12,138.32" stroke="#9a9a9a" stroke-width=".7" fill="none"/></g></svg>

@@ -18,14 +18,18 @@ export const site = {
     en: "Hello Casa Club! I'd like to book a table.\nName:\nDate:\nTime:\nNumber of people:",
     es: '¡Hola Casa Club! Quería reservar una mesa.\nNombre:\nFecha:\nHora:\nNúmero de personas:',
   },
-  // Golf office / tee times
-  golfPhoneDisplay: '+34 968 978 886', // CONFIRM
-  golfPhoneHref: 'tel:+34968978886',
-  // The golf club's mobile, listed on its own website and social pages. CONFIRM.
-  golfMobileDisplay: '+34 624 41 38 01',
-  golfMobileHref: 'tel:+34624413801',
+  // Golf office / tee times: the number on the golf club's own Facebook and Instagram pages
+  golfPhoneDisplay: '+34 624 41 38 01',
+  golfPhoneHref: 'tel:+34624413801',
+  // Older landline, still listed by golf directories. CONFIRM it is answered, or delete it.
+  golfLandlineDisplay: '+34 968 978 886',
+  golfLandlineHref: 'tel:+34968978886',
   email: 'eventos@casaclubcamposolgolf.com',
-  golfEmail: 'info@camposolclubdegolf.com', // CONFIRM (old domain), not shown on the site yet
+  // Golf club email as shown on its Facebook page (its Instagram shows info@camposolgolfclub.com). CONFIRM.
+  golfEmail: 'info@casaclubcamposolgolf.com',
+  // Camposol Golf Academy (PGA professional Jerónimo Janssens Koster), from the academy's Facebook page
+  academyPhoneDisplay: '+34 604 81 82 05',
+  academyPhoneHref: 'tel:+34604818205',
   teeTimeUrl: 'https://eu.golfmanager.com/camposol',
 
   /** Optional form service endpoint: a Formspree URL (https://formspree.io/f/…) or
@@ -56,19 +60,22 @@ export const site = {
     instagramAcademy: 'https://www.instagram.com/camposolgolfacademy/',
   },
 
-  // Opening hours shown in the footer and contact page. CONFIRM with the team.
+  // Opening hours shown in the footer, restaurant and contact pages. Thursday kitchen time from Euro Weekly
+  // News (Aug 2026); no current closing times are published anywhere. CONFIRM with the team.
   hours: {
     en: [
       { label: 'Bar & terrace', value: 'Daily from 08:00' },
-      { label: 'Kitchen', value: '08:00 – 16:00' },
-      { label: 'Quiz & event nights', value: 'Open late' },
-      { label: 'Golf office', value: 'Daily 08:00 – 16:00' },
+      { label: 'Kitchen', value: 'From 08:00' },
+      { label: 'Thursday quiz', value: 'Full menu from 18:00' },
+      { label: 'Event nights', value: 'Open late' },
+      { label: 'Golf office', value: 'Daily from 08:00' },
     ],
     es: [
       { label: 'Bar y terraza', value: 'Todos los días desde las 8:00' },
-      { label: 'Cocina', value: '8:00 – 16:00' },
-      { label: 'Noches de quiz y eventos', value: 'Abierto hasta tarde' },
-      { label: 'Oficina de golf', value: 'Todos los días 8:00 – 16:00' },
+      { label: 'Cocina', value: 'Desde las 8:00' },
+      { label: 'Quiz de los jueves', value: 'Carta completa desde las 18:00' },
+      { label: 'Noches de eventos', value: 'Abierto hasta tarde' },
+      { label: 'Oficina de golf', value: 'Todos los días desde las 8:00' },
     ],
   },
 
@@ -87,10 +94,11 @@ export const site = {
       { name: 'Blue', es: 'Azules', metres: 5484, par: 73, cr: 75.4, slope: 136 },
       { name: 'Red', es: 'Rojas', metres: 5270, par: 73, cr: 74.1, slope: 134 },
     ],
-    // Indicative prices from 2025–26 listings and reviews (18 holes €35–40). CONFIRM before publishing.
+    // "From" prices paid by visitors in 2025–26 (Golfshake Jan 2026: €35 walk-on; 1golf: 9 holes €22;
+    // buggy €20). No official price list is published. CONFIRM before publishing.
     fees: [
-      { key: '18', eur: 40 },
-      { key: '9', eur: 25 },
+      { key: '18', eur: 35 },
+      { key: '9', eur: 22 },
       { key: 'buggy', eur: 20 },
     ],
   },

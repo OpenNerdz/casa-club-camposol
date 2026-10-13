@@ -13,12 +13,13 @@ export interface ProgrammeDay { day: number; items: ProgrammeItem[] }
 
 const menuDelDia: ProgrammeItem = { title: { en: 'Menú del día', es: 'Menú del día' }, note: { en: 'lunchtime', es: 'mediodía' }, minor: true };
 const quiz: ProgrammeItem = { title: { en: 'Quiz night', es: 'Noche de quiz' }, time: '19:30' };
+const quizSupper: ProgrammeItem = { title: { en: 'Full menu', es: 'Carta completa' }, note: { en: 'from 18:00', es: 'desde las 18:00' }, minor: true };
 
 export const programme: ProgrammeDay[] = [
   { day: 1, items: [quiz, menuDelDia] },
   { day: 2, items: [{ title: { en: 'Funky Orange daytime disco', es: 'Funky Orange, disco de tarde' }, note: { en: 'selected weeks', es: 'algunas semanas' } }, menuDelDia] },
   { day: 3, items: [menuDelDia] },
-  { day: 4, items: [quiz, menuDelDia] },
+  { day: 4, items: [quiz, quizSupper, menuDelDia] },
   { day: 5, items: [
     { title: { en: 'Fish & chips', es: 'Fish & chips' } },
     { title: { en: 'Bingo', es: 'Bingo' }, time: '15:30' },

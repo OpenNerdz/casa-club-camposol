@@ -15,7 +15,8 @@ const { lang } = Astro.props;
 const c = events[lang];
 const t = useTranslations(lang);
 const locale = lang === 'es' ? 'es-ES' : 'en-GB';
-// One-off events carry a `date` (and maybe a `time`); recurring ones a free-text `when`.
+// One-off events carry a `date` (and maybe a `time`); recurring ones a free-text `when`. A dated
+// event with a `when` shows that label (e.g. 'Halloween') and still drops off after its date.
 type Highlight = { date?: string; time?: string; when?: string; title: string; text: string; tag: string };
 const items: readonly Highlight[] = c.upcoming.items;
 // Past one-off events are dropped at build time, and in the browser by Base.astro's script.
@@ -23,7 +24,7 @@ const buildDay = new Date().toISOString().slice(0, 10);
 const highlights = items
   .filter((e) => !e.date || e.date >= buildDay)
   .map((e) => {
-    if (!e.date) return { ...e, until: undefined, big: undefined, small: e.when, weekday: undefined };
+    if (!e.date || e.when) return { ...e, until: e.date, big: undefined, small: e.when, weekday: undefined };
     const d = new Date(`${e.date}T12:00:00`);
     const weekday = d.toLocaleDateString(locale, { weekday: 'long' });
     return {

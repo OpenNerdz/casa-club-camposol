@@ -59,7 +59,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta property="og:locale" content={lang === 'en' ? 'en_GB' : 'es_ES'} />
     <meta property="og:locale:alternate" content={lang === 'en' ? 'es_ES' : 'en_GB'} />
     <meta name="twitter:card" content="summary_large_image" />
-    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+    <script is:inline>document.documentElement.classList.remove('no-js');setTimeout(function(){if(!document.documentElement.hasAttribute('data-ready'))document.documentElement.classList.add('reveal-off')},3000);</script>
     {ld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
   </head>
   <body class="flex min-h-screen flex-col">
@@ -73,6 +73,8 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <BookDialog lang={lang} />
     <script>
       import { madridDate, madridWeekday } from '../scripts/madrid';
+      // Tells the inline watchdog in <head> that this script has run (otherwise it un-hides every .reveal)
+      document.documentElement.setAttribute('data-ready', '');
 
       // Reveal on scroll (content is visible without JS; see .no-js in global.css)
       const els = document.querySelectorAll('.reveal');
@@ -83,24 +85,35 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         els.forEach((el) => io.observe(el));
       } else els.forEach((el) => el.classList.add('is-visible'));
 
-      // "Today": mark today's programme row and show today's line-up, in Spanish time.
-      const day = String(madridWeekday());
-      document.querySelectorAll('[data-day]').forEach((el) => el.toggleAttribute('data-today', (el as HTMLElement).dataset.day === day));
-      document.querySelectorAll<HTMLElement>('[data-today-for]').forEach((el) => { el.hidden = el.dataset.todayFor !== day; });
+      // "Today": mark today's programme row and show today's line-up, in Spanish time. Dated highlights
+      // disappear the day after they happen, even before the next rebuild. Re-run whenever the visitor
+      // comes back to a tab left open across midnight.
+      function refresh() {
+        const day = String(madridWeekday());
+        document.querySelectorAll('[data-day]').forEach((el) => el.toggleAttribute('data-today', (el as HTMLElement).dataset.day === day));
+        document.querySelectorAll<HTMLElement>('[data-today-for]').forEach((el) => { el.hidden = el.dataset.todayFor !== day; });
+        const today = madridDate();
+        document.querySelectorAll<HTMLElement>('[data-until]').forEach((el) => { if (el.dataset.until! < today) el.remove(); });
+        // If that empties a list of highlights, show its "nothing announced yet" message instead.
+        document.querySelectorAll<HTMLElement>('[data-highlights]').forEach((box) => {
+          const list = box.querySelector('ol');
+          if (list && !list.children.length) { list.remove(); box.querySelector<HTMLElement>('[data-empty]')!.hidden = false; }
+        });
+      }
+      refresh();
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') refresh(); });
+      window.addEventListener('pageshow', (e) => { if (e.persisted) refresh(); });
       // On phones the week is a sideways row: open it on today's card.
       document.querySelectorAll<HTMLElement>('[data-week]').forEach((row) => {
         const card = row.querySelector<HTMLElement>('[data-today]');
         if (card && row.scrollWidth > row.clientWidth) row.scrollLeft = card.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft);
       });
-
-      // Dated highlights disappear the day after they happen, even before the next rebuild.
-      const today = madridDate();
-      document.querySelectorAll<HTMLElement>('[data-until]').forEach((el) => { if (el.dataset.until! < today) el.remove(); });
-      // If that empties a list of highlights, show its "nothing announced yet" message instead.
-      document.querySelectorAll<HTMLElement>('[data-highlights]').forEach((box) => {
-        const list = box.querySelector('ol');
-        if (list && !list.children.length) { list.remove(); box.querySelector<HTMLElement>('[data-empty]')!.hidden = false; }
-      });
+      // Sideways rows are keyboard-scrollable only while they actually overflow (desktop shows them as a grid)
+      const rows = document.querySelectorAll<HTMLElement>('[data-scroll-row]');
+      const setRowTabs = () => rows.forEach((row) => { if (row.scrollWidth > row.clientWidth) row.setAttribute('tabindex', '0'); else row.removeAttribute('tabindex'); });
+      setRowTabs();
+      let raf = 0;
+      window.addEventListener('resize', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(setRowTabs); });
     </script>
   </body>
 </html>

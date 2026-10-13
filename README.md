@@ -27,8 +27,9 @@ structured data (schema.org Restaurant + GolfCourse), sitemap and hreflang tags.
 ## Editing content (no coding needed beyond text)
 
 - **Business facts** (phones, email, address, hours, social links, green fees, tee data):
-  `src/data/site.ts`. Everything on the site reads from here.
-- **Weekly programme** (quiz nights, Fry Day, carvery…): `src/data/programme.ts`. It feeds the home and
+  `src/data/site.ts`. Almost everything on the site reads from here; the page copy also mentions the
+  08:00 opening time in words (search `src/content` and `src/i18n` for `08:00` if it changes).
+- **Weekly programme** (quiz nights, fish & chips Friday, carvery…): `src/data/programme.ts`. It feeds the home and
   What's On timetables and the "Today at Casa Club" card, which picks today's row in Spanish time.
 - **One-off highlights** (tribute nights, Christmas lunch): `src/content/events.ts`. Give each a `date:
   'YYYY-MM-DD'` and, if known, a `time: '20:00'`; it disappears from the page the day after, even before the

@@ -77,7 +77,7 @@ const enquiryHref = `${localePath(lang, '/contact/')}#enquiry`;
     document.querySelectorAll('#main, footer, [data-mobilebar], [data-skip]').forEach((el) => el.toggleAttribute('inert', open));
   }
   toggle.addEventListener('click', () => setOpen(Boolean(menu.hidden)));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { setOpen(false); toggle.focus(); } });
-  // Close if the viewport grows past the mobile breakpoint while open
-  matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden && !document.querySelector('dialog[open]')) { setOpen(false); toggle.focus(); } });
+  // Close if the viewport grows past the mobile breakpoint while open (the toggle disappears, so park focus on the logo)
+  matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches && !menu.hidden) { setOpen(false); header.querySelector<HTMLElement>('a')?.focus(); } });
 </script>

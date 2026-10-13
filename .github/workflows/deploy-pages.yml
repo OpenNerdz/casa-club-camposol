@@ -5,6 +5,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Nightly, so past events also drop out of the static HTML (visitors with JavaScript see them go at once)
+  schedule:
+    - cron: '20 3 * * *'
   workflow_dispatch:
 permissions:
   contents: read

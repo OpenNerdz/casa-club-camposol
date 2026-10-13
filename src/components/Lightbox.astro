@@ -34,11 +34,13 @@ const btn = 'grid h-12 w-12 place-items-center rounded-full bg-cream-50/10 text-
     img.src = a.href; img.alt = a.dataset.caption ?? ''; cap.textContent = a.dataset.caption ?? '';
     count.textContent = `${i + 1} / ${list.length}`;
     if (!box.open) box.showModal();
+    // Warm the cache for the next and previous photos
+    for (const k of [1, -1]) { const n = list[(i + k + list.length) % list.length]; if (n) new Image().src = n.href; }
   }
 
   document.addEventListener('click', (e) => {
     const a = (e.target as Element).closest<HTMLAnchorElement>('a[data-lightbox]');
-    if (!a || typeof box.showModal !== 'function') return;
+    if (!a || typeof box.showModal !== 'function' || e.metaKey || e.ctrlKey || e.shiftKey) return;
     e.preventDefault();
     show(links().indexOf(a));
   });

@@ -9,7 +9,7 @@ const t = useTranslations(lang);
 const dark = tone === 'dark';
 ---
 <div class="mt-12 sm:mt-14">
-  <ol data-week tabindex="0" aria-label={t('week.label')} class="snap-row relative pt-3 lg:-mx-12 lg:scroll-px-12 lg:px-12 xl:mx-0 xl:grid xl:grid-cols-7 xl:gap-3 xl:overflow-visible xl:px-0 xl:pb-0">
+  <ol data-week data-scroll-row tabindex="0" aria-label={t('week.label')} class="snap-row relative pt-3 lg:-mx-12 lg:scroll-px-12 lg:px-12 xl:mx-0 xl:grid xl:grid-cols-7 xl:gap-3 xl:overflow-visible xl:px-0 xl:pb-0">
     {programme.map((d) => (
       <li data-day={d.day}
           class:list={['relative flex min-h-[14rem] w-[70%] flex-col rounded-[1.5rem] border p-5 transition-colors sm:w-[40%] lg:w-[28%] xl:w-auto',

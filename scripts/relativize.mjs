@@ -40,7 +40,7 @@ for await (const file of walk(root)) {
     });
     // srcset lists
     text = text.replace(/(\ssrcset=")([^"]*)(")/g, (_, a, list, c) =>
-      a + list.split(',').map(s => s.trim().replace(/^\/(?!\/)(\S*)/, (m2, p) => toRel(fileDir === '/.' ? '/' : fileDir, '/' + p))).join(', ') + c);
+      a + list.split(',').map(s => s.trim().replace(/^\/(?!\/)(\S*)/, (_m, p) => toRel(fileDir === '/.' ? '/' : fileDir, '/' + p))).join(', ') + c);
   }
   text = text.replace(CSS, (_, q, p) => `url(${q}${toRel(fileDir === '/.' ? '/' : fileDir, '/' + p)}${q})`);
   if (text !== before) { await writeFile(file, text); count++; }

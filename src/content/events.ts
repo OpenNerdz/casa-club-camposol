@@ -16,7 +16,7 @@ export const events = {
     community: { eyebrow: 'Community', title: 'A clubhouse that gives back', text: 'Casa Club regularly hosts local charities and community groups: Age Concern lunches and fairs, Friends of Mazarrón Animals (FMA) fundraisers, a Bereavement Café, kids’ talent shows and Camposol Golf Association competitions. If you run a group that needs a venue, talk to us.', cta: 'Talk to us about your event' },
     hire: { eyebrow: 'Private hire', title: 'Your party, our place', text: 'The private function room hosts lunches, dinners and celebrations, while the terrace takes larger gatherings with the course as a backdrop. We arrange menus, bar packages, entertainment and decorations.', points: ['Birthdays, anniversaries and wakes', 'Society and club presentation dinners', 'Christmas and end-of-year parties', 'Charity nights and community fundraisers'], cta: 'Enquire about hire' },
     alts: { hero: 'A live act on the terrace stage on a sunny afternoon', hire: 'A live band performing in the function room' },
-    follow: { title: 'Never miss a night', text: 'Follow Casa Club Camposol on Facebook for weekly line-ups, menus and last-minute announcements.', cta: 'Follow on Facebook' },
+    follow: { cta: 'Follow on Facebook' },
   },
   es: {
     meta: { title: 'Agenda', description: 'Música en directo, quiz, bingo, tributos y fiestas privadas en Casa Club Camposol, Mazarrón: la programación semanal y las próximas fechas.' },
@@ -31,6 +31,6 @@ export const events = {
     community: { eyebrow: 'Comunidad', title: 'Una casa club comprometida', text: 'Casa Club acoge con frecuencia a asociaciones y colectivos de la zona: comidas y mercadillos de Age Concern, actos benéficos de Friends of Mazarrón Animals (FMA), un Bereavement Café (café de apoyo en el duelo), concursos de talento infantil y las competiciones de la Camposol Golf Association. Si diriges un grupo que necesita un espacio, habla con nosotros.', cta: 'Cuéntanos tu evento' },
     hire: { eyebrow: 'Eventos privados', title: 'Tu fiesta, nuestra casa', text: 'El salón privado acoge comidas, cenas y celebraciones, y la terraza recibe las reuniones más numerosas con el campo de fondo. Nos encargamos de menús, barra, animación y decoración.', points: ['Cumpleaños, aniversarios y reuniones en memoria de un ser querido', 'Cenas de entrega de premios de peñas y clubes', 'Fiestas de Navidad y de fin de año', 'Noches benéficas y eventos solidarios'], cta: 'Consultar disponibilidad' },
     alts: { hero: 'Una actuación en el escenario de la terraza en una tarde de sol', hire: 'Un grupo actuando en directo en el salón de eventos' },
-    follow: { title: 'No te pierdas ni una noche', text: 'Sigue a Casa Club Camposol en Facebook para ver la programación semanal, los menús y los avisos de última hora.', cta: 'Seguir en Facebook' },
+    follow: { cta: 'Seguir en Facebook' },
   },
 } as const;

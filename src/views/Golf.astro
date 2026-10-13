@@ -90,7 +90,7 @@ const stats = [
     <div class="mt-12 grid gap-4 lg:grid-cols-12">
       <div class="reveal rounded-[var(--radius-card)] border border-ink-950/8 bg-white px-7 py-3 sm:px-9 sm:py-4 lg:col-span-8">
         <dl class="divide-y divide-ink-950/8">
-          {c.fees.rows.map((r) => { const f = site.golf.fees.find((x) => x.key === r.key)!; return (
+          {c.fees.rows.flatMap((r) => { const f = site.golf.fees.find((x) => x.key === r.key); return !f ? [] : (
             <div class="flex items-center justify-between gap-6 py-5">
               <dt class="text-lg font-semibold text-pine-950">{r.label}</dt>
               <dd class="flex items-baseline gap-2 whitespace-nowrap">

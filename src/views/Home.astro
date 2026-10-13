@@ -59,7 +59,7 @@ const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
       {c.experiences.map((x, i) => (
         <li class:list={['w-[80%] sm:w-auto', tileLayout[i]]}>
           <a href={localePath(lang, x.href)} class="group relative isolate flex aspect-[3/4] h-full flex-col overflow-hidden rounded-[var(--radius-card)] bg-pine-900 text-cream-50 sm:aspect-auto sm:min-h-[20rem] lg:min-h-0">
-            <img src={tileImages[i]} srcset={i === 1 ? srcset.heroGolf : undefined} sizes={i === 1 ? '(min-width: 1024px) 40vw, (min-width: 640px) 50vw, 80vw' : undefined} alt={x.alt} class="img-cover absolute inset-0 -z-10 transition duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async" />
+            <img src={tileImages[i]} srcset={i === 1 ? srcset.heroGolf : undefined} sizes={i === 1 ? '(min-width: 1024px) 40vw, (min-width: 640px) 50vw, 80vw' : undefined} alt={x.alt} class="img-cover absolute inset-0 -z-10 transition duration-700 ease-out motion-safe:group-hover:scale-105" loading="lazy" decoding="async" />
             <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950/90 via-pine-950/30 to-transparent"></div>
             <span class="glass absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full transition-colors group-hover:bg-cream-50 group-hover:text-pine-950"><Icon name="arrow" size={18} /></span>
             <div class="mt-auto p-6 sm:p-7">
@@ -106,7 +106,7 @@ const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
 
   <!-- Golf -->
   <section class="on-dark relative isolate overflow-hidden bg-pine-950 text-cream-50">
-    <img src={img.course} srcset={srcset.course} sizes="100vw" alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" />
+    <img src={img.course} srcset={srcset.course} sizes="(min-width: 1024px) 100vw, 1200px" alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" />
     <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950 via-pine-950/75 to-pine-950/55 lg:bg-gradient-to-r lg:from-pine-950/95 lg:via-pine-950/70 lg:to-pine-950/10"></div>
     <div class="container-x grid gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:items-end lg:py-36">
       <div class="lg:col-span-6">

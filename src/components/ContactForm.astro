@@ -13,12 +13,14 @@ const label = 'block text-sm font-semibold text-ink-800';
 const optional = `<span class="font-normal text-ink-600">(${t('form.optional')})</span>`;
 // Consent text with the privacy-policy link in place of {privacy}
 const [consentBefore, consentAfter] = t('form.consent').split('{privacy}');
-const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form.okMail'), err: t('form.err'), invalid: t('form.invalid') };
+const emailLink = `<a href="mailto:${site.email}" class="font-semibold underline">${site.email}</a>`;
+const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form.okMail').replace('{email}', emailLink), err: t('form.err'), invalid: t('form.invalid') };
 // Field labels in the visitor's language, for the e-mail fallback body
 const labels = { name: t('form.name'), email: t('form.email'), phone: t('form.phone'), enquiry: t('form.type'), date: t('form.date'), guests: t('form.guests'), message: t('form.message') };
 ---
+{!site.formEndpoint && <noscript><p class="rounded-2xl bg-white p-6 text-ink-800 ring-1 ring-ink-950/8" set:html={t('form.noJs').replace('{email}', emailLink)} /></noscript>}
 <form id="contact-form" class="rounded-[1.75rem] bg-cream-50 p-6 shadow-[0_30px_60px_-30px_rgb(23_32_27/.35)] ring-1 ring-ink-950/8 sm:p-9"
-  method="post" action={site.formEndpoint || `mailto:${site.email}`} data-endpoint={site.formEndpoint} data-mailto={site.email}
+  method="post" action={site.formEndpoint || `mailto:${site.email}`} data-endpoint={site.formEndpoint} data-mailto={site.email} data-needs-js={site.formEndpoint ? undefined : ''}
   data-messages={JSON.stringify(messages)} data-labels={JSON.stringify(labels)} enctype={site.formEndpoint ? undefined : 'text/plain'}>
   <input type="hidden" name="subject" value={`${t('form.subject')} · ${site.name}`} />
   {site.formAccessKey && <input type="hidden" name="access_key" value={site.formAccessKey} />}
@@ -56,40 +58,48 @@ const labels = { name: t('form.name'), email: t('form.email'), phone: t('form.ph
   const status = document.getElementById('form-status')!;
   const msg = JSON.parse(form.dataset.messages!) as Record<'sending' | 'ok' | 'okMail' | 'err' | 'invalid', string>;
   const labels = JSON.parse(form.dataset.labels!) as Record<string, string>;
-
-  // With JS the script validates (and shows its own status message); without it the browser does.
-  form.noValidate = true;
-
-  // No booking dates in the past; preselect the enquiry type from ?type=
-  (form.elements.namedItem('date') as HTMLInputElement).min = madridDate();
-  const type = new URLSearchParams(location.search).get('type');
+  const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
   const select = form.elements.namedItem('enquiry') as HTMLSelectElement;
-  if (type && [...select.options].some((o) => o.value === type)) select.value = type;
+  let inFlight = false;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (inFlight) return;
     const fields = [...form.elements].filter((el): el is HTMLInputElement => 'checkValidity' in el && (el as HTMLInputElement).name !== '');
     fields.forEach((el) => (el.checkValidity() ? el.removeAttribute('aria-invalid') : el.setAttribute('aria-invalid', 'true')));
     if (!form.checkValidity()) { form.reportValidity(); status.textContent = msg.invalid; return; }
     const data: Record<string, FormDataEntryValue> = Object.fromEntries(new FormData(form).entries());
-    if (data.botcheck) return;
+    if (data.botcheck) return; // honeypot filled in: a bot
+    delete data.botcheck;
     data.enquiry = select.selectedOptions[0].text;
     const endpoint = form.dataset.endpoint;
     if (!endpoint) {
       // No form service configured yet: hand over to the visitor's email app.
-      const body = Object.entries(data).filter(([k, v]) => v && !['botcheck', 'subject', 'consent', 'access_key'].includes(k)).map(([k, v]) => `${labels[k] ?? k}: ${v}`).join('\n');
+      const body = Object.entries(data).filter(([k, v]) => v && !['subject', 'consent', 'access_key'].includes(k)).map(([k, v]) => `${labels[k] ?? k}: ${v}`).join('\n');
       location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(String(data.subject))}&body=${encodeURIComponent(body)}`;
-      status.textContent = msg.okMail;
+      status.innerHTML = msg.okMail;
       return;
     }
     // Formspree reads its subject line from `_subject`
     if (endpoint.includes('formspree')) data._subject = data.subject;
+    inFlight = true; button.disabled = true;
     status.textContent = msg.sending;
     try {
-      const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data), signal: AbortSignal.timeout(15000) });
       if (!r.ok) throw new Error(String(r.status));
       form.reset();
       status.textContent = msg.ok;
-    } catch { status.textContent = msg.err; }
+    } catch { status.textContent = msg.err; } finally { inFlight = false; button.disabled = false; }
   });
+  // A corrected field drops its error styling straight away
+  form.addEventListener('input', (e) => { const el = e.target as HTMLInputElement; if (el.getAttribute('aria-invalid') && el.checkValidity()) el.removeAttribute('aria-invalid'); });
+
+  // With JS the script validates (and shows its own status message); without it the browser does.
+  // Set only once the submit handler is in place, so a failure above never lets an unchecked form through.
+  form.noValidate = true;
+
+  // No booking dates in the past; preselect the enquiry type from ?type=
+  try { (form.elements.namedItem('date') as HTMLInputElement).min = madridDate(); } catch { /* no time-zone data: leave the field unrestricted */ }
+  const type = new URLSearchParams(location.search).get('type');
+  if (type && [...select.options].some((o) => o.value === type)) select.value = type;
 </script>

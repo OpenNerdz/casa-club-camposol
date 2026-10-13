@@ -36,7 +36,14 @@ const t = useTranslations(lang);
     const { default: L } = await import('leaflet');
     el.replaceChildren();
     const { lat, lng, zoom, name, satellite: satLabel, streets: streetLabel, layers: layersLabel, zoomIn, zoomOut, imagery, contributors } = el.dataset;
-    const map = L.map(el, { scrollWheelZoom: false, zoomControl: false }).setView([+lat!, +lng!], +zoom!);
+    // On touch screens one-finger dragging would swallow the page scroll, so the map pans only after a
+    // tap on it (and stops again when the visitor touches anything else). Pinch-zoom always works.
+    const coarse = matchMedia('(pointer: coarse)').matches;
+    const map = L.map(el, { scrollWheelZoom: false, zoomControl: false, dragging: !coarse }).setView([+lat!, +lng!], +zoom!);
+    if (coarse) {
+      el.addEventListener('click', () => map.dragging.enable());
+      document.addEventListener('touchstart', (e) => { if (!el.contains(e.target as Node)) map.dragging.disable(); }, { passive: true });
+    }
     // Controls go where the floating address card is not: bottom right on desktop, top left on phones.
     const corner = matchMedia('(min-width: 1024px)').matches ? 'bottomright' : 'topleft';
     L.control.zoom({ position: corner, zoomInTitle: zoomIn, zoomOutTitle: zoomOut }).addTo(map);

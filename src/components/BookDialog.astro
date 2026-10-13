@@ -43,7 +43,7 @@ const options = [
   const dialog = document.getElementById('book-dialog') as HTMLDialogElement;
   document.addEventListener('click', (e) => {
     const trigger = (e.target as Element).closest('a[data-book]');
-    if (!trigger || typeof dialog.showModal !== 'function') return;
+    if (!trigger || typeof dialog.showModal !== 'function' || e.metaKey || e.ctrlKey || e.shiftKey) return;
     e.preventDefault();
     dialog.showModal();
   });

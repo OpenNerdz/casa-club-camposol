@@ -20,7 +20,7 @@ export const golf = {
       { label: '18 holes', key: '18' }, { label: '9 holes', key: '9' },
     ], note: 'Prices include VAT and may change: please confirm when you book. Buggies, trolleys and clubs can be hired. Players without a Spanish golf licence pay a small insurance supplement. A handicap certificate is required, and booking in advance is essential.' },
     societies: { eyebrow: 'Societies & groups', title: 'Bring your society and we will do the rest', text: 'Camposol welcomes visiting societies, corporate days and charity events throughout the year, with lunch or dinner on the terrace afterwards. The Camposol Golf Association plays a nine-hole competition every Monday and is always looking for new members of all standards.', points: ['Group green-fee packages', 'Set menus from a bacon roll to a three-course dinner', 'Prize-giving in the function room', 'Buggies reserved for your group'], cta: 'Enquire about a society day' },
-    booking: { title: 'Book your round', text: 'Tee times can be booked online through our booking partner, or by phone at the golf office.', online: 'Book online', phone: 'Golf office' },
+    booking: { title: 'Book your round', text: 'Tee times can be booked online through our booking partner, or by phone at the golf office.', online: 'Book online' },
     academy: 'Lessons',
   },
   es: {
@@ -43,7 +43,7 @@ export const golf = {
       { label: '18 hoyos', key: '18' }, { label: '9 hoyos', key: '9' },
     ], note: 'Precios con IVA incluido y sujetos a cambios: confírmalos al reservar. Hay buggies, carros y palos de alquiler. Los jugadores sin licencia federativa española pagan un pequeño suplemento de seguro. Se requiere certificado de hándicap y es imprescindible reservar con antelación.' },
     societies: { eyebrow: 'Peñas y grupos', title: 'Trae a tu peña, nosotros nos encargamos del resto', text: 'Camposol acoge durante todo el año a peñas de golf visitantes, jornadas de empresa y torneos benéficos, con comida o cena en la terraza al terminar. La Camposol Golf Association disputa una competición a nueve hoyos todos los lunes y siempre busca nuevos socios de cualquier nivel.', points: ['Paquetes de green fee para grupos', 'Menús desde un bocadillo hasta una cena de tres platos', 'Entrega de premios en el salón privado', 'Buggies reservados para tu grupo'], cta: 'Organizar una jornada para tu peña' },
-    booking: { title: 'Reserva tu salida', text: 'Las salidas se reservan online a través de nuestro sistema de reservas o por teléfono en la oficina de golf.', online: 'Reservar online', phone: 'Oficina de golf' },
+    booking: { title: 'Reserva tu salida', text: 'Las salidas se reservan online a través de nuestro sistema de reservas o por teléfono en la oficina de golf.', online: 'Reservar online' },
     academy: 'Clases',
   },
 } as const;

@@ -7,7 +7,8 @@ export function madridWeekday(d = new Date()): number {
   return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(w) + 1;
 }
 
-/** Today's date in Spain as YYYY-MM-DD (the en-CA locale formats dates that way). */
+/** Today's date in Spain as YYYY-MM-DD. */
 export function madridDate(d = new Date()): string {
-  return new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(d);
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(d).map((x) => [x.type, x.value]));
+  return `${p.year}-${p.month}-${p.day}`;
 }

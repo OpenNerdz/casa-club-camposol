@@ -2,10 +2,10 @@
 // Opening of every inner page: a dark band with the headline, and a photo that runs
 // from the band down onto the page below.
 import Icon from './Icon.astro';
-interface Cta { href: string; label: string; icon?: string; book?: boolean; external?: boolean }
+interface Cta { href: string; label: string; icon?: string; book?: boolean; external?: boolean; lang?: string }
 interface Props { eyebrow: string; title: string; sub?: string; image?: string; alt?: string; position?: string; cta1?: Cta; cta2?: Cta }
 const { eyebrow, title, sub, image, alt = '', position = 'center', cta1, cta2 } = Astro.props;
-const linkAttrs = (c: Cta) => ({ href: c.href, 'data-book': c.book ? '' : undefined, target: c.external ? '_blank' : undefined, rel: c.external ? 'noopener' : undefined });
+const linkAttrs = (c: Cta) => ({ href: c.href, 'data-book': c.book ? '' : undefined, target: c.external ? '_blank' : undefined, rel: c.external ? 'noopener' : undefined, lang: c.lang, hreflang: c.lang });
 ---
 <section class="on-dark relative isolate">
   <div class:list={['absolute inset-x-0 top-0 -z-10 overflow-hidden bg-pine-950', image ? 'bottom-24 lg:bottom-28' : 'bottom-0']}>

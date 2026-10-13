@@ -55,6 +55,7 @@ const heading = 'font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18
       <h2 class={heading}>{t('footer.visit')}</h2>
       <address class="mt-5 text-[0.9375rem] not-italic leading-relaxed text-cream-50/80">
         {site.address.lines.map((l) => <span class="block">{l}</span>)}
+        <span class="block">{site.address.countryName[lang]}</span>
       </address>
       <a href={site.directionsUrl} target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-ochre-300 hover:text-ochre-100"><Icon name="navigation" size={16} /> {t('cta.directions')}</a>
       <ul class="mt-6 space-y-2 text-[0.9375rem]">

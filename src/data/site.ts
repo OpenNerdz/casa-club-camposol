@@ -22,7 +22,7 @@ export const site = {
   golfPhoneDisplay: '+34 624 41 38 01',
   golfPhoneHref: 'tel:+34624413801',
   // Older landline, still listed by golf directories. CONFIRM it is answered, or delete it.
-  golfLandlineDisplay: '+34 968 978 886',
+  golfLandlineDisplay: '+34 968 97 88 86',
   golfLandlineHref: 'tel:+34968978886',
   email: 'eventos@casaclubcamposolgolf.com',
   // Golf club email as shown on its Facebook page (its Instagram shows info@camposolgolfclub.com). CONFIRM.
@@ -40,7 +40,8 @@ export const site = {
   formAccessKey: '',
 
   address: {
-    lines: ['Calle Aljibe s/n', 'Urb. Camposol, Sector C', '30875 Mazarrón, Murcia', 'España'],
+    lines: ['Calle Aljibe s/n', 'Urb. Camposol, Sector C', '30875 Mazarrón, Murcia'],
+    countryName: { en: 'Spain', es: 'España' },
     street: 'Calle Aljibe s/n, Urb. Camposol Sector C',
     locality: 'Mazarrón',
     region: 'Región de Murcia',

@@ -17,17 +17,17 @@ const quizSupper: ProgrammeItem = { title: { en: 'Full menu', es: 'Carta complet
 
 export const programme: ProgrammeDay[] = [
   { day: 1, items: [quiz, menuDelDia] },
-  { day: 2, items: [{ title: { en: 'Funky Orange daytime disco', es: 'Funky Orange, disco de tarde' }, note: { en: 'selected weeks', es: 'algunas semanas' } }, menuDelDia] },
+  { day: 2, items: [{ title: { en: 'Funky Orange daytime disco', es: 'Funky Orange, sesión disco de tarde' }, note: { en: 'selected weeks', es: 'algunas semanas' } }, menuDelDia] },
   { day: 3, items: [menuDelDia] },
   { day: 4, items: [quiz, quizSupper, menuDelDia] },
   { day: 5, items: [
     { title: { en: 'Fish & chips', es: 'Fish & chips' } },
     { title: { en: 'Bingo', es: 'Bingo' }, time: '15:30' },
-    { title: { en: 'Live music', es: 'Música en vivo' }, time: '16:30–18:00' },
+    { title: { en: 'Live music', es: 'Música en directo' }, time: '16:30–18:00' },
     menuDelDia,
   ] },
-  { day: 6, items: [{ title: { en: 'Tribute & live music nights', es: 'Tributos y música en vivo' }, note: { en: 'selected Saturdays', es: 'algunos sábados' } }] },
-  { day: 7, items: [{ title: { en: 'Sunday carvery', es: 'Carvery dominical' }, note: { en: 'book ahead', es: 'reserva antes' } }] },
+  { day: 6, items: [{ title: { en: 'Tribute & live music nights', es: 'Tributos y música en directo' }, note: { en: 'selected Saturdays', es: 'algunos sábados' } }] },
+  { day: 7, items: [{ title: { en: 'Sunday carvery', es: 'Carvery dominical' }, note: { en: 'book ahead', es: 'con reserva' } }] },
 ];
 
 export const dayNames: Record<Lang, { short: string[]; long: string[] }> = {

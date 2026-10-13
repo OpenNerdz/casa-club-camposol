@@ -5,9 +5,9 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import { localePath } from '../i18n/utils';
 const links = [
-  { href: localePath('en', '/restaurant/'), label: 'Restaurant & Bar' },
+  { href: localePath('en', '/restaurant/'), label: 'Restaurant & bar' },
   { href: localePath('en', '/golf/'), label: 'Golf' },
-  { href: localePath('en', '/events/'), label: 'What’s On' },
+  { href: localePath('en', '/events/'), label: 'What’s on' },
   { href: localePath('en', '/contact/'), label: 'Contact' },
 ];
 ---
@@ -15,7 +15,7 @@ const links = [
   <PageHero eyebrow="404" title="Sorry, we can’t find that page"
     sub="It may have moved, or the link may be mistyped. These will get you back on course."
     cta1={{ href: localePath('en', '/'), label: 'Back to the homepage' }}
-    cta2={{ href: localePath('es', '/'), label: 'Ir a la página en español' }} />
+    cta2={{ href: localePath('es', '/'), label: 'Ir a la portada en español', lang: 'es' }} />
   <section class="container-x pb-20 pt-12 sm:pb-28">
     <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {links.map((l) => (

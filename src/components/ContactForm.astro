@@ -4,13 +4,15 @@
 // ?type=event|golf|table|other preselects the enquiry type.
 import Icon from './Icon.astro';
 import { site } from '../data/site';
-import { useTranslations, type Lang } from '../i18n/utils';
+import { localePath, useTranslations, type Lang } from '../i18n/utils';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const types = ['table', 'event', 'golf', 'other'] as const;
 const label = 'block text-sm font-semibold text-ink-800';
 const optional = `<span class="font-normal text-ink-400">(${t('form.optional')})</span>`;
+// Consent text with the privacy-policy link in place of {privacy}
+const [consentBefore, consentAfter] = t('form.consent').split('{privacy}');
 const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form.okMail'), err: t('form.err'), invalid: t('form.invalid') };
 ---
 <form id="contact-form" class="rounded-[1.75rem] bg-cream-50 p-6 shadow-[0_30px_60px_-30px_rgb(23_32_27/.35)] ring-1 ring-ink-950/8 sm:p-9"
@@ -37,8 +39,9 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
   </div>
   <label class="mt-6 flex items-start gap-3 text-sm text-ink-600">
     <input type="checkbox" name="consent" required class="mt-0.5 h-5 w-5 shrink-0 rounded accent-pine-700" />
-    <span>{t('form.consent')}</span>
+    <span>{consentBefore}<a href={localePath(lang, '/privacy/')} target="_blank" class="font-semibold text-pine-800 underline decoration-pine-800/30 underline-offset-2 hover:text-clay-700">{t('form.privacyLink')}</a>{consentAfter}</span>
   </label>
+  <p class="mt-3 pl-8 text-xs leading-relaxed text-ink-600">{t('form.info')}</p>
   <div class="mt-7 flex flex-wrap items-center gap-4">
     <button type="submit" class="btn-dark">{t('form.send')} <Icon name="arrow" size={16} /></button>
     <p id="form-status" class="text-sm font-medium text-ink-600" role="status" aria-live="polite"></p>

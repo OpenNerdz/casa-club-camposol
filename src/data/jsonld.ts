@@ -16,7 +16,7 @@ export function businessJsonLd(lang: Lang) {
     email: site.email,
     image: `${SITE_URL}/images/og-default.jpg`,
     logo: `${SITE_URL}/images/logo-512.png`,
-    servesCuisine: ['Spanish', 'British', 'International'],
+    servesCuisine: ['British', 'Spanish'],
     priceRange: '€€',
     address: {
       '@type': 'PostalAddress',
@@ -28,7 +28,7 @@ export function businessJsonLd(lang: Lang) {
     },
     geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
     ...(site.openingHours.length ? { openingHours: site.openingHours } : {}),
-    sameAs: [site.social.facebook, site.social.facebookGolf].filter(Boolean),
+    sameAs: [site.social.facebook],
     containedInPlace: { '@type': 'GolfCourse', '@id': `${SITE_URL}/#golf` },
   };
   const golf = {
@@ -38,6 +38,7 @@ export function businessJsonLd(lang: Lang) {
     name: 'Camposol Club de Golf',
     url: `${SITE_URL}${lang === 'es' ? '/es' : ''}/golf/`,
     telephone: site.golfPhoneDisplay,
+    sameAs: [site.social.facebookGolf],
     address: base.address,
     geo: base.geo,
     amenityFeature: [

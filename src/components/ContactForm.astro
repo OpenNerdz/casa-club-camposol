@@ -38,7 +38,7 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
     <label class:list={[label, 'sm:col-span-2']}>{t('form.message')}<textarea name="message" rows="4" required class="field resize-y"></textarea></label>
   </div>
   <label class="mt-6 flex items-start gap-3 text-sm text-ink-600">
-    <input type="checkbox" name="consent" required class="mt-0.5 h-5 w-5 shrink-0 rounded accent-pine-700" />
+    <input type="checkbox" name="consent" required class="mt-0.5 h-5 w-5 shrink-0 rounded accent-pine-700 aria-invalid:outline-2 aria-invalid:outline-offset-2 aria-invalid:outline-clay-600" />
     <span>{consentBefore}<a href={localePath(lang, '/privacy/')} target="_blank" class="font-semibold text-pine-800 underline decoration-pine-800/30 underline-offset-2 hover:text-clay-700">{t('form.privacyLink')}</a>{consentAfter}</span>
   </label>
   <p class="mt-3 pl-8 text-xs leading-relaxed text-ink-600">{t('form.info')}</p>
@@ -66,7 +66,7 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fields = [...form.elements].filter((el): el is HTMLInputElement => 'checkValidity' in el && (el as HTMLInputElement).name !== '');
-    fields.forEach((el) => el.toggleAttribute('aria-invalid', !el.checkValidity()));
+    fields.forEach((el) => (el.checkValidity() ? el.removeAttribute('aria-invalid') : el.setAttribute('aria-invalid', 'true')));
     if (!form.checkValidity()) { form.reportValidity(); status.textContent = msg.invalid; return; }
     const data: Record<string, FormDataEntryValue> = Object.fromEntries(new FormData(form).entries());
     if (data.botcheck) return;

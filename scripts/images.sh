@@ -20,7 +20,7 @@ og terrace-tables-colonnade-01.jpg    og-restaurant.jpg "crop=iw:iw*630/1200:0:5
 og live-music-gazebo-day-01.jpg       og-events.jpg     "crop=iw:iw*630/1200:0:420"
 # Section images
 enc golf-green-flag-mountains-01.jpg course.webp          "crop=iw:iw*10/16:0:520,scale=1600:-1"
-enc golf-green-palms-mountains-01.jpg course-2.webp       "crop=720:720:0:120"
+enc golf-course-lake-panorama-01.jpg lake.webp            "crop=iw:iw*9/16,scale=2000:-1"
 Q=74 enc golf-green-flag-mountains-01.jpg golf-portrait.webp "scale=760:-2"
 # Casa Club's own reel covers (portrait 720x1280) – kept at native size
 for pair in \

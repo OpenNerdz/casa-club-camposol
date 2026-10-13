@@ -9,7 +9,7 @@ const btn = 'grid h-12 w-12 place-items-center rounded-full bg-cream-50/10 text-
 ---
 <dialog id="lightbox" aria-label={t('lb.label')} class="m-0 h-dvh max-h-none w-screen max-w-none bg-pine-950/97 p-0 text-cream-50 backdrop:bg-transparent">
   <figure class="flex h-full flex-col items-center justify-center gap-4 px-4 pb-24 pt-16 sm:px-20 sm:pb-16">
-    <img id="lb-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" class="min-h-0 max-w-full flex-1 rounded-xl object-contain" />
+    <img id="lb-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" class="h-auto max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl object-contain" />
     <figcaption id="lb-cap" aria-hidden="true" class="max-w-xl text-center text-sm text-cream-50/80"></figcaption>
   </figure>
   <p id="lb-count" aria-live="polite" class="absolute left-5 top-5 text-sm tabular-nums text-cream-50/70"></p>

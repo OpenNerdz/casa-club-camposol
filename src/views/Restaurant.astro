@@ -40,7 +40,7 @@ const momentPhotos = [undefined, undefined, undefined, undefined, img.restaurant
         const photo = momentPhotos[i];
         return (
           <li class:list={['reveal relative isolate flex min-h-[15rem] flex-col overflow-hidden rounded-[var(--radius-card)] p-7', momentTone[i]]} style={`transition-delay:${(i % 3) * 80}ms`}>
-            {photo && <><img src={photo} alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" /><div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950/90 via-pine-950/60 to-pine-950/50"></div></>}
+            {photo && <><img src={photo} alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" /><div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950/95 via-pine-950/75 to-pine-950/50"></div></>}
             <p class="text-xs font-bold uppercase tracking-[0.14em] opacity-90">{m.when}</p>
             <h3 class="mt-auto pt-10 text-2xl font-extrabold tracking-tight">{m.title}</h3>
             <p class="mt-2 text-[0.9375rem] leading-relaxed opacity-95">{m.text}</p>

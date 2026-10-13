@@ -32,31 +32,31 @@ const stats = [
     cta2={{ href: site.golfPhoneHref, label: c.hero.cta2, icon: 'phone' }} />
 
   <!-- The course + scorecard -->
-  <section class="container-x section-y grid gap-12 lg:grid-cols-12 lg:gap-20">
-    <div class="min-w-0 lg:col-span-7">
+  <section class="container-x section-y grid gap-12 xl:grid-cols-12 xl:gap-20">
+    <div class="min-w-0 xl:col-span-7">
       <SectionHeading eyebrow={c.course.eyebrow} title={c.course.title} intro={c.course.text} />
       <dl class="reveal mt-10 grid max-w-xl grid-cols-3 gap-3">
         {stats.map((s) => <div class="min-w-0 rounded-2xl bg-pine-100 p-4 sm:p-5"><dt class="text-[1.75rem] font-extrabold leading-none tracking-[-0.04em] text-pine-900 sm:text-[2.5rem]">{s.v}</dt><dd class="mt-2 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-pine-700 [overflow-wrap:anywhere] sm:text-xs">{s.l}</dd></div>)}
       </dl>
     </div>
-    <div class="reveal min-w-0 self-center lg:col-span-5">
+    <div class="reveal min-w-0 max-w-2xl self-center xl:col-span-5 xl:max-w-none">
       <div class="overflow-hidden rounded-[var(--radius-card)] border border-ink-950/8 bg-white shadow-[0_30px_60px_-40px_rgb(23_32_27/.45)]">
         <h3 class="bg-pine-900 px-6 py-4 text-lg text-cream-50">{c.teesTitle}</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm sm:text-[0.9375rem]">
             <thead class="text-left text-[0.625rem] uppercase tracking-[0.08em] text-ink-600 sm:text-[0.6875rem] sm:tracking-[0.14em]">
-              <tr class="border-b border-ink-950/10">{c.teeCols.map((h, i) => <th scope="col" class:list={[i === 0 ? 'pl-4 pr-2 py-3' : 'px-2 py-3', 'align-bottom font-semibold sm:px-4', i > 0 && 'text-right']}>{h}</th>)}</tr>
+              <tr class="border-b border-ink-950/10">{c.teeCols.map((h, i) => <th scope="col" class:list={[i === 0 ? 'pl-3 pr-1.5 py-3' : 'px-1.5 py-3', 'align-bottom font-semibold sm:px-4', i > 0 && 'text-right']}>{h}</th>)}</tr>
             </thead>
             <tbody class="divide-y divide-ink-950/8 tabular-nums">
               {site.golf.tees.map((tee) => (
                 <tr>
-                  <th scope="row" class="py-3.5 pl-4 pr-2 text-left font-semibold text-pine-950 sm:px-4">
+                  <th scope="row" class="py-3.5 pl-3 pr-1.5 text-left font-semibold text-pine-950 sm:px-4">
                     <span class="inline-flex items-center gap-2.5"><span class="h-3.5 w-3.5 rounded-full ring-1 ring-ink-950/25" style={`background:${swatch[tee.name]}`}></span>{lang === 'es' ? tee.es : tee.name}</span>
                   </th>
-                  <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{fmt(tee.metres)} m</td>
-                  <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{tee.par}</td>
-                  <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{fmtRating(tee.cr)}</td>
-                  <td class="whitespace-nowrap px-2 py-3.5 text-right sm:px-4">{tee.slope}</td>
+                  <td class="whitespace-nowrap px-1.5 py-3.5 text-right sm:px-4">{fmt(tee.metres)} m</td>
+                  <td class="whitespace-nowrap px-1.5 py-3.5 text-right sm:px-4">{tee.par}</td>
+                  <td class="whitespace-nowrap px-1.5 py-3.5 text-right sm:px-4">{fmtRating(tee.cr)}</td>
+                  <td class="whitespace-nowrap px-1.5 py-3.5 text-right sm:px-4">{tee.slope}</td>
                 </tr>
               ))}
             </tbody>
@@ -68,7 +68,7 @@ const stats = [
 
   <!-- Facilities -->
   <section class="on-dark section-y relative isolate overflow-hidden bg-pine-950 text-cream-50">
-    <img src={img.course2} alt="" class="img-cover absolute inset-0 -z-10 opacity-40" loading="lazy" decoding="async" />
+    <img src={img.lake} alt="" class="img-cover absolute inset-0 -z-10 opacity-40" loading="lazy" decoding="async" />
     <div class="absolute inset-0 -z-10 bg-gradient-to-b from-pine-950/80 via-pine-950/85 to-pine-950"></div>
     <div class="container-x">
       <SectionHeading eyebrow={c.facilities.eyebrow} title={c.facilities.title} />

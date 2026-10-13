@@ -72,11 +72,11 @@ export const site = {
       { label: 'Golf office', value: 'Daily from 08:00' },
     ],
     es: [
-      { label: 'Bar y terraza', value: 'Todos los días desde las 8:00' },
+      { label: 'Bar y terraza', value: 'A diario desde las 8:00' },
       { label: 'Cocina', value: 'Desde las 8:00' },
-      { label: 'Quiz de los jueves', value: 'Carta completa desde las 18:00' },
-      { label: 'Noches de eventos', value: 'Abierto hasta tarde' },
-      { label: 'Oficina de golf', value: 'Todos los días desde las 8:00' },
+      { label: 'Quiz de los jueves', value: 'Carta desde las 18:00' },
+      { label: 'Noches de eventos', value: 'Hasta tarde' },
+      { label: 'Oficina de golf', value: 'A diario desde las 8:00' },
     ],
   },
 
@@ -106,6 +106,9 @@ export const site = {
 } as const;
 
 export type Site = typeof site;
+
+/** An email address as HTML that may only wrap after the "@" or before the domain ending. */
+export const breakable = (email: string) => email.replace('@', '@<wbr>').replace(/\.(?=[^.]+$)/, '<wbr>.');
 
 /** WhatsApp link with the booking template pre-filled in the visitor's language. */
 export const whatsappBookingHref = (lang: 'en' | 'es') =>

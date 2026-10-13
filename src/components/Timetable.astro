@@ -9,10 +9,10 @@ const t = useTranslations(lang);
 const dark = tone === 'dark';
 ---
 <div class="mt-12 sm:mt-14">
-  <ol data-week tabindex="0" aria-label={t('week.label')} class="snap-row relative pt-3 lg:mx-0 lg:grid lg:grid-cols-7 lg:gap-3 lg:overflow-visible lg:px-0 lg:pb-0">
+  <ol data-week tabindex="0" aria-label={t('week.label')} class="snap-row relative pt-3 lg:-mx-12 lg:scroll-px-12 lg:px-12 xl:mx-0 xl:grid xl:grid-cols-7 xl:gap-3 xl:overflow-visible xl:px-0 xl:pb-0">
     {programme.map((d) => (
       <li data-day={d.day}
-          class:list={['relative flex min-h-[14rem] w-[70%] flex-col rounded-[1.5rem] border p-5 transition-colors sm:w-[40%] lg:w-auto',
+          class:list={['relative flex min-h-[14rem] w-[70%] flex-col rounded-[1.5rem] border p-5 transition-colors sm:w-[40%] lg:w-[28%] xl:w-auto',
             dark ? 'border-cream-50/12 bg-cream-50/[.04] text-cream-50 data-today:border-ochre-300/70 data-today:bg-cream-50/10'
                  : 'border-ink-950/10 bg-white text-ink-950 data-today:border-clay-600 data-today:shadow-[0_20px_40px_-24px_rgb(169_74_40/.5)]']}>
         <p class="text-xl font-extrabold tracking-tight">{dayNames[lang].long[d.day - 1]}</p>

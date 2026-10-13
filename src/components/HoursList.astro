@@ -9,8 +9,8 @@ const dark = tone === 'dark';
 <dl class:list={['divide-y text-[0.9375rem]', dark ? 'divide-ink-950/10' : 'divide-cream-50/10', cls]}>
   {site.hours[lang].map((h) => (
     <div class="flex items-baseline justify-between gap-4 py-2.5">
-      <dt class={dark ? 'text-ink-600' : 'text-cream-50/70'}>{h.label}</dt>
-      <dd class:list={['text-right font-semibold', dark ? 'text-pine-950' : 'text-cream-50']}>{h.value}</dd>
+      <dt class:list={['min-w-0', dark ? 'text-ink-600' : 'text-cream-50/70']}>{h.label}</dt>
+      <dd class:list={['whitespace-nowrap text-right font-semibold', dark ? 'text-pine-950' : 'text-cream-50']}>{h.value}</dd>
     </div>
   ))}
 </dl>

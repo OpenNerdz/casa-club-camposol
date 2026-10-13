@@ -13,7 +13,7 @@ export const img = {
   restaurant: `${b}/images/restaurant.webp`,
   food: `${b}/images/food.webp`,
   course: `${b}/images/course.webp`,
-  course2: `${b}/images/course-2.webp`,
+  lake: `${b}/images/lake.webp`,
   events: `${b}/images/events.webp`,
   exterior: `${b}/images/exterior.webp`,
   golfPortrait: `${b}/images/golf-portrait.webp`,

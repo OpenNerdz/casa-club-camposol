@@ -8,15 +8,13 @@ import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
 import { contact } from '../content/contact';
 import { img, srcset } from '../data/images';
-import { site, whatsappBookingHref } from '../data/site';
+import { site, whatsappBookingHref, breakable } from '../data/site';
 import { useTranslations, type Lang } from '../i18n/utils';
 import { businessJsonLd } from '../data/jsonld';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = contact[lang];
 const t = useTranslations(lang);
-// Long email addresses may only wrap after the "@" or before the domain ending, never mid-word.
-const breakable = (email: string) => email.replace('@', '@<wbr>').replace(/\.(?=[^.]+$)/, '<wbr>.');
 const groups = [
   { title: c.cards.club, sub: c.cards.clubSub, links: [
     { href: site.phoneHref, icon: 'phone', label: site.phoneDisplay },

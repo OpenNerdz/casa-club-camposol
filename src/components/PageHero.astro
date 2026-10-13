@@ -17,7 +17,7 @@ const linkAttrs = (c: Cta) => ({ href: c.href, 'data-book': c.book ? '' : undefi
       <h1 class="h-display rise mt-5" style="--i:1">{title}</h1>
       {sub && <p class="lede rise mt-6 max-w-xl" style="--i:2">{sub}</p>}
       {(cta1 || cta2) && (
-        <div class="rise mt-9 flex flex-wrap gap-3" style="--i:3">
+        <div class="rise mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap" style="--i:3">
           {cta1 && <a {...linkAttrs(cta1)} class="btn-primary">{cta1.icon && <Icon name={cta1.icon} size={17} />}{cta1.label}</a>}
           {cta2 && <a {...linkAttrs(cta2)} class="btn-glass">{cta2.icon && <Icon name={cta2.icon} size={17} />}{cta2.label}</a>}
         </div>

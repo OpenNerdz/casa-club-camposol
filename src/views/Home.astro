@@ -37,10 +37,10 @@ const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
 
     <div class="container-x grid gap-8 pb-8 pt-40 sm:pb-12 lg:grid-cols-12 lg:items-end lg:gap-10 lg:pb-16">
       <div class="lg:col-span-8">
-        <p class="eyebrow rise">{c.hero.eyebrow}</p>
+        <p class="eyebrow rise [text-shadow:0_1px_10px_rgb(12_36_27/.9)]">{c.hero.eyebrow}</p>
         <h1 class="h-hero rise mt-5 max-w-4xl" style="--i:1">{c.hero.title}</h1>
         <p class="lede rise mt-6 max-w-xl" style="--i:2">{c.hero.sub}</p>
-        <div class="rise mt-8 flex flex-wrap gap-3" style="--i:3">
+        <div class="rise mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap" style="--i:3">
           <a href={enquiry('table')} data-book class="btn-primary">{c.hero.cta1} <Icon name="arrow" size={17} /></a>
           <a href={localePath(lang, '/events/')} class="btn-glass"><Icon name="calendar" size={17} /> {c.hero.cta2}</a>
         </div>
@@ -55,7 +55,7 @@ const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
       <SectionHeading eyebrow={c.intro.eyebrow} title={c.intro.title} class="lg:col-span-6" />
       <p class="lede reveal lg:col-span-6">{c.intro.text}</p>
     </div>
-    <ul class="snap-row mt-12 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:grid-rows-[repeat(2,18rem)]">
+    <ul class="snap-row mt-12 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:grid-rows-[repeat(2,20rem)]">
       {c.experiences.map((x, i) => (
         <li class:list={['w-[80%] sm:w-auto', tileLayout[i]]}>
           <a href={localePath(lang, x.href)} class="group relative isolate flex aspect-[3/4] h-full flex-col overflow-hidden rounded-[var(--radius-card)] bg-pine-900 text-cream-50 sm:aspect-auto sm:min-h-[20rem] lg:min-h-0">

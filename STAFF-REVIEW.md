@@ -22,9 +22,12 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
       and dining-room photos show identifiable customers; confirm you are comfortable publishing them (they
       were already public on your own pages). Higher-resolution originals of the terrace/bar/live-music photos
       would improve the hero images: the current ones are 720 px reel covers.
-- [ ] **Legal pages**: company name and CIF B19345867 are confirmed (BORME 17-09-2024, Iberinform). The
-      registry sheet **Hoja MU-114423** could not be found in any public source: check it against your
-      deeds. Have the privacy policy checked by your gestoría / legal adviser.
+- [ ] **Legal pages**: company name, NIF B19345867 and registered office (C/ Aljibe s/n, Urb. Camposol) are
+      confirmed (BORME 17-09-2024, Iberinform). The registry sheet **Hoja MU-114423** could not be found in
+      any public source: check it against your deeds and add tomo/folio if you have them (`registry` in
+      `site.ts`). The privacy policy now covers processors, international transfers (US hosting/form/map
+      providers) and withdrawing consent, and the form shows a short data-protection notice; still have it
+      checked by your gestoría / legal adviser.
 - [ ] **Menu**: the restaurant page no longer lists sample dishes (they were placeholders, not your menu). It
       now points visitors to the daily menu on Facebook. Add a real menu (a list or a PDF) when ready.
 - [ ] **Opening hours for search engines**: fill `openingHours` in `src/data/site.ts` (for example
@@ -48,7 +51,8 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
 - [ ] Email **eventos@casaclubcamposolgolf.com**: confirmed (Facebook, Camposol Hub). Golf email shown:
       **info@casaclubcamposolgolf.com** (the golf club's Facebook page; its Instagram says info@camposolgolfclub.com).
 - [ ] Golf academy: PGA professional **Jerónimo Janssens Koster**, lessons **+34 604 81 82 05** (the academy's
-      Facebook page). Lesson prices seen on his website in 2025 (30 min €30, 50 min €50) are not shown.
+      Facebook page). "Junior coaching" comes from his website (Sundays 11:30–13:00, September to June, 2025).
+      Lesson prices seen there (30 min €30, 50 min €50) are not shown.
 - [ ] Address: Calle Aljibe s/n, Urb. Camposol Sector C, **30875** Mazarrón. Postcode directories give 30875 for
       Urbanización Camposol; 30870 (used by some golf directories) is Mazarrón town.
 - [ ] Map pin 37.670098, −1.354977: matches the Google and Tripadvisor pins to within a few metres.
@@ -81,7 +85,8 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
 - [ ] From your Facebook cover: **The Jersey Boys Experience** Halloween special (the poster gives no date, so the
       card says "Halloween" and disappears after 31 Oct; set the exact date in `events.ts` if you like), **Commitment Issues** (Sat 14 Nov, €15, bookings by WhatsApp with Venuvo Events on
       +34 604 52 22 87) and **The Troupers Swing Band** (Sat 19 Dec, 20:00, €7).
-- [ ] Christmas Day lunch 25 Dec, 3 courses + cava, €65 pp (camposolhub). This could not be found again; confirm it.
+- [ ] Christmas Day lunch 25 Dec: the €65 / 3 courses + cava details seen earlier on camposolhub could not be found
+      again, so the card now says "menu and price coming soon". Add the real menu and price in `events.ts`.
 - [ ] Community: Age Concern and FMA events confirmed; Bereavement Café confirmed for 5 Oct 2026 ("monthly"
       removed); kids' talent show confirmed; Camposol Golf Association plays a nine-hole "Monday Mayhem".
 
@@ -116,8 +121,9 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
       entertainment in the evenings"), written by Frank B., probably in June 2025.
 - [ ] Golfshake: trimmed to the confirmed words ("…excellent clubhouse providing good food and drinks
       selection"). The "much improved" part could not be confirmed.
-- [ ] Google (Feb 2026), "The new owners are a credit to the course…": Google reviews are not searchable,
-      so check the wording against your Google profile or replace it.
+- [ ] The unverifiable Google quote was removed. In its place: a May 2025 Tripadvisor review ("Since the new
+      Spanish owners have taken over… really turned things around. The food is fab."). Add your own favourite
+      reviews in `src/content/home.ts` if you prefer.
 - [ ] The Spanish versions are translations and are labelled "(traducida)".
 
 ### Getting here (contact page)

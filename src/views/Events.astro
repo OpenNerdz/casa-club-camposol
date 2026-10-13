@@ -10,6 +10,7 @@ import { events } from '../content/events';
 import { img } from '../data/images';
 import { site } from '../data/site';
 import { localePath, useTranslations, type Lang } from '../i18n/utils';
+import { madridDate } from '../scripts/madrid';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = events[lang];
@@ -20,7 +21,7 @@ const locale = lang === 'es' ? 'es-ES' : 'en-GB';
 type Highlight = { date?: string; time?: string; when?: string; title: string; text: string; tag: string };
 const items: readonly Highlight[] = c.upcoming.items;
 // Past one-off events are dropped at build time, and in the browser by Base.astro's script.
-const buildDay = new Date().toISOString().slice(0, 10);
+const buildDay = madridDate();
 const highlights = items
   .filter((e) => !e.date || e.date >= buildDay)
   .map((e) => {

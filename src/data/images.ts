@@ -11,7 +11,6 @@ export const img = {
   terrace: `${b}/images/terrace.webp`,
   bar: `${b}/images/bar.webp`,
   restaurant: `${b}/images/restaurant.webp`,
-  food: `${b}/images/food.webp`,
   course: `${b}/images/course.webp`,
   lake: `${b}/images/lake.webp`,
   events: `${b}/images/events.webp`,
@@ -19,6 +18,9 @@ export const img = {
   golfPortrait: `${b}/images/golf-portrait.webp`,
   functionRoom: `${b}/images/gallery/event-dance-floor-indoor-01.webp`,
   party: `${b}/images/gallery/event-dancing-night-01.webp`,
+  pergola: `${b}/images/gallery/terrace-arcade-tables-01.webp`,
+  sunsetPalm: `${b}/images/gallery/terrace-sunset-palm-01.webp`,
+  courseView: `${b}/images/gallery/golf-course-buggy-camposol-view-01.webp`,
   clubhouseBuggies: `${b}/images/gallery/clubhouse-exterior-buggies-01.webp`,
   // Social-share (Open Graph) images: JPEG, about 1200×630
   og: `${b}/images/og-default.jpg`,

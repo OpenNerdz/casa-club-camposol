@@ -27,7 +27,6 @@ for pair in \
   "terrace-tables-colonnade-01.jpg:terrace.webp" \
   "terrace-guests-colonnade-01.jpg:restaurant.webp" \
   "restaurant-interior-crowd-01.jpg:bar.webp" \
-  "restaurant-diners-01.jpg:food.webp" \
   "live-music-terrace-singer-01.jpg:events.webp" \
   "live-music-gazebo-day-01.jpg:hero-events.webp"; do
   enc "${pair%%:*}" "${pair##*:}" "scale=iw:ih"

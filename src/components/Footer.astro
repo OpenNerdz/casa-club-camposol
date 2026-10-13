@@ -46,8 +46,8 @@ const heading = 'font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18
 
     <div class="xl:col-span-2">
       <h2 class={heading}>{t('footer.explore')}</h2>
-      <ul class="mt-5 space-y-2.5 text-[0.9375rem]">
-        {explore.map((l) => <li><a href={l.href} class="text-cream-50/80 transition-colors hover:text-ochre-300">{l.label}</a></li>)}
+      <ul class="mt-5 space-y-1 text-[0.9375rem]">
+        {explore.map((l) => <li><a href={l.href} class="inline-block py-1 text-cream-50/80 transition-colors hover:text-ochre-300">{l.label}</a></li>)}
       </ul>
     </div>
 
@@ -76,8 +76,8 @@ const heading = 'font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18
     <div class="container-x flex flex-col gap-3 py-6 text-xs text-cream-50/55 sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {site.legalName} {t('footer.rights')}</p>
       <nav class="flex gap-5" aria-label={t('footer.legalNav')}>
-        <a href={localePath(lang, '/legal/')} class="hover:text-cream-50">{t('footer.legal')}</a>
-        <a href={localePath(lang, '/privacy/')} class="hover:text-cream-50">{t('footer.privacy')}</a>
+        <a href={localePath(lang, '/legal/')} class="py-2 hover:text-cream-50">{t('footer.legal')}</a>
+        <a href={localePath(lang, '/privacy/')} class="py-2 hover:text-cream-50">{t('footer.privacy')}</a>
       </nav>
     </div>
   </div>

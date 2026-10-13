@@ -23,10 +23,10 @@ const swatch: Record<string, string> = { White: '#ffffff', Yellow: '#f2c94c', Bl
 const stats = [
   { v: site.golf.holes, l: c.statLabels.holes },
   { v: site.golf.par, l: c.statLabels.par },
-  { v: 7, l: c.statLabels.days },
+  { v: 15, l: c.statLabels.coast },
 ];
 ---
-<Base title={c.meta.title} description={c.meta.description} image={img.ogGolf} jsonLd={businessJsonLd(lang)}>
+<Base title={c.meta.title} description={c.meta.description} image={img.ogGolf} jsonLd={businessJsonLd(lang)} bar="golf">
   <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.golfPortrait} alt={c.alts.hero} position="center 35%"
     cta1={{ href: site.teeTimeUrl, label: c.hero.cta1, icon: 'calendar', external: true }}
     cta2={{ href: site.golfPhoneHref, label: c.hero.cta2, icon: 'phone' }} />
@@ -79,6 +79,7 @@ const stats = [
             <h3 class="mt-5 text-xl">{f.title}</h3>
             <p class="mt-2 text-[0.9375rem] leading-relaxed text-cream-50/75">{f.text}</p>
             {f.icon === 'users' && <a href={site.academyPhoneHref} class="mt-3 inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-ochre-300 hover:text-ochre-100"><Icon name="phone" size={15} /> {c.academy}: {site.academyPhoneDisplay}</a>}
+            {f.icon === 'utensils' && <a href={localePath(lang, '/restaurant/')} class="mt-3 inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-ochre-300 hover:text-ochre-100">{f.title} <Icon name="arrow" size={15} /></a>}
           </li>
         ))}
       </ul>
@@ -108,6 +109,7 @@ const stats = [
         <div class="mt-auto grid gap-2.5 pt-6">
           <a href={site.teeTimeUrl} class="btn-light" target="_blank" rel="noopener"><Icon name="calendar" size={16} /> {c.booking.online}</a>
           <a href={site.golfPhoneHref} class="btn-glass"><Icon name="phone" size={16} /> {site.golfPhoneDisplay}</a>
+          <a href={site.social.facebookGolf} target="_blank" rel="noopener" class="mt-1 inline-flex items-center justify-center gap-2 py-2 text-sm font-semibold text-cream-50/80 hover:text-ochre-300"><Icon name="facebook" size={15} /> {c.booking.facebook} <Icon name="external" size={13} /></a>
         </div>
       </div>
     </div>

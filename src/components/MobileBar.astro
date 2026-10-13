@@ -3,10 +3,15 @@
 import Icon from './Icon.astro';
 import { site, whatsappBookingHref } from '../data/site';
 import { useTranslations, type Lang } from '../i18n/utils';
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props { lang: Lang; variant?: 'club' | 'golf' }
+const { lang, variant = 'club' } = Astro.props;
 const t = useTranslations(lang);
-const actions = [
+// The golf page swaps the restaurant actions for the golf office's, so "Call" never rings the wrong number
+const actions = variant === 'golf' ? [
+  { href: site.teeTimeUrl, icon: 'calendar', label: t('bar.teeTimes'), external: true },
+  { href: site.golfPhoneHref, icon: 'phone', label: t('bar.golf') },
+  { href: site.directionsUrl, icon: 'navigation', label: t('bar.directions'), external: true },
+] : [
   { href: site.phoneHref, icon: 'phone', label: t('bar.call') },
   { href: whatsappBookingHref(lang), icon: 'whatsapp', label: t('bar.whatsapp'), external: true },
   { href: site.directionsUrl, icon: 'navigation', label: t('bar.directions'), external: true },

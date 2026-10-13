@@ -7,7 +7,7 @@ export const restaurant = {
     moments: [
       { when: 'From 08:00', title: 'Breakfast', text: 'Full English, tostadas con tomate and proper coffee from 08:00. Perfect before an early tee time.' },
       { when: 'Mon–Fri lunch', title: 'Menú del día', text: 'A weekday lunch that changes daily: a choice of starters and mains, with dessert or coffee included.' },
-      { when: 'Fridays', title: 'Fish & chips Friday', text: 'Fish & chips with all the trimmings every Friday, followed by bingo at 15:30 and live music from 16:30.' },
+      { when: 'Fridays', title: 'Fish & chips', text: 'Fish & chips with all the trimmings every Friday, followed by bingo at 15:30 and live music from 16:30.' },
       { when: 'Sundays', title: 'Sunday carvery', text: 'Roast meats carved to order with all the trimmings. Booking strongly recommended.' },
       { when: 'All day', title: 'The terrace', text: 'A big, sunny terrace overlooking the course, with shade under the colonnade. Ideal for a long lunch or a cold drink after your round.' },
       { when: 'Event nights', title: 'Evenings', text: 'Quiz nights on Mondays and Thursdays (full menu from 18:00 on Thursdays), live music and tribute shows, with a full bar of draught beer, Spanish wines, spirits and gin & tonics.' },
@@ -25,7 +25,7 @@ export const restaurant = {
     booking: { title: 'Book a table', text: 'For Sunday carvery, groups of six or more and event nights, please book ahead. Message us on WhatsApp or call, and we will confirm your table.', cta1: 'WhatsApp a booking', cta2: 'Call the clubhouse' },
     hoursTitle: 'Opening hours',
     day: { eyebrow: 'From morning to night', title: 'A day at the clubhouse' },
-    alts: { hero: 'The colonnade terrace full of guests on a sunny afternoon', food: 'Friends at dinner on the covered terrace', bar: 'A busy evening on the covered terrace' },
+    alts: { hero: 'The colonnade terrace full of guests on a sunny afternoon', food: 'Sunset over the course from the terrace', bar: 'A busy evening on the covered terrace' },
   },
   es: {
     meta: { title: 'Restaurante y bar', description: 'Restaurante, bar y terraza en Casa Club Camposol: desayunos, menú del día entre semana, fish & chips los viernes y carvery del domingo con vistas al campo.' },
@@ -34,7 +34,7 @@ export const restaurant = {
     moments: [
       { when: 'Desde las 8:00', title: 'Desayunos', text: 'Desayuno inglés completo, tostadas con tomate y buen café desde las 8:00. Perfecto antes de una salida temprana.' },
       { when: 'Mediodía, lun–vie', title: 'Menú del día', text: 'Un menú de mediodía que cambia cada día: primeros y segundos a elegir, con postre o café incluido.' },
-      { when: 'Viernes', title: 'Viernes de fish & chips', text: 'Fish & chips con sus guarniciones todos los viernes, seguido de bingo a las 15:30 y música en directo desde las 16:30.' },
+      { when: 'Viernes', title: 'Fish & chips', text: 'Fish & chips con sus guarniciones todos los viernes, seguido de bingo a las 15:30 y música en directo desde las 16:30.' },
       { when: 'Domingos', title: 'Carvery del domingo', text: 'Asados cortados al momento con todas sus guarniciones. Muy recomendable reservar.' },
       { when: 'Todo el día', title: 'La terraza', text: 'Una terraza amplia y soleada con vistas al campo y sombra bajo los soportales. Ideal para una comida larga o algo fresquito después de la partida.' },
       { when: 'Noches de eventos', title: 'Las noches', text: 'Noches de quiz los lunes y los jueves (los jueves, carta completa desde las 18:00), música en directo y tributos, con una barra bien surtida: cerveza de grifo, vinos españoles, copas y gin-tonics.' },
@@ -52,6 +52,6 @@ export const restaurant = {
     booking: { title: 'Reserva tu mesa', text: 'Para el carvery del domingo, grupos de seis o más y noches de eventos, reserva con antelación. Escríbenos por WhatsApp o llámanos y te confirmaremos la mesa.', cta1: 'Reservar por WhatsApp', cta2: 'Llamar a la casa club' },
     hoursTitle: 'Horario',
     day: { eyebrow: 'De la mañana a la noche', title: 'Un día en la casa club' },
-    alts: { hero: 'La terraza porticada llena de clientes en una tarde de sol', food: 'Amigos cenando en la terraza cubierta', bar: 'Una noche animada en la terraza cubierta' },
+    alts: { hero: 'La terraza porticada llena de clientes en una tarde de sol', food: 'Atardecer sobre el campo desde la terraza', bar: 'Una noche animada en la terraza cubierta' },
   },
 } as const;

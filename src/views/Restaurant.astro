@@ -13,8 +13,9 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = restaurant[lang];
 const t = useTranslations(lang);
-// Breakfast, menú del día, fish & chips and carvery in colour; the terrace and evenings as photos.
-const momentTone = ['bg-ochre-100 text-pine-950', 'bg-white text-pine-950 border border-ink-950/8', 'bg-clay-100 text-pine-950', 'bg-pine-900 text-cream-50', 'text-cream-50', 'text-cream-50'];
+// Breakfast, menú del día and fish & chips as light cards, the carvery in pine, the terrace and evenings as photos.
+const light = 'bg-white text-pine-950 border border-ink-950/8';
+const momentTone = [light, light, light, 'bg-pine-900 text-cream-50', 'text-cream-50', 'text-cream-50'];
 const momentPhotos = [undefined, undefined, undefined, undefined, img.restaurant, img.bar];
 ---
 <Base title={c.meta.title} description={c.meta.description} image={img.ogRestaurant}>
@@ -28,7 +29,7 @@ const momentPhotos = [undefined, undefined, undefined, undefined, img.restaurant
       <SectionHeading eyebrow={c.intro.eyebrow} title={c.intro.title} intro={c.intro.text} />
     </div>
     <div class="reveal grid grid-cols-2 gap-4 lg:col-span-6">
-      <div class="frame aspect-[3/4] bg-cream-200"><img src={img.food} alt={c.alts.food} class="img-cover" loading="lazy" decoding="async" /></div>
+      <div class="frame aspect-[3/4] bg-cream-200"><img src={img.sunsetPalm} alt={c.alts.food} class="img-cover" loading="lazy" decoding="async" /></div>
       <div class="frame aspect-[3/4] bg-cream-200"><img src={img.bar} alt={c.alts.bar} class="img-cover" loading="lazy" decoding="async" /></div>
     </div>
   </section>
@@ -39,10 +40,10 @@ const momentPhotos = [undefined, undefined, undefined, undefined, img.restaurant
       {c.moments.map((m, i) => {
         const photo = momentPhotos[i];
         return (
-          <li class:list={['reveal relative isolate flex min-h-[15rem] flex-col overflow-hidden rounded-[var(--radius-card)] p-7', momentTone[i]]} style={`transition-delay:${(i % 3) * 80}ms`}>
+          <li class:list={['reveal relative isolate flex flex-col overflow-hidden rounded-[var(--radius-card)] p-7 sm:min-h-[15rem]', photo && 'min-h-[14rem]', momentTone[i]]} style={`transition-delay:${(i % 3) * 80}ms`}>
             {photo && <><img src={photo} alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" /><div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950/95 via-pine-950/75 to-pine-950/50"></div></>}
-            <p class="text-xs font-bold uppercase tracking-[0.14em] opacity-90">{m.when}</p>
-            <h3 class="mt-auto pt-10 text-2xl font-extrabold tracking-tight">{m.title}</h3>
+            <p class:list={['text-xs font-bold uppercase tracking-[0.14em]', momentTone[i] === light ? 'text-clay-700' : 'opacity-90']}>{m.when}</p>
+            <h3 class="mt-auto pt-5 text-2xl font-extrabold tracking-tight sm:pt-10">{m.title}</h3>
             <p class="mt-2 text-[0.9375rem] leading-relaxed opacity-95">{m.text}</p>
           </li>
         );

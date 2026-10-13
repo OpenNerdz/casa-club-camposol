@@ -22,10 +22,10 @@ const groups = [
     { href: `mailto:${site.email}`, icon: 'mail', label: site.email, html: breakable(site.email) },
   ] },
   { title: c.cards.golf, sub: c.cards.golfSub, links: [
-    { href: site.golfPhoneHref, icon: 'phone', label: site.golfPhoneDisplay },
-    { href: site.golfLandlineHref, icon: 'phone', label: site.golfLandlineDisplay },
+    { href: site.golfPhoneHref, icon: 'phone', label: site.golfPhoneDisplay, sub: c.cards.mobile },
+    { href: site.golfLandlineHref, icon: 'phone', label: site.golfLandlineDisplay, sub: c.cards.landline },
     { href: `mailto:${site.golfEmail}`, icon: 'mail', label: site.golfEmail, html: breakable(site.golfEmail) },
-    { href: site.teeTimeUrl, icon: 'calendar', label: t('cta.teeTimes'), external: true },
+    { href: site.teeTimeUrl, icon: 'calendar', label: c.cards.book, external: true },
   ] },
 ];
 ---
@@ -44,8 +44,8 @@ const groups = [
               <li><a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener' : undefined}
                 class:list={['group flex min-h-14 items-center gap-4 rounded-2xl px-4 py-3 font-semibold transition-colors', i === 0 ? 'bg-cream-50/8 hover:bg-cream-50/15' : 'bg-cream-100 hover:bg-cream-200']}>
                 <span class:list={['grid h-9 w-9 shrink-0 place-items-center rounded-full', i === 0 ? 'bg-ochre-300 text-pine-950' : 'bg-pine-900 text-cream-50']}><Icon name={l.icon} size={17} /></span>
-                {'html' in l ? <span class="min-w-0 flex-1 text-[0.9375rem]" set:html={l.html} /> : <span class="min-w-0 flex-1">{l.label}</span>}
-                <Icon name="arrow" size={16} class="hidden shrink-0 opacity-50 transition group-hover:translate-x-0.5 group-hover:opacity-100 sm:block" /></a></li>
+                {'html' in l ? <span class="min-w-0 flex-1 text-[0.9375rem]" set:html={l.html} /> : <span class="min-w-0 flex-1">{l.label}{'sub' in l && l.sub && <span class:list={['ml-2 text-xs font-normal', i === 0 ? 'text-cream-50/70' : 'text-ink-600']}>{l.sub}</span>}</span>}
+                <Icon name={l.external ? 'external' : 'arrow'} size={16} class="hidden shrink-0 opacity-50 transition group-hover:translate-x-0.5 group-hover:opacity-100 sm:block" /></a></li>
             ))}
           </ul>
         </div>
@@ -76,7 +76,7 @@ const groups = [
   <section id="enquiry" class="section-y bg-cream-100">
     <div class="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
       <div class="lg:col-span-5">
-        <SectionHeading eyebrow={t('cta.enquire')} title={c.formTitle} intro={c.formText} />
+        <SectionHeading eyebrow={t('cta.enquire')} title={c.formTitle} intro={site.formEndpoint ? c.formText : `${c.formText} ${t('form.quick')}`} />
         <div class="mt-9 flex flex-wrap gap-3">
           <a href={whatsappBookingHref(lang)} class="btn-primary" target="_blank" rel="noopener"><Icon name="whatsapp" size={16} /> WhatsApp</a>
           <a href={site.phoneHref} class="btn-line"><Icon name="phone" size={16} /> {t('cta.call')}</a>

@@ -18,8 +18,10 @@ interface Props {
   noindex?: boolean;
   /** 'dark' when the page opens on a dark hero, so the header starts out white. */
   tone?: 'dark' | 'light';
+  /** Phone action bar: 'golf' swaps the restaurant actions for tee times and the golf office. */
+  bar?: 'club' | 'golf';
 }
-const { title, description, image = withBase('/images/og-default.jpg'), jsonLd, noindex = false, tone = 'dark' } = Astro.props;
+const { title, description, image = withBase('/images/og-default.jpg'), jsonLd, noindex = false, tone = 'dark', bar = 'club' } = Astro.props;
 // Staging builds (e.g. GitHub Pages) set PUBLIC_NOINDEX=1 so search engines ignore them.
 const hideFromSearch = noindex || import.meta.env.PUBLIC_NOINDEX === '1';
 const lang: Lang = getLangFromUrl(Astro.url);
@@ -69,7 +71,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       <slot />
     </main>
     <Footer lang={lang} />
-    <MobileBar lang={lang} />
+    <MobileBar lang={lang} variant={bar} />
     <BookDialog lang={lang} />
     <script>
       import { madridDate, madridWeekday } from '../scripts/madrid';
@@ -93,6 +95,10 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         document.querySelectorAll('[data-day]').forEach((el) => el.toggleAttribute('data-today', (el as HTMLElement).dataset.day === day));
         document.querySelectorAll<HTMLElement>('[data-today-for]').forEach((el) => { el.hidden = el.dataset.todayFor !== day; });
         const today = madridDate();
+        // A dated highlight today (tribute night, Christmas lunch…) replaces the regular line-up in the Today card
+        let special = false;
+        document.querySelectorAll<HTMLElement>('[data-today-date]').forEach((el) => { el.hidden = el.dataset.todayDate !== today; special ||= !el.hidden; });
+        document.querySelectorAll<HTMLElement>('[data-regular]').forEach((el) => { el.hidden = special; });
         document.querySelectorAll<HTMLElement>('[data-until]').forEach((el) => { if (el.dataset.until! < today) el.remove(); });
         // If that empties a list of highlights, show its "nothing announced yet" message instead.
         document.querySelectorAll<HTMLElement>('[data-highlights]').forEach((box) => {
@@ -103,8 +109,8 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       refresh();
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') refresh(); });
       window.addEventListener('pageshow', (e) => { if (e.persisted) refresh(); });
-      // On phones the week is a sideways row: open it on today's card.
-      document.querySelectorAll<HTMLElement>('[data-week]').forEach((row) => {
+      // On phones the week is a sideways row: open it on today's card (larger screens see several cards, so they start on Monday).
+      if (innerWidth < 768) document.querySelectorAll<HTMLElement>('[data-week]').forEach((row) => {
         const card = row.querySelector<HTMLElement>('[data-today]');
         if (card && row.scrollWidth > row.clientWidth) row.scrollLeft = card.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft);
       });

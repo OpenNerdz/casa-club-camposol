@@ -8,7 +8,7 @@ import CheckList from '../components/CheckList.astro';
 import Icon from '../components/Icon.astro';
 import { events } from '../content/events';
 import { img } from '../data/images';
-import { site } from '../data/site';
+import { site, whatsappEventHref } from '../data/site';
 import { localePath, useTranslations, type Lang } from '../i18n/utils';
 import { madridDate } from '../scripts/madrid';
 interface Props { lang: Lang }
@@ -18,7 +18,9 @@ const t = useTranslations(lang);
 const locale = lang === 'es' ? 'es-ES' : 'en-GB';
 // One-off events carry a `date` (and maybe a `time`); recurring ones a free-text `when`. A dated
 // event with a `when` shows that label (e.g. 'Halloween') and still drops off after its date.
-type Highlight = { date?: string; time?: string; when?: string; title: string; text: string; tag: string };
+type Highlight = { date?: string; time?: string; when?: string; title: string; text: string; tag: string; book?: string };
+// Phone numbers in event text become WhatsApp links (the text says to book by WhatsApp)
+const linkPhones = (s: string) => s.replace(/\+34(?:[\s\u00a0]\d{2,3}){4}/g, (m) => `<a href="https://wa.me/${m.replace(/\D/g, '')}" target="_blank" rel="noopener" class="font-semibold text-pine-800 underline decoration-pine-800/30 underline-offset-2 hover:text-clay-700">${m}</a>`);
 const items: readonly Highlight[] = c.upcoming.items;
 // Past one-off events are dropped at build time, and in the browser by Base.astro's script.
 const buildDay = madridDate();
@@ -50,24 +52,26 @@ const highlights = items
     <div data-highlights>
     {highlights.length > 0 && <ol class="mt-12 grid gap-4 md:grid-cols-2">
       {highlights.map((e, i) => (
-        <li data-until={e.until} class="reveal flex gap-4 rounded-[var(--radius-card)] sm:gap-5 border border-ink-950/8 bg-white p-4 sm:p-5" style={`transition-delay:${(i % 2) * 80}ms`}>
-          <div class:list={['flex h-24 w-24 shrink-0 flex-col items-center justify-center self-start rounded-2xl px-2 py-5 text-center sm:h-auto sm:w-28 sm:self-stretch', e.big ? 'bg-clay-600 text-white' : 'bg-pine-900 text-cream-50']}>
+        <li data-until={e.until} class="reveal flex flex-col gap-3 rounded-[var(--radius-card)] border border-ink-950/8 bg-white p-4 sm:flex-row sm:gap-5 sm:p-5" style={`transition-delay:${(i % 2) * 80}ms`}>
+          <!-- Date: a small chip above the text on phones, a square block beside it on larger screens -->
+          <div class:list={['flex shrink-0 items-center gap-2.5 self-start rounded-2xl px-4 py-2.5 sm:w-28 sm:flex-col sm:justify-center sm:gap-0 sm:self-stretch sm:px-2 sm:py-5 sm:text-center', e.big ? 'bg-clay-600 text-white' : 'bg-pine-900 text-cream-50']}>
             {e.big ? (
               <>
-                <span class="text-[2.75rem] font-extrabold leading-none tracking-[-0.04em]">{e.big}</span>
-                <span class="mt-1.5 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-white">{e.small}</span>
+                <span class="text-2xl font-extrabold leading-none tracking-[-0.04em] sm:text-[2.75rem]">{e.big}</span>
+                <span class="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-white sm:mt-1.5">{e.small}</span>
               </>
             ) : (
               <>
-                <Icon name="calendar" size={22} class="text-ochre-300" />
-                <span class="mt-3 text-sm font-semibold leading-tight">{e.small}</span>
+                <Icon name="calendar" size={20} class="text-ochre-300" />
+                <span class="text-sm font-semibold leading-tight sm:mt-3">{e.small}</span>
               </>
             )}
           </div>
-          <div class="py-2 pr-2">
+          <div class="sm:py-2 sm:pr-2">
             <p class="text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-clay-700">{e.tag}{e.weekday && <span class="text-ink-600"> · {e.weekday}</span>}</p>
             <h3 class="mt-2 text-xl text-pine-950">{e.title}</h3>
-            <p class="mt-2 text-ink-600">{e.text}</p>
+            <p class="mt-2 text-ink-600" set:html={linkPhones(e.text)} />
+            <a href={e.book ?? whatsappEventHref(lang, e.title)} target="_blank" rel="noopener" class="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink-950/15 px-4 text-sm font-semibold text-pine-950 transition-colors hover:border-pine-900 hover:bg-pine-900 hover:text-cream-50"><Icon name="whatsapp" size={15} /> {c.upcoming.book}</a>
           </div>
         </li>
       ))}

@@ -20,19 +20,37 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
 - [ ] **Photos**: all photos are the venue's own (Casa Club Camposol and Camposol Golf Facebook/Instagram,
       camposolgolf.com). Confirm the golf club is happy for its course photos to be used here. Several terrace
       and dining-room photos show identifiable customers; confirm you are comfortable publishing them (they
-      were already public on your own pages). Higher-resolution originals of the terrace/bar/live-music photos
-      would improve the hero images: the current ones are 720 px reel covers.
+      were already public on your own pages). There are only about 13 usable photos, so some repeat across
+      pages, and most are 720 px video covers that look soft on large screens. A half-day shoot would lift the
+      whole site: plated breakfast, menú del día, fish & chips, the carvery, drinks on the terrace, the empty
+      terrace at golden hour, the function room laid for a party, the bar, and the team. The photo showing the
+      previous operator's "The Club House" window decal is no longer used.
 - [ ] **Legal pages**: company name, NIF B19345867 and registered office (C/ Aljibe s/n, Urb. Camposol) are
       confirmed (BORME 17-09-2024, Iberinform). The registry sheet **Hoja MU-114423** could not be found in
       any public source: check it against your deeds and add tomo/folio if you have them (`registry` in
       `site.ts`). The privacy policy now covers processors, international transfers (US hosting/form/map
       providers) and withdrawing consent, and the form shows a short data-protection notice; still have it
       checked by your gestoría / legal adviser.
-- [ ] **Menu**: the restaurant page no longer lists sample dishes (they were placeholders, not your menu). It
-      now points visitors to the daily menu on Facebook. Add a real menu (a list or a PDF) when ready.
-- [ ] **Opening hours for search engines**: fill `openingHours` in `src/data/site.ts` (for example
-      `['Mo-Su 08:00-23:00']`) once you know your real closing times. It was removed because the old value
+- [ ] **Menu and prices**: the restaurant page lists no dishes or prices (the earlier sample dishes were
+      placeholders) and points visitors to the daily menu on Facebook, where people without an account hit a
+      login wall on phones. This is the biggest gap a customer will notice. Please provide a short priced list
+      (breakfast, menú del día, fish & chips, Sunday carvery, children) and 4–6 photos of dishes and drinks: the
+      site has no food photo at all. A review from March 2026 mentions €10 for the menú del día.
+- [ ] **Closing times**: the site gives opening times only ("from 08:00", "open late"), because none are
+      published. Please give bar, kitchen (breakfast, lunch, Thursday dinner) and event-night closing times, and
+      summer/winter differences, for `hours` in `site.ts`; then fill `openingHours` (for example
+      `['Mo-Su 08:00-23:00']`) so search engines show you as open. It was left empty because the old value
       (08:00–16:00) would have told Google you are closed on quiz nights.
+- [ ] **Google and Tripadvisor listings**: Google still lists the venue as "The Club House" with the old phone
+      number and 08:00–16:00 hours, and the "Open in Google Maps" button on the site leads there. Claim the
+      Google Business Profile and the Tripadvisor listing and update name, phone, hours, website and photos
+      before launch, and pick 3–6 recent reviews to quote (the three on the home page are the only verifiable
+      ones found).
+- [ ] **FAQ answers**: customers ask about these and the site stays silent because nothing is published. If you
+      confirm them, a short FAQ can be added to the contact page: dogs on the terrace; step-free access and
+      accessible toilet; children (high chairs, kids' menu); card payments; Wi-Fi; live sport on TV; function-room
+      capacity (seated / standing) and party packages; deposits for groups; Halloween show date, time and price;
+      Christmas Day menu and price (Christmas bookings start in October).
 - [ ] **Logo**: the site now uses your round badge (green ring, "CASA CLUB" / "CAMPOSOL GOLF", crossed irons),
       redrawn as a vector from the clubhouse sign and your Facebook cover. If you have the original artwork,
       replace `public/images/logo-mark.svg` (and `public/favicon.svg`, `public/apple-touch-icon.png`,
@@ -151,6 +169,14 @@ Where to look on the site: `/` home, `/restaurant/`, `/golf/`, `/events/`, `/gal
       is the covered terrace at night. The "golfers with a buggy" photo shows electric trolleys. Captions have
       been fixed. The `driving-range-bays` photo is ambiguous (it could be a putting or bowls green), so its
       caption is now neutral and it is no longer used for the driving range.
+
+### What the site does on its own
+- The "Today at Casa Club" card on the home page picks the day in Spanish time, names a dated event from
+  `events.ts` on its date (e.g. "Commitment Issues" on 14 Nov), and on quiet days shows the menú del día and the
+  next regular event. Dated events get a "Book on WhatsApp" button with the event name pre-filled; Commitment
+  Issues points to Venuvo's WhatsApp instead. Past events disappear the day after (in the browser at once, and
+  from the built pages at the nightly rebuild).
+- The golf page's phone action bar shows tee times and the golf office instead of the Casa Club number.
 
 ### Background
 - The previous operator ("The Club House", Mazarron Entertainments SL, since 2013) closed around June 2024;

@@ -4,7 +4,7 @@ export const home = {
   en: {
     meta: { title: 'Casa Club Camposol · Clubhouse restaurant & bar, Mazarrón', description: 'Clubhouse bar, restaurant and sun terrace at Camposol golf course, Mazarrón: live music, quiz nights, Sunday carvery and 18 holes. Open to all, 7 days a week.' },
     hero: {
-      eyebrow: 'Camposol Club de Golf · Mazarrón',
+      eyebrow: 'Clubhouse restaurant & bar · Mazarrón',
       title: 'The clubhouse at the heart of Camposol',
       sub: 'Restaurant, bar and sun terrace overlooking the golf course. Great food, live music and golf in the Murcian sunshine, open to everyone, seven days a week.',
       cta1: 'Book a table', cta2: 'See what’s on',
@@ -12,10 +12,10 @@ export const home = {
     },
     intro: {
       eyebrow: 'Welcome', title: 'Eat, drink, play and celebrate',
-      text: 'Casa Club is Camposol’s social hub: a relaxed, friendly clubhouse where neighbours, golfers and visitors meet from breakfast through to the last song of the night.',
+      text: 'Casa Club is the clubhouse restaurant, bar and events venue at Camposol Club de Golf, and Camposol’s social hub: a relaxed, friendly place where neighbours, golfers and visitors meet from breakfast through to the last song of the night.',
     },
     experiences: [
-      { href: '/restaurant/', title: 'Restaurant & bar', text: 'Breakfasts, a weekday menú del día, Friday fish & chips and the famous Sunday carvery.', alt: 'Friends at dinner on the Casa Club covered terrace' },
+      { href: '/restaurant/', title: 'Restaurant & bar', text: 'Breakfasts, a weekday menú del día, Friday fish & chips and the Sunday carvery.', alt: 'Friends at dinner on the Casa Club covered terrace' },
       { href: '/golf/', title: 'Golf', text: '18 holes, par 72, with a driving range, academy and crazy golf.', alt: 'A golfer teeing off beside the lake at Camposol' },
       { href: '/events/', title: 'What’s on', text: 'Quiz nights, bingo and live music every week, plus tribute shows.', alt: 'A singer performing on the terrace' },
       { href: '/events/#hire', title: 'Private parties', text: 'Birthdays, society dinners and celebrations.', alt: 'Guests dancing at a night party on the terrace' },
@@ -28,9 +28,9 @@ export const home = {
     },
     restaurant: {
       eyebrow: 'Restaurant & bar', title: 'Honest food, generous plates, sunshine on the side',
-      text: 'From a proper breakfast before your round to a long Sunday lunch with the family, the kitchen serves British and Spanish favourites with friendly service, fair prices and one of the best terrace views in Camposol.',
+      text: 'From a proper breakfast before your round to a long Sunday lunch with the family, the kitchen serves British and Spanish favourites with friendly service, fair prices and a terrace looking straight onto the course.',
       signatures: [
-        { name: 'Breakfast', when: 'From 08:00', desc: 'Full English, tostadas and proper coffee' },
+        { name: 'Breakfast', when: 'From 08:00', desc: 'Full English, tostadas and good coffee' },
         { name: 'Menú del día', when: 'Mon–Fri', desc: 'Starter, main and dessert or coffee' },
         { name: 'Fish & chips', when: 'Fridays', desc: 'Followed by bingo and live music' },
         { name: 'Sunday carvery', when: 'Sundays', desc: 'Roasts carved to order; book ahead' },
@@ -41,23 +41,23 @@ export const home = {
     },
     golf: {
       eyebrow: 'Golf', title: 'Eighteen holes in the Murcian sun',
-      text: 'Designed by Manuel Quesada Mendiola, Camposol Club de Golf winds through a valley of lakes, olive groves and palms with the Murcian sierras as a backdrop: an open, friendly front nine and a tighter, hillier back nine for those who want a challenge.',
-      stats: [{ v: '18', l: 'holes' }, { v: '72', l: 'par' }, { v: '5,895 m', l: 'from the white tees' }, { v: '129', l: 'slope rating' }],
+      text: 'Designed by Manuel Quesada Mendiola, Camposol Club de Golf winds through a valley of lakes, olive groves and palms with the Murcian sierras as a backdrop: an open, friendly front nine and a tighter, hillier back nine for those who want a challenge. Tee times and green fees are booked with the golf office; Casa Club looks after the nineteenth hole.',
+      stats: [{ v: '18', l: 'holes' }, { v: '72', l: 'par' }, { v: '5,895 m', l: 'from the white tees' }, { v: '7', l: 'days a week' }],
       cta: 'Green fees & tee times',
     },
     reviews: {
       eyebrow: 'What people say', title: 'Loved by locals, golfers and visitors',
       items: [
-        { quote: 'Since the new Spanish owners have taken over… really turned things around. The food is fab.', who: 'Tripadvisor review, 2025' },
         { quote: 'Club house is top notch, not the usual stuffy location, cheap drinks, entertainment in the evenings.', who: 'Tripadvisor review' },
-        { quote: '…excellent clubhouse providing good food and drinks selection.', who: 'Golfshake review' },
+        { quote: 'Excellent clubhouse providing good food and drinks selection.', who: 'Golfshake review' },
+        { quote: 'Since the new Spanish owners have taken over… really turned things around. The food is fab.', who: 'Tripadvisor review, 2025' },
       ],
     },
     functions: {
-      eyebrow: 'Private hire', title: 'Celebrate with us', text: 'Birthdays, anniversaries, society dinners, charity fundraisers and Christmas lunches. Our private function room and terrace can be dressed for anything from a casual buffet to a seated three-course dinner.',
+      eyebrow: 'Private hire', title: 'Celebrate with us', text: 'Birthdays, anniversaries, society dinners, charity fundraisers and Christmas lunches. Our private function room and terrace can be dressed for anything from a casual buffet to a seated dinner with three courses.',
       points: ['Private function room', 'Terrace with golf-course views', 'Set menus and buffets for groups', 'Live entertainment arranged on request'],
       cta: 'Enquire about an event',
-      chip: 'Function room & terrace',
+      chip: 'Live music in the function room',
       alt: 'A live band performing in the function room',
     },
     visit: {
@@ -75,7 +75,7 @@ export const home = {
   es: {
     meta: { title: 'Casa Club Camposol · Restaurante y bar del golf, Mazarrón', description: 'Bar, restaurante y terraza de la casa club del golf de Camposol (Mazarrón): música en directo, quiz, carvery del domingo y 18 hoyos. Abierto a todo el mundo, todos los días.' },
     hero: {
-      eyebrow: 'Camposol Club de Golf · Mazarrón',
+      eyebrow: 'Restaurante y bar del golf · Mazarrón',
       title: 'La casa club en el corazón de Camposol',
       sub: 'Restaurante, bar y terraza soleada con vistas al campo de golf. Buena comida, música en directo y golf bajo el sol de Murcia. Abierto a todo el mundo, los siete días de la semana.',
       cta1: 'Reservar mesa', cta2: 'Ver la agenda',
@@ -83,10 +83,10 @@ export const home = {
     },
     intro: {
       eyebrow: 'Bienvenidos', title: 'Comer, beber, jugar y celebrar',
-      text: 'Casa Club es el punto de encuentro de Camposol: una casa club relajada y cercana donde vecinos, golfistas y visitantes coinciden desde el desayuno hasta la última canción de la noche.',
+      text: 'Casa Club es el restaurante, bar y espacio de eventos de la casa club del Camposol Club de Golf, y el punto de encuentro de Camposol: un lugar relajado y cercano donde vecinos, golfistas y visitantes coinciden desde el desayuno hasta la última canción de la noche.',
     },
     experiences: [
-      { href: '/restaurant/', title: 'Restaurante y bar', text: 'Desayunos, menú del día entre semana, fish & chips los viernes y el famoso carvery del domingo.', alt: 'Amigos cenando en la terraza cubierta de Casa Club' },
+      { href: '/restaurant/', title: 'Restaurante y bar', text: 'Desayunos, menú del día entre semana, fish & chips los viernes y el carvery del domingo.', alt: 'Amigos cenando en la terraza cubierta de Casa Club' },
       { href: '/golf/', title: 'Golf', text: '18 hoyos, par 72, con campo de prácticas, academia y minigolf.', alt: 'Un golfista dando el golpe de salida junto al lago de Camposol' },
       { href: '/events/', title: 'Agenda', text: 'Noches de quiz, bingo y música en directo cada semana, además de tributos.', alt: 'Un cantante actuando en la terraza' },
       { href: '/events/#hire', title: 'Fiestas privadas', text: 'Cumpleaños, cenas de peñas de golf y celebraciones.', alt: 'Clientes bailando en una fiesta nocturna en la terraza' },
@@ -99,7 +99,7 @@ export const home = {
     },
     restaurant: {
       eyebrow: 'Restaurante y bar', title: 'Cocina honesta, platos generosos y mucho sol',
-      text: 'Desde un buen desayuno antes de salir al campo hasta una larga comida de domingo en familia, la cocina prepara clásicos británicos y españoles, con trato cercano, precios justos y una de las terrazas con mejores vistas de Camposol.',
+      text: 'Desde un buen desayuno antes de salir al campo hasta una larga comida de domingo en familia, la cocina prepara clásicos británicos y españoles, con trato cercano, precios justos y una terraza que da directamente al campo.',
       signatures: [
         { name: 'Desayunos', when: 'Desde las 8:00', desc: 'Desayuno inglés, tostadas y buen café' },
         { name: 'Menú del día', when: 'Lun–Vie', desc: 'Primero, segundo y postre o café' },
@@ -112,23 +112,23 @@ export const home = {
     },
     golf: {
       eyebrow: 'Golf', title: 'Dieciocho hoyos bajo el sol de Murcia',
-      text: 'Diseñado por Manuel Quesada Mendiola, el Camposol Club de Golf serpentea por un valle de lagos, olivos y palmeras con las sierras murcianas de fondo: unos primeros nueve abiertos y amables, y unos segundos nueve más estrechos y ondulados para quien busque un reto.',
-      stats: [{ v: '18', l: 'hoyos' }, { v: '72', l: 'par' }, { v: '5895 m', l: 'desde barras blancas' }, { v: '129', l: 'slope' }],
+      text: 'Diseñado por Manuel Quesada Mendiola, el Camposol Club de Golf serpentea por un valle de lagos, olivos y palmeras con las sierras murcianas de fondo: unos primeros nueve abiertos y amables, y unos segundos nueve más estrechos y ondulados para quien busque un reto. Las salidas y los green fees se reservan en la oficina de golf; Casa Club se ocupa del hoyo 19.',
+      stats: [{ v: '18', l: 'hoyos' }, { v: '72', l: 'par' }, { v: '5895 m', l: 'desde barras blancas' }, { v: '7', l: 'días a la semana' }],
       cta: 'Green fees y salidas',
     },
     reviews: {
       eyebrow: 'Opiniones', title: 'Vecinos, golfistas y visitantes repiten',
       items: [
-        { quote: 'Desde que llegaron los nuevos propietarios españoles… han dado un giro total. La comida es estupenda.', who: 'Reseña de Tripadvisor, 2025 (traducida)' },
         { quote: 'La casa club es de primera, nada del típico ambiente estirado, bebidas baratas y animación por las noches.', who: 'Reseña de Tripadvisor (traducida)' },
-        { quote: '…una casa club excelente, con buena comida y una buena selección de bebidas.', who: 'Reseña de Golfshake (traducida)' },
+        { quote: 'Una casa club excelente, con buena comida y una buena selección de bebidas.', who: 'Reseña de Golfshake (traducida)' },
+        { quote: 'Desde que llegaron los nuevos propietarios españoles… han dado un giro total. La comida es estupenda.', who: 'Reseña de Tripadvisor, 2025 (traducida)' },
       ],
     },
     functions: {
       eyebrow: 'Eventos privados', title: 'Celebra con nosotros', text: 'Cumpleaños, aniversarios, cenas de peñas de golf, eventos benéficos y comidas de Navidad. Nuestro salón privado y la terraza se adaptan a todo, desde un bufé informal hasta una cena sentada con primero, segundo y postre.',
       points: ['Salón privado para eventos', 'Terraza con vistas al campo', 'Menús cerrados y bufés para grupos', 'Animación y música en directo a medida'],
       cta: 'Pedir información sobre eventos',
-      chip: 'Salón privado y terraza',
+      chip: 'Música en directo en el salón',
       alt: 'Un grupo actuando en directo en el salón de eventos',
     },
     visit: {

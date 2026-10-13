@@ -13,7 +13,7 @@ const c = galleryPage[lang];
 const filters = Object.entries(c.filters) as [keyof typeof c.filters, string][];
 ---
 <Base title={c.meta.title} description={c.meta.description} image={img.og}>
-  <PageHero eyebrow={c.eyebrow} title={c.title} sub={c.intro} />
+  <PageHero eyebrow={c.eyebrow} title={c.title} sub={c.intro} image={img.courseView} alt={c.heroAlt} position="center 60%" />
   <section class="container-x pb-16 pt-10 sm:pb-24 sm:pt-12">
     <div class="flex flex-wrap gap-2" role="group" aria-label={c.filterLabel} id="gallery-filters">
       {filters.map(([key, label], i) => (
@@ -38,9 +38,13 @@ const filters = Object.entries(c.filters) as [keyof typeof c.filters, string][];
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>('#gallery-filters [data-filter]');
   const items = document.querySelectorAll<HTMLElement>('#gallery-grid [data-cat]');
-  buttons.forEach((b) => b.addEventListener('click', () => {
-    const f = b.dataset.filter;
-    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  function apply(f: string, push: boolean) {
+    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.filter === f)));
     items.forEach((el) => { el.hidden = f !== 'all' && el.dataset.cat !== f; });
-  }));
+    // Keep the filter in the URL so a reload or a shared link shows the same photos
+    if (push) history.replaceState(null, '', f === 'all' ? location.pathname : `?filter=${f}`);
+  }
+  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter!, true)));
+  const initial = new URLSearchParams(location.search).get('filter');
+  if (initial && [...buttons].some((b) => b.dataset.filter === initial)) apply(initial, false);
 </script>

@@ -39,7 +39,8 @@ const t = useTranslations(lang);
     // On touch screens one-finger dragging would swallow the page scroll, so the map pans only after a
     // tap on it (and stops again when the visitor touches anything else). Pinch-zoom always works.
     const coarse = matchMedia('(pointer: coarse)').matches;
-    const map = L.map(el, { scrollWheelZoom: false, zoomControl: false, dragging: !coarse }).setView([+lat!, +lng!], +zoom!);
+    const map = L.map(el, { scrollWheelZoom: false, zoomControl: false, dragging: !coarse, attributionControl: false }).setView([+lat!, +lng!], +zoom!);
+    L.control.attribution({ prefix: '<a href="https://leafletjs.com">Leaflet</a>' }).addTo(map);
     if (coarse) {
       el.addEventListener('click', () => map.dragging.enable());
       document.addEventListener('touchstart', (e) => { if (!el.contains(e.target as Node)) map.dragging.disable(); }, { passive: true });

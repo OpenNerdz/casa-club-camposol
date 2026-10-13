@@ -110,6 +110,10 @@ export type Site = typeof site;
 /** An email address as HTML that may only wrap after the "@" or before the domain ending. */
 export const breakable = (email: string) => email.replace('@', '@<wbr>').replace(/\.(?=[^.]+$)/, '<wbr>.');
 
+/** WhatsApp link asking about a named event (tribute night, Christmas lunch…). */
+export const whatsappEventHref = (lang: 'en' | 'es', title: string) =>
+  `${site.whatsappHref}?text=${encodeURIComponent(lang === 'es' ? `¡Hola, Casa Club! Quería reservar para ${title}.\nNombre:\nNúmero de personas:` : `Hello, Casa Club! I'd like to book for ${title}.\nName:\nNumber of people:`)}`;
+
 /** WhatsApp link with the booking template pre-filled in the visitor's language. */
 export const whatsappBookingHref = (lang: 'en' | 'es') =>
   `${site.whatsappHref}?text=${encodeURIComponent(site.whatsappBooking[lang])}`;

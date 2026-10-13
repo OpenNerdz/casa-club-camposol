@@ -5,6 +5,7 @@ export const galleryPage = {
     eyebrow: 'Gallery', title: 'A look around the club', intro: 'The terrace, the bar, the course and a few of our nights. Come and see it for yourself.',
     filters: { all: 'All', club: 'Terrace & dining', events: 'Music & events', golf: 'Golf' },
     filterLabel: 'Filter photos',
+    heroAlt: 'A buggy on the course with Camposol in the distance',
     more: 'More photos every week on',
   },
   es: {
@@ -12,6 +13,7 @@ export const galleryPage = {
     eyebrow: 'Galería', title: 'Un paseo por el club', intro: 'La terraza, el bar, el campo y algunas de nuestras noches. Ven a verlo con tus propios ojos.',
     filters: { all: 'Todo', club: 'Terraza y comedor', events: 'Música y eventos', golf: 'Golf' },
     filterLabel: 'Filtrar fotos',
+    heroAlt: 'Un buggy en el campo con Camposol al fondo',
     more: 'Más fotos cada semana en',
   },
 } as const;

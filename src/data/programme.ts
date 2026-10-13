@@ -8,7 +8,8 @@
 import type { Lang } from '../i18n/ui';
 
 type Text = Record<Lang, string>;
-export interface ProgrammeItem { title: Text; time?: string; note?: Text; minor?: boolean }
+/** `occasional`: not every week (shown in the week grid, but never as "today" or "next up" in the Today card). */
+export interface ProgrammeItem { title: Text; time?: string; note?: Text; minor?: boolean; occasional?: boolean }
 export interface ProgrammeDay { day: number; items: ProgrammeItem[] }
 
 const menuDelDia: ProgrammeItem = { title: { en: 'Menú del día', es: 'Menú del día' }, note: { en: 'lunchtime', es: 'mediodía' }, minor: true };
@@ -26,7 +27,7 @@ export const programme: ProgrammeDay[] = [
     { title: { en: 'Live music', es: 'Música en directo' }, time: '16:30–18:00' },
     menuDelDia,
   ] },
-  { day: 6, items: [{ title: { en: 'Tribute & live music nights', es: 'Tributos y música en directo' }, note: { en: 'selected Saturdays', es: 'algunos sábados' } }] },
+  { day: 6, items: [{ title: { en: 'Tribute & live music nights', es: 'Tributos y música en directo' }, note: { en: 'selected Saturdays', es: 'algunos sábados' }, occasional: true }] },
   { day: 7, items: [{ title: { en: 'Sunday carvery', es: 'Carvery del domingo' }, note: { en: 'book ahead', es: 'reserva recomendada' } }] },
 ];
 

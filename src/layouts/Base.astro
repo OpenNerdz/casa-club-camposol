@@ -93,6 +93,11 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       // Dated highlights disappear the day after they happen, even before the next rebuild.
       const today = madridDate();
       document.querySelectorAll<HTMLElement>('[data-until]').forEach((el) => { if (el.dataset.until! < today) el.remove(); });
+      // If that empties a list of highlights, show its "nothing announced yet" message instead.
+      document.querySelectorAll<HTMLElement>('[data-highlights]').forEach((box) => {
+        const list = box.querySelector('ol');
+        if (list && !list.children.length) { list.remove(); box.querySelector<HTMLElement>('[data-empty]')!.hidden = false; }
+      });
     </script>
   </body>
 </html>

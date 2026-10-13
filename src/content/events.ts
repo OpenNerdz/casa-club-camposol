@@ -6,7 +6,7 @@ export const events = {
     meta: { title: 'What’s On', description: 'Live music, quiz nights, bingo, tribute shows, Sunday carvery and private functions at Casa Club Camposol, Mazarrón. See the weekly programme and the dates coming up.' },
     hero: { eyebrow: 'What’s on', title: 'There is always something happening', sub: 'Live music every Friday, two quiz nights a week, bingo, tribute shows, charity days and the big seasonal celebrations.' },
     week: { eyebrow: 'Weekly programme', title: 'The regulars', intro: 'Pencil these in. Guest acts, specials and any changes are posted on our Facebook page every week.', note: 'Programme may change seasonally. Book for Sunday carvery and tribute nights: they fill up fast.' },
-    upcoming: { eyebrow: 'Coming up', title: 'Dates for the diary', items: [
+    upcoming: { eyebrow: 'Coming up', title: 'Dates for the diary', empty: 'No special dates are announced right now. Follow us on Facebook for the next tribute nights and celebrations.', items: [
       { date: '2026-10-31', title: 'The Jersey Boys Experience', text: 'Our Halloween special: the Four Seasons hits plus a helping of soul and Motown magic. Book your table early.', tag: 'Halloween' },
       { date: '2026-11-14', title: 'Commitment Issues', text: 'A tribute to The Commitments: a seven-piece band with Joe Travers and Georgia Baie. Entry €15. Bookings by WhatsApp with Venuvo Events on +34 604 52 22 87.', tag: 'Tribute night' },
       { date: '2026-12-19', time: '20:00', title: 'The Troupers Swing Band', text: 'An evening of swing and big-band favourites. Entry €7.', tag: 'Live music' },
@@ -21,7 +21,7 @@ export const events = {
     meta: { title: 'Agenda', description: 'Música en vivo, noches de quiz, bingo, tributos, carvery dominical y eventos privados en Casa Club Camposol, Mazarrón. Consulta la programación semanal y las próximas fechas.' },
     hero: { eyebrow: 'Agenda', title: 'Siempre pasa algo en Casa Club', sub: 'Música en vivo cada viernes, dos noches de quiz por semana, bingo, tributos, jornadas benéficas y las grandes celebraciones de temporada.' },
     week: { eyebrow: 'Programación semanal', title: 'Las citas fijas', intro: 'Apúntalas en la agenda. Los artistas invitados, las novedades y cualquier cambio se publican cada semana en nuestro Facebook.', note: 'La programación puede cambiar según la temporada. Reserva para el carvery y las noches de tributo: se llenan rápido.' },
-    upcoming: { eyebrow: 'Próximamente', title: 'Fechas para apuntar', items: [
+    upcoming: { eyebrow: 'Próximamente', title: 'Fechas para apuntar', empty: 'Ahora mismo no hay fechas especiales anunciadas. Síguenos en Facebook para enterarte de los próximos tributos y celebraciones.', items: [
       { date: '2026-10-31', title: 'The Jersey Boys Experience', text: 'Nuestro especial de Halloween: los éxitos de los Four Seasons con mucho soul y Motown. Reserva tu mesa con tiempo.', tag: 'Halloween' },
       { date: '2026-11-14', title: 'Commitment Issues', text: 'Tributo a The Commitments: una banda de siete músicos con Joe Travers y Georgia Baie. Entrada 15 €. Reservas por WhatsApp con Venuvo Events en el +34 604 52 22 87.', tag: 'Tributo' },
       { date: '2026-12-19', time: '20:00', title: 'The Troupers Swing Band', text: 'Una noche de swing y clásicos de big band. Entrada 7 €.', tag: 'En vivo' },

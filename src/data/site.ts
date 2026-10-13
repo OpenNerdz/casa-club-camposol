@@ -15,8 +15,8 @@ export const site = {
   whatsappHref: 'https://wa.me/34602420167',
   /** Pre-filled WhatsApp booking message, so guests only fill in the blanks. */
   whatsappBooking: {
-    en: "Hello Casa Club! I'd like to book a table.\nName:\nDate:\nTime:\nNumber of people:",
-    es: '¡Hola Casa Club! Quería reservar una mesa.\nNombre:\nFecha:\nHora:\nNúmero de personas:',
+    en: "Hello, Casa Club! I'd like to book a table.\nName:\nDate:\nTime:\nNumber of people:",
+    es: '¡Hola, Casa Club! Quería reservar una mesa.\nNombre:\nFecha:\nHora:\nNúmero de personas:',
   },
   // Golf office / tee times: the number on the golf club's own Facebook and Instagram pages
   golfPhoneDisplay: '+34 624 41 38 01',
@@ -95,12 +95,12 @@ export const site = {
       { name: 'Blue', es: 'Azules', metres: 5484, par: 73, cr: 75.4, slope: 136 },
       { name: 'Red', es: 'Rojas', metres: 5270, par: 73, cr: 74.1, slope: 134 },
     ],
-    // "From" prices paid by visitors in 2025–26 (Golfshake Jan 2026: €35 walk-on; 1golf: 9 holes €22;
-    // buggy €20). No official price list is published. CONFIRM before publishing.
+    // "From" prices paid by visitors in 2025–26 (Golfshake Jan 2026: €35 walk-on; 1golf: 9 holes €22).
+    // No official price list is published, and buggy reports range from €10 to €20, so no buggy price
+    // is shown. CONFIRM before publishing.
     fees: [
       { key: '18', eur: 35 },
       { key: '9', eur: 22 },
-      { key: 'buggy', eur: 20 },
     ],
   },
 } as const;

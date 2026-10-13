@@ -75,7 +75,7 @@ const heading = 'font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18
   <div class="border-t border-cream-50/10 pb-[calc(4.25rem+env(safe-area-inset-bottom))] lg:pb-0">
     <div class="container-x flex flex-col gap-3 py-6 text-xs text-cream-50/55 sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {site.legalName} {t('footer.rights')}</p>
-      <nav class="flex gap-5" aria-label="Legal">
+      <nav class="flex gap-5" aria-label={t('footer.legalNav')}>
         <a href={localePath(lang, '/legal/')} class="hover:text-cream-50">{t('footer.legal')}</a>
         <a href={localePath(lang, '/privacy/')} class="hover:text-cream-50">{t('footer.privacy')}</a>
       </nav>

@@ -17,15 +17,15 @@ export const contact = {
   },
   es: {
     meta: { title: 'Contacto y cómo llegar', description: 'Contacta con Casa Club Camposol: teléfono, WhatsApp, correo, horario, mapa y cómo llegar a la casa club del golf de Camposol, Sector C, Mazarrón.' },
-    hero: { eyebrow: 'Contacto', title: 'Hablemos', sub: 'Reservas de mesa, consultas para eventos, jornadas de sociedades de golf o cualquier pregunta: es fácil dar con nosotros.' },
+    hero: { eyebrow: 'Contacto', title: 'Hablemos', sub: 'Reservas de mesa, consultas para eventos, jornadas de peñas de golf o cualquier pregunta: es fácil contactar con nosotros.' },
     cards: { club: 'Casa Club', clubSub: 'Mesas, eventos y el bar', golf: 'Oficina de golf', golfSub: 'Salidas, buggies y green fees', email: 'Correo' },
-    findTitle: 'Cómo encontrarnos',
+    findTitle: 'Dónde estamos',
     alt: 'El cartel de Casa Club Camposol junto a los búnkeres y las palmeras de la entrada',
     hoursTitle: 'Horario',
     formTitle: 'Envíanos una consulta', formText: 'Cuéntanos qué tienes en mente y te responderemos por correo o teléfono, normalmente el mismo día.',
-    directions: { title: 'Cómo llegar', steps: [
-      'Camposol está en la autovía RM-3 Totana–Mazarrón, a unos 10 minutos al norte de Mazarrón y a 15 minutos de las playas de Puerto de Mazarrón. Toma la salida de Camposol.',
-      'Sigue las indicaciones a Camposol y después a Sector C. Casa Club es la casa club del campo de golf de Camposol, en la Calle Aljibe.',
+    directions: { title: 'Indicaciones para llegar', steps: [
+      'Camposol está junto a la autovía RM-3 Totana-Mazarrón, a unos 10 minutos al norte del pueblo de Mazarrón y a 15 minutos de las playas de Puerto de Mazarrón. Toma la salida de Camposol.',
+      'Sigue las indicaciones hacia Camposol y, después, hacia el Sector C. Casa Club es la casa club del campo de golf de Camposol, en la calle Aljibe.',
       'Aparcamiento gratuito en la casa club.',
       'Desde el aeropuerto de Murcia (Corvera) calcula unos 30 minutos; desde el aeropuerto de Alicante, unos 80 minutos.',
     ] },

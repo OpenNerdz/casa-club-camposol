@@ -17,7 +17,7 @@ const quizSupper: ProgrammeItem = { title: { en: 'Full menu', es: 'Carta complet
 
 export const programme: ProgrammeDay[] = [
   { day: 1, items: [quiz, menuDelDia] },
-  { day: 2, items: [{ title: { en: 'Funky Orange daytime disco', es: 'Funky Orange, sesión disco de tarde' }, note: { en: 'selected weeks', es: 'algunas semanas' } }, menuDelDia] },
+  { day: 2, items: [menuDelDia] },
   { day: 3, items: [menuDelDia] },
   { day: 4, items: [quiz, quizSupper, menuDelDia] },
   { day: 5, items: [
@@ -27,7 +27,7 @@ export const programme: ProgrammeDay[] = [
     menuDelDia,
   ] },
   { day: 6, items: [{ title: { en: 'Tribute & live music nights', es: 'Tributos y música en directo' }, note: { en: 'selected Saturdays', es: 'algunos sábados' } }] },
-  { day: 7, items: [{ title: { en: 'Sunday carvery', es: 'Carvery dominical' }, note: { en: 'book ahead', es: 'con reserva' } }] },
+  { day: 7, items: [{ title: { en: 'Sunday carvery', es: 'Carvery del domingo' }, note: { en: 'book ahead', es: 'reserva recomendada' } }] },
 ];
 
 export const dayNames: Record<Lang, { short: string[]; long: string[] }> = {

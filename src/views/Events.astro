@@ -32,7 +32,7 @@ const highlights = items
       ...e, until: e.date,
       big: d.getDate(),
       small: d.toLocaleDateString(locale, { month: 'short', year: 'numeric' }),
-      weekday: e.time ? `${weekday} ${e.time}` : weekday,
+      weekday: e.time ? `${weekday}${lang === 'es' ? ',' : ''} ${e.time}` : weekday,
     };
   });
 ---

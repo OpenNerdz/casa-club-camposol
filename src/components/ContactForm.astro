@@ -14,11 +14,13 @@ const optional = `<span class="font-normal text-ink-600">(${t('form.optional')})
 // Consent text with the privacy-policy link in place of {privacy}
 const [consentBefore, consentAfter] = t('form.consent').split('{privacy}');
 const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form.okMail'), err: t('form.err'), invalid: t('form.invalid') };
+// Field labels in the visitor's language, for the e-mail fallback body
+const labels = { name: t('form.name'), email: t('form.email'), phone: t('form.phone'), enquiry: t('form.type'), date: t('form.date'), guests: t('form.guests'), message: t('form.message') };
 ---
 <form id="contact-form" class="rounded-[1.75rem] bg-cream-50 p-6 shadow-[0_30px_60px_-30px_rgb(23_32_27/.35)] ring-1 ring-ink-950/8 sm:p-9"
   method="post" action={site.formEndpoint || `mailto:${site.email}`} data-endpoint={site.formEndpoint} data-mailto={site.email}
-  data-messages={JSON.stringify(messages)} enctype={site.formEndpoint ? undefined : 'text/plain'}>
-  <input type="hidden" name="subject" value={`Web enquiry · ${site.name}`} />
+  data-messages={JSON.stringify(messages)} data-labels={JSON.stringify(labels)} enctype={site.formEndpoint ? undefined : 'text/plain'}>
+  <input type="hidden" name="subject" value={`${t('form.subject')} · ${site.name}`} />
   {site.formAccessKey && <input type="hidden" name="access_key" value={site.formAccessKey} />}
   <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
   <div class="grid gap-5 sm:grid-cols-2">
@@ -53,6 +55,7 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const status = document.getElementById('form-status')!;
   const msg = JSON.parse(form.dataset.messages!) as Record<'sending' | 'ok' | 'okMail' | 'err' | 'invalid', string>;
+  const labels = JSON.parse(form.dataset.labels!) as Record<string, string>;
 
   // With JS the script validates (and shows its own status message); without it the browser does.
   form.noValidate = true;
@@ -74,7 +77,7 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
     const endpoint = form.dataset.endpoint;
     if (!endpoint) {
       // No form service configured yet: hand over to the visitor's email app.
-      const body = Object.entries(data).filter(([k, v]) => v && !['botcheck', 'subject', 'consent', 'access_key'].includes(k)).map(([k, v]) => `${k}: ${v}`).join('\n');
+      const body = Object.entries(data).filter(([k, v]) => v && !['botcheck', 'subject', 'consent', 'access_key'].includes(k)).map(([k, v]) => `${labels[k] ?? k}: ${v}`).join('\n');
       location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(String(data.subject))}&body=${encodeURIComponent(body)}`;
       status.textContent = msg.okMail;
       return;

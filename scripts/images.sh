@@ -9,7 +9,6 @@ enc() { # enc <src> <dst> <ffmpeg -vf filter>
   ffmpeg -v error -y -i "$RAW/$1" -vf "$3" -c:v libwebp -quality $Q -update 1 "$OUT/$2"
 }
 # Wide heroes (16:9, 2000px)
-enc golf-course-lake-panorama-01.jpg hero.webp            "crop=iw:iw*9/16,scale=2000:-1"
 enc golf-course-lake-tee-01.jpg      hero-golf.webp       "crop=iw:iw*9/16,scale=2000:-1"
 enc golf-entrance-sign-palms-01.jpg  exterior.webp        "crop=iw:iw*9/16,scale=2000:-1"
 # Open Graph images (JPEG: not every social crawler reads WebP)
@@ -22,8 +21,6 @@ og live-music-gazebo-day-01.jpg       og-events.jpg     "crop=iw:iw*630/1200:0:4
 # Section images
 enc golf-green-flag-mountains-01.jpg course.webp          "crop=iw:iw*10/16:0:520,scale=1600:-1"
 enc golf-green-palms-mountains-01.jpg course-2.webp       "crop=720:720:0:120"
-enc golf-buggies-bags-01.jpg         buggies.webp         "crop=iw:iw:0:420,scale=1000:-1"
-enc driving-range-bays-01.jpg        range.webp           "crop=iw:iw*3/4:0:360,scale=1400:-1"
 Q=74 enc golf-green-flag-mountains-01.jpg golf-portrait.webp "scale=760:-2"
 # Casa Club's own reel covers (portrait 720x1280) – kept at native size
 for pair in \
@@ -34,6 +31,10 @@ for pair in \
   "live-music-terrace-singer-01.jpg:events.webp" \
   "live-music-gazebo-day-01.jpg:hero-events.webp"; do
   enc "${pair%%:*}" "${pair##*:}" "scale=iw:ih"
+done
+# Smaller copies of the big photos for srcset (phones and tablets get these)
+for n in hero-golf course exterior; do
+  for w in 800 1200; do ffmpeg -v error -y -i "$OUT/$n.webp" -vf "scale=$w:-2" -c:v libwebp -quality 80 "$OUT/$n-$w.webp"; done
 done
 # Gallery (max 1400px on the long side)
 mkdir -p "$OUT/gallery"

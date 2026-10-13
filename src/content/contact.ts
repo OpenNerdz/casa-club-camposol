@@ -1,7 +1,7 @@
 // Contact page copy. Phone numbers and hours live in src/data/site.ts.
 export const contact = {
   en: {
-    meta: { title: 'Contact & Directions', description: 'Contact Casa Club Camposol: phone, WhatsApp, email, opening hours, map and directions to the clubhouse at Camposol Club de Golf, Calle Aljibe s/n, Sector C, Mazarrón.' },
+    meta: { title: 'Contact & directions', description: 'Contact Casa Club Camposol: phone, WhatsApp, email, opening hours, map and directions to the clubhouse at Camposol golf course, Sector C, Mazarrón.' },
     hero: { eyebrow: 'Contact', title: 'Say hello', sub: 'Table bookings, event enquiries, society days or just a question: we are easy to reach.' },
     cards: { club: 'Casa Club', clubSub: 'Tables, events & the bar', golf: 'Golf office', golfSub: 'Tee times, buggies & green fees', email: 'Email' },
     findTitle: 'Find us',
@@ -16,7 +16,7 @@ export const contact = {
     ] },
   },
   es: {
-    meta: { title: 'Contacto y cómo llegar', description: 'Contacta con Casa Club Camposol: teléfono, WhatsApp, correo, horario, mapa y cómo llegar a la casa club del Camposol Club de Golf, Calle Aljibe s/n, Sector C, Mazarrón.' },
+    meta: { title: 'Contacto y cómo llegar', description: 'Contacta con Casa Club Camposol: teléfono, WhatsApp, correo, horario, mapa y cómo llegar a la casa club del golf de Camposol, Sector C, Mazarrón.' },
     hero: { eyebrow: 'Contacto', title: 'Hablemos', sub: 'Reservas de mesa, consultas para eventos, jornadas de sociedades de golf o cualquier pregunta: es fácil dar con nosotros.' },
     cards: { club: 'Casa Club', clubSub: 'Mesas, eventos y el bar', golf: 'Oficina de golf', golfSub: 'Salidas, buggies y green fees', email: 'Correo' },
     findTitle: 'Cómo encontrarnos',

@@ -38,10 +38,12 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={altEn} />
-    <link rel="alternate" hreflang="es" href={altEs} />
-    <link rel="alternate" hreflang="x-default" href={altEn} />
+    {!noindex && <>
+      <link rel="canonical" href={canonical} />
+      <link rel="alternate" hreflang="en" href={altEn} />
+      <link rel="alternate" hreflang="es" href={altEs} />
+      <link rel="alternate" hreflang="x-default" href={altEn} />
+    </>}
     {hideFromSearch && <meta name="robots" content="noindex,nofollow" />}
     <meta name="theme-color" content="#0c241b" />
     <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
@@ -52,15 +54,16 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={lang === 'en' ? 'en_GB' : 'es_ES'} />
+    <meta property="og:locale:alternate" content={lang === 'en' ? 'es_ES' : 'en_GB'} />
     <meta name="twitter:card" content="summary_large_image" />
     <script is:inline>document.documentElement.classList.remove('no-js');</script>
     {ld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
   </head>
   <body class="flex min-h-screen flex-col">
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-pine-950 focus:px-5 focus:py-2.5 focus:text-cream-50">{t('nav.skip')}</a>
+    <a href="#main" data-skip class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-pine-950 focus:px-5 focus:py-2.5 focus:text-cream-50">{t('nav.skip')}</a>
     <Header lang={lang} tone={tone} />
     <main id="main" class="flex-1">
       <slot />

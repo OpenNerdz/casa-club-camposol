@@ -9,7 +9,7 @@ import Testimonials from '../components/Testimonials.astro';
 import CheckList from '../components/CheckList.astro';
 import MapLeaflet from '../components/MapLeaflet.astro';
 import { home } from '../content/home';
-import { img } from '../data/images';
+import { img, srcset } from '../data/images';
 import { site } from '../data/site';
 import { localePath, useTranslations, type Lang } from '../i18n/utils';
 import { businessJsonLd } from '../data/jsonld';
@@ -32,6 +32,8 @@ const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
     </div>
     <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950 via-pine-950/60 to-pine-950/0"></div>
     <div class="absolute inset-x-0 top-0 -z-10 h-44 bg-gradient-to-b from-pine-950/70 to-transparent"></div>
+    <!-- Desktop: darken the left of the strip so the headline reads over the terrace photo -->
+    <div class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-pine-950/70 via-pine-950/25 to-transparent lg:block"></div>
 
     <div class="container-x grid gap-8 pb-8 pt-40 sm:pb-12 lg:grid-cols-12 lg:items-end lg:gap-10 lg:pb-16">
       <div class="lg:col-span-8">
@@ -57,7 +59,7 @@ const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
       {c.experiences.map((x, i) => (
         <li class:list={['w-[80%] sm:w-auto', tileLayout[i]]}>
           <a href={localePath(lang, x.href)} class="group relative isolate flex aspect-[3/4] h-full flex-col overflow-hidden rounded-[var(--radius-card)] bg-pine-900 text-cream-50 sm:aspect-auto sm:min-h-[20rem] lg:min-h-0">
-            <img src={tileImages[i]} alt={x.alt} class="img-cover absolute inset-0 -z-10 transition duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async" />
+            <img src={tileImages[i]} srcset={i === 1 ? srcset.heroGolf : undefined} sizes={i === 1 ? '(min-width: 1024px) 40vw, (min-width: 640px) 50vw, 80vw' : undefined} alt={x.alt} class="img-cover absolute inset-0 -z-10 transition duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async" />
             <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950/90 via-pine-950/30 to-transparent"></div>
             <span class="glass absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full transition-colors group-hover:bg-cream-50 group-hover:text-pine-950"><Icon name="arrow" size={18} /></span>
             <div class="mt-auto p-6 sm:p-7">
@@ -104,16 +106,16 @@ const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
 
   <!-- Golf -->
   <section class="on-dark relative isolate overflow-hidden bg-pine-950 text-cream-50">
-    <img src={img.course} alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950 via-pine-950/70 to-pine-950/30 lg:bg-gradient-to-r lg:from-pine-950/95 lg:via-pine-950/70 lg:to-pine-950/10"></div>
+    <img src={img.course} srcset={srcset.course} sizes="100vw" alt="" class="img-cover absolute inset-0 -z-10" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-pine-950 via-pine-950/75 to-pine-950/55 lg:bg-gradient-to-r lg:from-pine-950/95 lg:via-pine-950/70 lg:to-pine-950/10"></div>
     <div class="container-x grid gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:items-end lg:py-36">
       <div class="lg:col-span-6">
         <SectionHeading eyebrow={c.golf.eyebrow} title={c.golf.title} intro={c.golf.text} />
         <a href={localePath(lang, '/golf/')} class="btn-light mt-9">{c.golf.cta} <Icon name="arrow" size={16} /></a>
       </div>
-      <dl class="glass reveal grid grid-cols-2 overflow-hidden rounded-[var(--radius-card)] lg:col-span-5 lg:col-start-8">
+      <dl class="reveal grid grid-cols-2 overflow-hidden rounded-[var(--radius-card)] border border-white/15 bg-pine-950/60 backdrop-blur-xl lg:col-span-5 lg:col-start-8">
         {c.golf.stats.map((s) => (
-          <div class="p-6 sm:p-7"><dt class="whitespace-nowrap text-[1.9rem] font-extrabold leading-none tracking-[-0.04em] sm:text-[2.75rem]">{s.v}</dt><dd class="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-50/70">{s.l}</dd></div>
+          <div class="p-6 sm:p-7"><dt class="whitespace-nowrap text-[1.9rem] font-extrabold leading-none tracking-[-0.04em] sm:text-[2.75rem]">{s.v}</dt><dd class="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-50/90">{s.l}</dd></div>
         ))}
       </dl>
     </div>
@@ -121,7 +123,7 @@ const tileLayout = ['lg:col-span-2 lg:row-span-2', 'lg:col-span-2', '', ''];
 
   <!-- Reviews -->
   <Section eyebrow={c.reviews.eyebrow} title={c.reviews.title} class="bg-cream-100">
-    <Testimonials items={c.reviews.items} />
+    <Testimonials items={c.reviews.items} label={c.reviews.eyebrow} />
   </Section>
 
   <!-- Private hire -->

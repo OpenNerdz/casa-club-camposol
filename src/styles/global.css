@@ -39,6 +39,8 @@
 /* ---------- Base ---------- */
 @layer base {
   :root { color-scheme: light; scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  /* Phones: focused or anchored content must not end up under the fixed action bar */
+  @media (max-width: 1023.98px) { :root { scroll-padding-bottom: calc(4.25rem + env(safe-area-inset-bottom) + .5rem); } }
   html { -webkit-text-size-adjust: 100%; }
   /* overflow-x: clip is a safety net: nothing may push the page sideways on phones (unlike hidden, it keeps sticky/fixed working) */
   body { @apply bg-cream-50 font-sans text-ink-950 antialiased; font-size: 1.0625rem; line-height: 1.7; overflow-x: clip; }
@@ -141,4 +143,8 @@ dialog[open] { animation: dialog-in .25s var(--ease-out-soft); }
 .leaflet-container { font: inherit; background: var(--color-cream-200); }
 /* Map credits stay small (the inherited body size made them wrap and spill out on phones) */
 .leaflet-container .leaflet-control-attribution { font-size: 11px; line-height: 1.5; }
+.leaflet-container .leaflet-control-attribution a { text-decoration: underline; }
+
+/* Without JavaScript the phone menu cannot open, so hide its button (the footer lists every page) */
+html.no-js #menu-toggle { display: none; }
 .leaflet-popup-content-wrapper { border-radius: 14px; }

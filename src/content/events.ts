@@ -4,7 +4,7 @@
 // Line-up as advertised on the Casa Club Facebook page (Oct 2026).
 export const events = {
   en: {
-    meta: { title: 'What’s on', description: 'Live music, quiz nights, bingo, tribute shows, Sunday carvery and private functions at Casa Club Camposol, Mazarrón. See the weekly programme and the dates coming up.' },
+    meta: { title: 'What’s on', description: 'Live music, quiz nights, bingo, tribute shows and private parties at Casa Club Camposol, Mazarrón: the weekly programme and dates coming up.' },
     hero: { eyebrow: 'What’s on', title: 'There is always something happening', sub: 'Live music every Friday, two quiz nights a week, bingo, tribute shows, charity days and the big seasonal celebrations.' },
     week: { eyebrow: 'Weekly programme', title: 'The regulars', intro: 'Pencil these in. Carl Thomas has hosted the Monday quiz since 2009; Paul Pryce takes Thursdays, with the full menu from 18:00. Guest acts, specials and any changes go up on our Facebook page every week.', note: 'Programme may change seasonally. Book for Sunday carvery and tribute nights: they fill up fast.' },
     upcoming: { eyebrow: 'Coming up', title: 'Dates for the diary', empty: 'No special dates are announced right now. Follow us on Facebook for the next tribute nights and celebrations.', items: [
@@ -19,7 +19,7 @@ export const events = {
     follow: { title: 'Never miss a night', text: 'Follow Casa Club Camposol on Facebook for weekly line-ups, menus and last-minute announcements.', cta: 'Follow on Facebook' },
   },
   es: {
-    meta: { title: 'Agenda', description: 'Música en directo, noches de quiz, bingo, tributos, carvery dominical y eventos privados en Casa Club Camposol, Mazarrón. Consulta la programación semanal y las próximas fechas.' },
+    meta: { title: 'Agenda', description: 'Música en directo, quiz, bingo, tributos y fiestas privadas en Casa Club Camposol, Mazarrón: la programación semanal y las próximas fechas.' },
     hero: { eyebrow: 'Agenda', title: 'Siempre pasa algo en Casa Club', sub: 'Música en directo cada viernes, dos noches de quiz por semana, bingo, tributos, jornadas benéficas y las grandes celebraciones de temporada.' },
     week: { eyebrow: 'Programación semanal', title: 'Las citas fijas', intro: 'Apúntalas en la agenda. Carl Thomas presenta el quiz de los lunes desde 2009 y Paul Pryce el de los jueves, con carta completa desde las 18:00. Los artistas invitados, las novedades y cualquier cambio se publican cada semana en nuestro Facebook.', note: 'La programación puede cambiar según la temporada. Reserva para el carvery y las noches de tributo: se llenan rápido.' },
     upcoming: { eyebrow: 'Próximamente', title: 'Fechas para apuntar', empty: 'Ahora mismo no hay fechas especiales anunciadas. Síguenos en Facebook para enterarte de los próximos tributos y celebraciones.', items: [

@@ -7,7 +7,7 @@ import MapLeaflet from '../components/MapLeaflet.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
 import { contact } from '../content/contact';
-import { img } from '../data/images';
+import { img, srcset } from '../data/images';
 import { site, whatsappBookingHref } from '../data/site';
 import { useTranslations, type Lang } from '../i18n/utils';
 import { businessJsonLd } from '../data/jsonld';
@@ -32,7 +32,7 @@ const groups = [
 ];
 ---
 <Base title={c.meta.title} description={c.meta.description} image={img.ogContact} jsonLd={businessJsonLd(lang)}>
-  <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.exterior} alt={c.alt} position="78% center" />
+  <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.exterior} srcset={srcset.exterior} alt={c.alt} position="78% center" />
 
   <!-- Ways to get in touch -->
   <section class="container-x pt-12 sm:pt-16">

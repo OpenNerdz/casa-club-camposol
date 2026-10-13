@@ -3,8 +3,8 @@
 // from the band down onto the page below.
 import Icon from './Icon.astro';
 interface Cta { href: string; label: string; icon?: string; book?: boolean; external?: boolean; lang?: string }
-interface Props { eyebrow: string; title: string; sub?: string; image?: string; alt?: string; position?: string; cta1?: Cta; cta2?: Cta }
-const { eyebrow, title, sub, image, alt = '', position = 'center', cta1, cta2 } = Astro.props;
+interface Props { eyebrow: string; title: string; sub?: string; image?: string; srcset?: string; alt?: string; position?: string; cta1?: Cta; cta2?: Cta }
+const { eyebrow, title, sub, image, srcset, alt = '', position = 'center', cta1, cta2 } = Astro.props;
 const linkAttrs = (c: Cta) => ({ href: c.href, 'data-book': c.book ? '' : undefined, target: c.external ? '_blank' : undefined, rel: c.external ? 'noopener' : undefined, lang: c.lang, hreflang: c.lang });
 ---
 <section class="on-dark relative isolate">
@@ -27,7 +27,7 @@ const linkAttrs = (c: Cta) => ({ href: c.href, 'data-book': c.book ? '' : undefi
     {image && (
       <div class="lg:col-span-5">
         <div class="frame aspect-[5/4] w-full bg-pine-900 shadow-2xl shadow-pine-950/30 sm:aspect-[16/10] lg:aspect-[4/5] lg:max-h-[38rem]">
-          <img src={image} alt={alt} class="img-cover hero-photo" style={`object-position:${position}`} fetchpriority="high" decoding="async" />
+          <img src={image} srcset={srcset} sizes={srcset ? '(min-width: 1024px) 40vw, 100vw' : undefined} alt={alt} class="img-cover hero-photo" style={`object-position:${position}`} fetchpriority="high" decoding="async" />
         </div>
       </div>
     )}

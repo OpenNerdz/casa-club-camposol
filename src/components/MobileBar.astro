@@ -12,7 +12,7 @@ const actions = [
   { href: site.directionsUrl, icon: 'navigation', label: t('bar.directions'), external: true },
 ];
 ---
-<nav class="fixed inset-x-0 bottom-0 z-40 border-t border-cream-50/10 bg-pine-950/95 pb-[env(safe-area-inset-bottom)] text-cream-50 backdrop-blur-md lg:hidden" aria-label={site.name}>
+<nav data-mobilebar class="fixed inset-x-0 bottom-0 z-40 border-t border-cream-50/10 bg-pine-950/95 pb-[env(safe-area-inset-bottom)] text-cream-50 backdrop-blur-md lg:hidden" aria-label={site.name}>
   <ul class="grid grid-cols-3">
     {actions.map((a) => (
       <li>

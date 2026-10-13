@@ -20,8 +20,19 @@ const t = useTranslations(lang);
 </div>
 
 <script>
+  import leafletCss from 'leaflet/dist/leaflet.css?url';
+
+  // Leaflet's stylesheet is added only when a map initialises, so it never blocks the first paint.
+  function loadCss() {
+    if (document.querySelector('link[data-leaflet]')) return;
+    const link = Object.assign(document.createElement('link'), { rel: 'stylesheet', href: leafletCss });
+    link.dataset.leaflet = '';
+    document.head.append(link);
+  }
+
   async function init(el: HTMLElement) {
-    const [{ default: L }] = await Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]);
+    loadCss();
+    const { default: L } = await import('leaflet');
     el.replaceChildren();
     const { lat, lng, zoom, name, satellite: satLabel, streets: streetLabel } = el.dataset;
     const map = L.map(el, { scrollWheelZoom: false, zoomControl: false }).setView([+lat!, +lng!], +zoom!);

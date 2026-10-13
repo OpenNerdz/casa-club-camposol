@@ -9,10 +9,10 @@ const btn = 'grid h-12 w-12 place-items-center rounded-full bg-cream-50/10 text-
 ---
 <dialog id="lightbox" aria-label={t('lb.label')} class="m-0 h-dvh max-h-none w-screen max-w-none bg-pine-950/97 p-0 text-cream-50 backdrop:bg-transparent">
   <figure class="flex h-full flex-col items-center justify-center gap-4 px-4 pb-24 pt-16 sm:px-20 sm:pb-16">
-    <img id="lb-img" alt="" class="min-h-0 max-w-full flex-1 rounded-xl object-contain" />
-    <figcaption id="lb-cap" class="max-w-xl text-center text-sm text-cream-50/80"></figcaption>
+    <img id="lb-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" class="min-h-0 max-w-full flex-1 rounded-xl object-contain" />
+    <figcaption id="lb-cap" aria-hidden="true" class="max-w-xl text-center text-sm text-cream-50/80"></figcaption>
   </figure>
-  <p id="lb-count" class="absolute left-5 top-5 text-sm tabular-nums text-cream-50/60"></p>
+  <p id="lb-count" aria-live="polite" class="absolute left-5 top-5 text-sm tabular-nums text-cream-50/70"></p>
   <button type="button" data-close class:list={[btn, 'absolute right-4 top-3']} aria-label={t('lb.close')}><Icon name="close" size={22} /></button>
   <button type="button" data-step="-1" class:list={[btn, 'absolute bottom-6 left-1/2 -translate-x-[calc(100%+0.5rem)] sm:bottom-auto sm:left-5 sm:top-1/2 sm:-translate-x-0 sm:-translate-y-1/2']} aria-label={t('lb.prev')}><Icon name="left" size={24} /></button>
   <button type="button" data-step="1" class:list={[btn, 'absolute bottom-6 left-1/2 translate-x-2 sm:bottom-auto sm:left-auto sm:right-5 sm:top-1/2 sm:translate-x-0 sm:-translate-y-1/2']} aria-label={t('lb.next')}><Icon name="right" size={24} /></button>

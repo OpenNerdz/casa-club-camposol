@@ -10,19 +10,19 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const types = ['table', 'event', 'golf', 'other'] as const;
 const label = 'block text-sm font-semibold text-ink-800';
-const optional = `<span class="font-normal text-ink-400">(${t('form.optional')})</span>`;
+const optional = `<span class="font-normal text-ink-600">(${t('form.optional')})</span>`;
 // Consent text with the privacy-policy link in place of {privacy}
 const [consentBefore, consentAfter] = t('form.consent').split('{privacy}');
 const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form.okMail'), err: t('form.err'), invalid: t('form.invalid') };
 ---
 <form id="contact-form" class="rounded-[1.75rem] bg-cream-50 p-6 shadow-[0_30px_60px_-30px_rgb(23_32_27/.35)] ring-1 ring-ink-950/8 sm:p-9"
   method="post" action={site.formEndpoint || `mailto:${site.email}`} data-endpoint={site.formEndpoint} data-mailto={site.email}
-  data-messages={JSON.stringify(messages)} novalidate>
+  data-messages={JSON.stringify(messages)} enctype={site.formEndpoint ? undefined : 'text/plain'}>
   <input type="hidden" name="subject" value={`Web enquiry · ${site.name}`} />
   {site.formAccessKey && <input type="hidden" name="access_key" value={site.formAccessKey} />}
   <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
   <div class="grid gap-5 sm:grid-cols-2">
-    <label class={label}>{t('form.name')}<input name="name" required autocomplete="name" class="field" /></label>
+    <label class={label}>{t('form.name')}<input name="name" type="text" required autocomplete="name" class="field" /></label>
     <label class={label}>{t('form.email')}<input name="email" type="email" required autocomplete="email" class="field" /></label>
     <label class={label}><Fragment set:html={`${t('form.phone')} ${optional}`} /><input name="phone" type="tel" autocomplete="tel" class="field" /></label>
     <label class={label}>{t('form.type')}
@@ -54,6 +54,9 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
   const status = document.getElementById('form-status')!;
   const msg = JSON.parse(form.dataset.messages!) as Record<'sending' | 'ok' | 'okMail' | 'err' | 'invalid', string>;
 
+  // With JS the script validates (and shows its own status message); without it the browser does.
+  form.noValidate = true;
+
   // No booking dates in the past; preselect the enquiry type from ?type=
   (form.elements.namedItem('date') as HTMLInputElement).min = madridDate();
   const type = new URLSearchParams(location.search).get('type');
@@ -62,8 +65,10 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const fields = [...form.elements].filter((el): el is HTMLInputElement => 'checkValidity' in el && (el as HTMLInputElement).name !== '');
+    fields.forEach((el) => el.toggleAttribute('aria-invalid', !el.checkValidity()));
     if (!form.checkValidity()) { form.reportValidity(); status.textContent = msg.invalid; return; }
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data: Record<string, FormDataEntryValue> = Object.fromEntries(new FormData(form).entries());
     if (data.botcheck) return;
     data.enquiry = select.selectedOptions[0].text;
     const endpoint = form.dataset.endpoint;
@@ -74,6 +79,8 @@ const messages = { sending: t('form.sending'), ok: t('form.ok'), okMail: t('form
       status.textContent = msg.okMail;
       return;
     }
+    // Formspree reads its subject line from `_subject`
+    if (endpoint.includes('formspree')) data._subject = data.subject;
     status.textContent = msg.sending;
     try {
       const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });

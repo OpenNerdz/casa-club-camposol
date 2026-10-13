@@ -2,7 +2,7 @@
 // The weekly programme itself lives in src/data/programme.ts.
 export const home = {
   en: {
-    meta: { title: 'Casa Club Camposol · Restaurant, Bar & Golf Clubhouse in Mazarrón', description: 'Clubhouse bar, restaurant and sun terrace at Camposol golf course, Mazarrón: live music, quiz nights, Sunday carvery and 18 holes. Open to all, 7 days a week.' },
+    meta: { title: 'Casa Club Camposol · Clubhouse restaurant & bar, Mazarrón', description: 'Clubhouse bar, restaurant and sun terrace at Camposol golf course, Mazarrón: live music, quiz nights, Sunday carvery and 18 holes. Open to all, 7 days a week.' },
     hero: {
       eyebrow: 'Camposol Club de Golf · Mazarrón',
       title: 'The clubhouse at the heart of Camposol',
@@ -73,7 +73,7 @@ export const home = {
     },
   },
   es: {
-    meta: { title: 'Casa Club Camposol · Restaurante, bar y casa club de golf en Mazarrón', description: 'Bar, restaurante y terraza de la casa club del golf de Camposol (Mazarrón): música en directo, quiz, carvery del domingo y 18 hoyos. Abierto todos los días.' },
+    meta: { title: 'Casa Club Camposol · Restaurante y bar del golf, Mazarrón', description: 'Bar, restaurante y terraza de la casa club del golf de Camposol (Mazarrón): música en directo, quiz, carvery del domingo y 18 hoyos. Abierto todos los días.' },
     hero: {
       eyebrow: 'Camposol Club de Golf · Mazarrón',
       title: 'La casa club en el corazón de Camposol',

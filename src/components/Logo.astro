@@ -8,7 +8,7 @@ const { class: cls = '', large = false } = Astro.props;
 <span class:list={['flex items-center gap-3', cls]}>
   <img src={withBase('/images/logo-mark.svg')} alt="" width={large ? 72 : 48} height={large ? 72 : 48} class:list={['shrink-0', large ? 'h-[4.5rem] w-[4.5rem]' : 'h-12 w-12']} />
   <span class="leading-none">
-    <span class="block text-[1.2rem] font-extrabold tracking-[-0.03em]">Casa Club</span>
+    <span class="block text-[1.2rem] font-extrabold tracking-[-0.03em]">Casa Club</span>{' '}
     <span class="mt-1 block text-[0.6rem] font-bold uppercase tracking-[0.3em] opacity-70">Camposol</span>
   </span>
 </span>

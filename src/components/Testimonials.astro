@@ -2,10 +2,10 @@
 // Review cards: the first one set apart in pine. A sideways row on phones, three columns on desktop.
 // No scroll-reveal here: cards sitting off to the side in the row would stay hidden.
 // Quotes are from public reviews (see STAFF-REVIEW.md).
-interface Props { items: readonly { quote: string; who: string }[] }
-const { items } = Astro.props;
+interface Props { items: readonly { quote: string; who: string }[]; label: string }
+const { items, label } = Astro.props;
 ---
-<ul class="snap-row mt-12 md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0">
+<ul tabindex="0" aria-label={label} class="snap-row mt-12 md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0">
   {items.map((r, i) => (
     <li class:list={['flex w-[82%] flex-col rounded-[var(--radius-card)] p-7 sm:w-[55%] md:w-auto sm:p-8',
       i === 0 ? 'bg-pine-900 text-cream-50' : 'border border-ink-950/8 bg-white text-ink-950']}>

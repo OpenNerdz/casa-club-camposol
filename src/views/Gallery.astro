@@ -25,7 +25,7 @@ const filters = Object.entries(c.filters) as [keyof typeof c.filters, string][];
     <div class="mt-8 columns-2 gap-3 sm:gap-4 lg:columns-3" id="gallery-grid">
       {gallery.map((g, i) => (
         <a href={g.src} data-lightbox data-caption={g.alt[lang]} data-cat={g.cat} class="group mb-3 block break-inside-avoid overflow-hidden rounded-2xl bg-cream-200 sm:mb-4 sm:rounded-[1.5rem]">
-          <img src={g.thumb} alt={g.alt[lang]} width={600} height={Math.round((600 * g.h) / g.w)} loading={i < 6 ? 'eager' : 'lazy'} decoding="async"
+          <img src={g.thumb} alt={g.alt[lang]} width={600} height={Math.round((600 * g.h) / g.w)} loading={i < 12 ? 'eager' : 'lazy'} decoding="async"
             class="w-full transition duration-700 ease-out group-hover:scale-[1.03]" />
         </a>
       ))}

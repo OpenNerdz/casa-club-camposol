@@ -9,6 +9,7 @@ import { golf } from '../content/golf';
 import { img } from '../data/images';
 import { site } from '../data/site';
 import { localePath, type Lang } from '../i18n/utils';
+import { businessJsonLd } from '../data/jsonld';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = golf[lang];
@@ -25,7 +26,7 @@ const stats = [
   { v: 7, l: c.statLabels.days },
 ];
 ---
-<Base title={c.meta.title} description={c.meta.description} image={img.ogGolf}>
+<Base title={c.meta.title} description={c.meta.description} image={img.ogGolf} jsonLd={businessJsonLd(lang)}>
   <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} sub={c.hero.sub} image={img.golfPortrait} alt={c.alts.hero} position="center 35%"
     cta1={{ href: site.teeTimeUrl, label: c.hero.cta1, icon: 'calendar', external: true }}
     cta2={{ href: site.golfPhoneHref, label: c.hero.cta2, icon: 'phone' }} />

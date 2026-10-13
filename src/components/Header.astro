@@ -31,7 +31,7 @@ const enquiryHref = `${localePath(lang, '/contact/')}#enquiry`;
 
     <a href={otherHref} hreflang={other} lang={other}
        class="grid h-10 min-w-10 place-items-center rounded-full border border-current/25 px-2.5 text-xs font-bold tracking-widest transition-colors hover:border-current/60"
-       aria-label={other === 'es' ? 'Ver en español' : 'View in English'}>{other.toUpperCase()}</a>
+       aria-label={other === 'es' ? 'ES, ver en español' : 'EN, view in English'}>{other.toUpperCase()}</a>
     <a href={enquiryHref} data-book class="btn-primary hidden h-11 sm:inline-flex">{t('cta.book')}</a>
     <button id="menu-toggle" type="button" class="-mr-2 grid h-11 w-11 place-items-center rounded-full lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label={t('nav.menu')} data-label-open={t('nav.menu')} data-label-close={t('nav.close')}>
       <Icon name="menu" size={26} class="icon-open" />
@@ -73,6 +73,8 @@ const enquiryHref = `${localePath(lang, '/contact/')}#enquiry`;
     toggle.querySelector('.icon-open')!.classList.toggle('hidden', open);
     toggle.querySelector('.icon-close')!.classList.toggle('hidden', !open);
     document.documentElement.style.overflow = open ? 'hidden' : '';
+    // Keep keyboard focus inside the menu: everything it covers becomes inert while it is open
+    document.querySelectorAll('#main, footer, [data-mobilebar], [data-skip]').forEach((el) => el.toggleAttribute('inert', open));
   }
   toggle.addEventListener('click', () => setOpen(Boolean(menu.hidden)));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { setOpen(false); toggle.focus(); } });

@@ -6,7 +6,6 @@
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 export const img = {
-  hero: `${b}/images/hero.webp`,
   heroGolf: `${b}/images/hero-golf.webp`,
   heroEvents: `${b}/images/hero-events.webp`,
   terrace: `${b}/images/terrace.webp`,
@@ -15,8 +14,6 @@ export const img = {
   food: `${b}/images/food.webp`,
   course: `${b}/images/course.webp`,
   course2: `${b}/images/course-2.webp`,
-  range: `${b}/images/range.webp`,
-  buggies: `${b}/images/buggies.webp`,
   events: `${b}/images/events.webp`,
   exterior: `${b}/images/exterior.webp`,
   golfPortrait: `${b}/images/golf-portrait.webp`,
@@ -29,6 +26,15 @@ export const img = {
   ogContact: `${b}/images/og-contact.jpg`,
   ogRestaurant: `${b}/images/og-restaurant.jpg`,
   ogEvents: `${b}/images/og-events.jpg`,
+} as const;
+
+/** srcset for the big photos that also have 800 and 1200 px copies (see scripts/images.sh). */
+const sized = (name: string, full: number) =>
+  `${b}/images/${name}-800.webp 800w, ${b}/images/${name}-1200.webp 1200w, ${b}/images/${name}.webp ${full}w`;
+export const srcset = {
+  heroGolf: sized('hero-golf', 2000),
+  course: sized('course', 1600),
+  exterior: sized('exterior', 2000),
 } as const;
 
 export type GalleryCategory = 'club' | 'events' | 'golf';

@@ -9,7 +9,7 @@ const t = useTranslations(lang);
 const dark = tone === 'dark';
 ---
 <div class="mt-12 sm:mt-14">
-  <ol data-week class="snap-row relative pt-3 lg:mx-0 lg:grid lg:grid-cols-7 lg:gap-3 lg:overflow-visible lg:px-0 lg:pb-0">
+  <ol data-week tabindex="0" aria-label={t('week.label')} class="snap-row relative pt-3 lg:mx-0 lg:grid lg:grid-cols-7 lg:gap-3 lg:overflow-visible lg:px-0 lg:pb-0">
     {programme.map((d) => (
       <li data-day={d.day}
           class:list={['relative flex min-h-[14rem] w-[70%] flex-col rounded-[1.5rem] border p-5 transition-colors sm:w-[40%] lg:w-auto',
@@ -19,7 +19,7 @@ const dark = tone === 'dark';
         <span class:list={['today-pill absolute -top-2.5 right-4 rounded-full px-2.5 py-0.5 text-[0.625rem] font-bold uppercase tracking-wider', dark ? 'bg-ochre-300 text-pine-950' : 'bg-clay-600 text-white']}>{t('week.today')}</span>
         <ul class="mt-5 flex flex-1 flex-col gap-3.5 text-[0.9375rem]">
           {d.items.map((it) => it.minor ? (
-            <li class:list={['mt-auto text-[0.8125rem]', dark ? 'text-cream-50/50' : 'text-ink-400']}>{it.title[lang]}{it.note && ` · ${it.note[lang]}`}</li>
+            <li class:list={['mt-auto text-[0.8125rem]', dark ? 'text-cream-50/70' : 'text-ink-600']}>{it.title[lang]}{it.note && ` · ${it.note[lang]}`}</li>
           ) : (
             <li>
               <p class="font-semibold leading-snug">{it.title[lang]}</p>
